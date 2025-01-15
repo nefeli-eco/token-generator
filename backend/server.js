@@ -16,7 +16,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 3000000) => {
+const waitForPayment = async (userAddress, timeout = 300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
@@ -28,10 +28,12 @@ const waitForPayment = async (userAddress, timeout = 3000000) => {
                 for (let i = latestBlockNumber; i > latestBlockNumber - 5; i--) {
                     if (i < 0) break; // Stop if block number goes negative
 
-                    const block = await provider.getBlockWithTransactions(i);
-                    console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
+                    const block = await provider.getBlock(i); // Fetch the block (without transactions)
+                    console.log(`Scanning block ${block.number}`);
 
-                    for (const tx of block.transactions) {
+                    for (const txHash of block.transactions) {
+                        const tx = await provider.getTransaction(txHash); // Fetch each transaction
+
                         console.log(`Transaction found: ${tx.hash}`);
                         console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
 
