@@ -17,7 +17,7 @@ const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
 // Function to wait for a valid transaction
-const waitForPayment = async (userAddress, timeout = 30000) => {
+const waitForPayment = async (userAddress, timeout = 1200000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
