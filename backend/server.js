@@ -16,25 +16,30 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-// Function to wait for a valid transaction
-const waitForPayment = async (userAddress, timeout = 30000) => {
+const waitForPayment = async (userAddress, timeout = 1200000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
         const checkForTransaction = async () => {
             try {
-                const blockNumber = await provider.getBlockNumber(); // Get latest block number
-                const block = await provider.getBlock(blockNumber); // Get the block details
+                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
+                const block = await provider.getBlock(blockNumber); // Fetch the block details
+
+                console.log(`Checking block ${blockNumber} for transactions...`);
 
                 // Loop through transaction hashes in the block
                 for (const txHash of block.transactions) {
                     const tx = await provider.getTransaction(txHash); // Fetch each transaction
+
+                    console.log(`Transaction found: ${tx.hash}`);
+                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
 
                     if (
                         tx.from.toLowerCase() === userAddress.toLowerCase() &&
                         tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
                         BigInt(tx.value) === REQUIRED_PAYMENT
                     ) {
+                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
                         resolve(tx.hash); // Transaction found, return the hash
                         return;
                     }
@@ -48,6 +53,7 @@ const waitForPayment = async (userAddress, timeout = 30000) => {
                     setTimeout(checkForTransaction, 1000);
                 }
             } catch (error) {
+                console.error("Error checking transactions:", error);
                 reject(error);
             }
         };
@@ -55,6 +61,7 @@ const waitForPayment = async (userAddress, timeout = 30000) => {
         checkForTransaction();
     });
 };
+
 
 
 app.post("/api/create-token", async (req, res) => {
