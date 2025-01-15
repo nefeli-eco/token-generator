@@ -22,35 +22,36 @@ const waitForPayment = async (userAddress, timeout = 3000000) => {
 
         const checkForTransaction = async () => {
             try {
-                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
-                const block = await provider.getBlock(blockNumber); // Fetch the block details
+                const latestBlockNumber = await provider.getBlockNumber();
+                console.log(`Checking transactions in blocks ${latestBlockNumber - 5} to ${latestBlockNumber}...`);
 
-                console.log(`Checking block ${blockNumber} for transactions...`);
+                for (let i = latestBlockNumber; i > latestBlockNumber - 5; i--) {
+                    if (i < 0) break; // Stop if block number goes negative
 
-                // Loop through transaction hashes in the block
-                for (const txHash of block.transactions) {
-                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
+                    const block = await provider.getBlockWithTransactions(i);
+                    console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
 
-                    console.log(`Transaction found: ${tx.hash}`);
-                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
+                    for (const tx of block.transactions) {
+                        console.log(`Transaction found: ${tx.hash}`);
+                        console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
 
-                    if (
-                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
-                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
-                        BigInt(tx.value) === REQUIRED_PAYMENT
-                    ) {
-                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                        resolve(tx.hash); // Transaction found, return the hash
-                        return;
+                        if (
+                            tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                            tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                            BigInt(tx.value) === REQUIRED_PAYMENT
+                        ) {
+                            console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                            resolve(tx.hash); // Transaction found, return the hash
+                            return;
+                        }
                     }
                 }
 
-                // Check if the timeout is exceeded
                 if (Date.now() - start > timeout) {
+                    console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                 } else {
-                    // Wait for the next block and check again
-                    setTimeout(checkForTransaction, 1000);
+                    setTimeout(checkForTransaction, 1000); // Wait for the next check
                 }
             } catch (error) {
                 console.error("Error checking transactions:", error);
@@ -61,6 +62,7 @@ const waitForPayment = async (userAddress, timeout = 3000000) => {
         checkForTransaction();
     });
 };
+
 
 
 
