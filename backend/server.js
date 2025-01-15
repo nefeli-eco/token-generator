@@ -21,51 +21,63 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
         const start = Date.now();
         let lastCheckedBlock = 0;
 
-        const checkForTransaction = async () => {
-            try {
-                const latestBlockNumber = await provider.getBlockNumber();
-                console.log(`Checking transactions in blocks ${lastCheckedBlock + 1} to ${latestBlockNumber}...`);
-
-                for (let blockNumber = lastCheckedBlock + 1; blockNumber <= latestBlockNumber; blockNumber++) {
-                    const block = await provider.getBlock(blockNumber); // Fetch block (no transactions)
-                    console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
-
-                    // Fetch transactions individually
-                    for (const txHash of block.transactions) {
-                        const tx = await provider.getTransaction(txHash);
-                        console.log(`Transaction found: ${tx.hash}`);
-                        console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
-
-                        if (
-                            tx.from.toLowerCase() === userAddress.toLowerCase() &&
-                            tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
-                            BigInt(tx.value) === REQUIRED_PAYMENT
-                        ) {
-                            console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                            resolve(tx.hash); // Transaction found, return the hash
-                            return;
+        const waitForPayment = async (userAddress, timeout = 300000) => {
+            return new Promise((resolve, reject) => {
+                const start = Date.now();
+        
+                // Initialize lastCheckedBlock to the current block number
+                provider.getBlockNumber().then((currentBlockNumber) => {
+                    let lastCheckedBlock = currentBlockNumber;
+        
+                    const checkForTransaction = async () => {
+                        try {
+                            const latestBlockNumber = await provider.getBlockNumber();
+                            console.log(`Checking transactions in blocks ${lastCheckedBlock + 1} to ${latestBlockNumber}...`);
+        
+                            for (let blockNumber = lastCheckedBlock + 1; blockNumber <= latestBlockNumber; blockNumber++) {
+                                const block = await provider.getBlock(blockNumber);
+                                console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
+        
+                                // Fetch and process transactions individually
+                                for (const txHash of block.transactions) {
+                                    const tx = await provider.getTransaction(txHash);
+                                    console.log(`Transaction found: ${tx.hash}`);
+                                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
+        
+                                    if (
+                                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                                        BigInt(tx.value) === REQUIRED_PAYMENT
+                                    ) {
+                                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                                        resolve(tx.hash);
+                                        return;
+                                    }
+                                }
+                            }
+        
+                            // Update the last checked block
+                            lastCheckedBlock = latestBlockNumber;
+        
+                            // Check if the timeout is exceeded
+                            if (Date.now() - start > timeout) {
+                                console.log("Timeout exceeded. No payment detected.");
+                                reject(new Error("Timeout: No payment detected."));
+                            } else {
+                                // Wait for the next block and check again
+                                setTimeout(checkForTransaction, 2000);
+                            }
+                        } catch (error) {
+                            console.error("Error checking transactions:", error);
+                            reject(error);
                         }
-                    }
-                }
-
-                lastCheckedBlock = latestBlockNumber; // Update last checked block
-
-                if (Date.now() - start > timeout) {
-                    console.log("Timeout exceeded. No payment detected.");
-                    reject(new Error("Timeout: No payment detected."));
-                } else {
-                    setTimeout(checkForTransaction, 2000); // Wait and check again
-                }
-            } catch (error) {
-                console.error("Error checking transactions:", error);
-                reject(error);
-            }
+                    };
+        
+                    checkForTransaction();
+                });
+            });
         };
-
-        checkForTransaction();
-    });
-};
-
+        
 
 
 
