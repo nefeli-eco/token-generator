@@ -16,9 +16,9 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 3330000) => {
+const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
-        const start = Date.now(); // Start time
+        const start = Date.now();
 
         const checkForTransaction = async () => {
             try {
@@ -43,6 +43,7 @@ const waitForPayment = async (userAddress, timeout = 3330000) => {
 
                     console.log(`Transaction found: ${tx.hash}`);
                     console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
+                    console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
 
                     if (
                         tx.from.toLowerCase() === userAddress.toLowerCase() &&
@@ -52,6 +53,8 @@ const waitForPayment = async (userAddress, timeout = 3330000) => {
                         console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
                         resolve(tx.hash); // Transaction found, return the hash
                         return;
+                    } else {
+                        console.log("Transaction does not match the required criteria.");
                     }
                 }
 
@@ -67,7 +70,6 @@ const waitForPayment = async (userAddress, timeout = 3330000) => {
     });
 };
 
-
 app.post("/api/create-token", async (req, res) => {
     const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
 
@@ -77,8 +79,8 @@ app.post("/api/create-token", async (req, res) => {
 
     try {
         // Wait for the user to send the required payment
-        console.log(`Waiting for payment of 0.01 ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 60000); // 60 seconds timeout
+        console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
+        const txHash = await waitForPayment(userAddress, 300000); // 300 seconds timeout
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
