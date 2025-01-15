@@ -3,7 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const { ethers } = require("ethers");
 const { exec } = require("child_process");
-require("dotenv").config(); // Load environment variables
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -13,27 +13,60 @@ app.use(bodyParser.json());
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
 const NETWORK = process.env.SEPOLIA_RPC_URL; // Sepolia RPC URL from .env
 const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
+const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-// Customizable IP and port
-const PORT = process.env.PORT || 3001;
-const HOST = process.env.HOST || "0.0.0.0"; // Defaults to listening on all interfaces
+// Function to wait for a valid transaction
+const waitForPayment = async (userAddress, timeout = 30000) => {
+    return new Promise((resolve, reject) => {
+        const start = Date.now();
+
+        const checkForTransaction = async () => {
+            try {
+                const blockNumber = await provider.getBlockNumber();
+                const block = await provider.getBlockWithTransactions(blockNumber);
+
+                // Look for a transaction from the user's address to the receiver
+                for (const tx of block.transactions) {
+                    if (
+                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                        BigInt(tx.value) === REQUIRED_PAYMENT
+                    ) {
+                        resolve(tx.hash); // Transaction found, return the hash
+                        return;
+                    }
+                }
+
+                // Check if the timeout is exceeded
+                if (Date.now() - start > timeout) {
+                    reject(new Error("Timeout: No payment detected."));
+                } else {
+                    // Wait for the next block and check again
+                    setTimeout(checkForTransaction, 1000);
+                }
+            } catch (error) {
+                reject(error);
+            }
+        };
+
+        checkForTransaction();
+    });
+};
 
 app.post("/api/create-token", async (req, res) => {
-    const { tokenName, tokenSymbol, initialSupply, receiverAddress } = req.body;
+    const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
 
-    if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress) {
+    if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress) {
         return res.status(400).json({ message: "All fields are required." });
     }
 
     try {
-        // Verify ETH payment
-        const balance = await provider.getBalance(RECEIVER_ADDRESS); // BigInt
-        const requiredBalance = ethers.parseEther("0.01"); // 0.01 ETH in wei (BigInt)
+        // Wait for the user to send the required payment
+        console.log(`Waiting for payment of 0.01 ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
+        const txHash = await waitForPayment(userAddress, 60000); // 60 seconds timeout
 
-        if (balance < requiredBalance) {
-            return res.status(400).json({ message: "No ETH payment detected." });
-        }
+        console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
         // Run deployment script
         exec(
@@ -46,7 +79,7 @@ app.post("/api/create-token", async (req, res) => {
 
                 const match = stdout.match(/Contract deployed to sepolia at address: (0x[a-fA-F0-9]{40})/);
                 if (match) {
-                    return res.json({ transactionHash: match[1] });
+                    return res.json({ transactionHash: match[1], paymentTransactionHash: txHash });
                 } else {
                     console.error(`Deployment Error: ${stderr}`);
                     return res.status(500).json({ message: "Deployment script failed." });
@@ -54,12 +87,14 @@ app.post("/api/create-token", async (req, res) => {
             }
         );
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: "An unexpected error occurred." });
+        console.error(error.message);
+        res.status(400).json({ message: error.message });
     }
 });
 
 // Start the server
+const PORT = process.env.PORT || 3001;
+const HOST = process.env.HOST || "0.0.0.0";
 app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
 });
