@@ -16,24 +16,21 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 3000000) => {
+const waitForPayment = async (userAddress, timeout = 30000000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
+        let lastCheckedBlock = 0; // Keep track of the last checked block
 
         const checkForTransaction = async () => {
             try {
                 const latestBlockNumber = await provider.getBlockNumber();
-                console.log(`Checking transactions in blocks ${latestBlockNumber - 5} to ${latestBlockNumber}...`);
+                console.log(`Checking transactions in blocks ${lastCheckedBlock + 1} to ${latestBlockNumber}...`);
 
-                for (let i = latestBlockNumber; i > latestBlockNumber - 5; i--) {
-                    if (i < 0) break; // Stop if block number goes negative
-
-                    const block = await provider.getBlock(i); // Fetch block (without transactions)
+                for (let blockNumber = lastCheckedBlock + 1; blockNumber <= latestBlockNumber; blockNumber++) {
+                    const block = await provider.getBlockWithTransactions(blockNumber); // Fetch block with transactions
                     console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
 
-                    for (const txHash of block.transactions) {
-                        const tx = await provider.getTransaction(txHash); // Fetch each transaction
-
+                    for (const tx of block.transactions) {
                         console.log(`Transaction found: ${tx.hash}`);
                         console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
 
@@ -49,11 +46,13 @@ const waitForPayment = async (userAddress, timeout = 3000000) => {
                     }
                 }
 
+                lastCheckedBlock = latestBlockNumber; // Update the last checked block
+
                 if (Date.now() - start > timeout) {
                     console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                 } else {
-                    setTimeout(checkForTransaction, 1000); // Wait for the next check
+                    setTimeout(checkForTransaction, 2000); // Wait and check again
                 }
             } catch (error) {
                 console.error("Error checking transactions:", error);
