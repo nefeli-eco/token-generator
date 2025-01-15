@@ -80,7 +80,7 @@ app.post("/api/create-token", async (req, res) => {
     try {
         // Wait for the user to send the required payment
         console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 300000); // 300 seconds timeout
+        const txHash = await waitForPayment(userAddress,  33300000); // 300 seconds timeout
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
