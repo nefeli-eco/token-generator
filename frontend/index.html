@@ -63,7 +63,7 @@
                 statusMessage.innerHTML = '<div class="alert alert-info">Creating your token, please wait...</div>';
 
                 // Send POST request to backend
-                const response = await axios.post('http://localhost:3001/api/create-token', formData);
+                const response = await axios.post('http://192.168.1.42:3001/api/create-token', formData);
 
                 // Display success message
                 const txHash = response.data.transactionHash;
