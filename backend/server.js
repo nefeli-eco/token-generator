@@ -16,7 +16,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 1200000) => {
+const waitForPayment = async (userAddress, timeout = 3000000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 

@@ -62,7 +62,7 @@
                 <input type="text" class="form-control" id="receiverAddress" name="receiverAddress" placeholder="0xYourEthereumAddress" required>
             </div>
             <div class="mb-3">
-                <label for="userAddress" class="form-label">Your Ethereum Address</label>
+                <label for="userAddress" class="form-label">Payment sender's Address(Can be different from token receiver)</label>
                 <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="0xYourEthereumAddress" required>
             </div>
             <button type="submit" class="btn btn-primary w-100">Create Token</button>
@@ -111,15 +111,16 @@
                 // Send POST request to backend
                 const response = await axios.post('http://192.168.1.42:3001/api/create-token', formData);
                 
-                // Update progress
+                // Update to "Proceeding" status
+                statusMessage.innerHTML = '<div class="alert alert-warning"><span class="spinner-border spinner-border-sm"></span> Payment detected! Proceeding with token creation...</div>';
                 progressBar.style.width = '75%';
 
-                // Display success message
+                // Display success message after token creation
                 const txHash = response.data.transactionHash;
                 statusMessage.innerHTML = `
                     <div class="alert alert-success">
                         <strong>Token created successfully!</strong><br>
-                        Transaction Hash: <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a>
+                        Transaction Hash: <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">${txHash}</a>
                     </div>
                 `;
                 progressBar.style.width = '100%';
@@ -132,6 +133,7 @@
                 progressContainer.style.display = 'none';
             }
         });
+
     </script>
 </body>
 </html>
