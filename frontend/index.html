@@ -60,6 +60,7 @@
                 tokenSymbol: document.getElementById('tokenSymbol').value,
                 initialSupply: document.getElementById('initialSupply').value,
                 receiverAddress: document.getElementById('receiverAddress').value,
+                userAddress: document.getElementById('userAddress').value,
             };
 
             try {
@@ -74,7 +75,7 @@
                 statusMessage.innerHTML = `
                     <div class="alert alert-success">
                         Token created successfully! Transaction Hash: 
-                        <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a>
+                        <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">${txHash}</a>
                     </div>
                 `;
             } catch (err) {
