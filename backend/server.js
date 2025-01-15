@@ -16,10 +16,10 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 30000000) => {
+const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
-        let lastCheckedBlock = 0; // Keep track of the last checked block
+        let lastCheckedBlock = 0;
 
         const checkForTransaction = async () => {
             try {
@@ -27,10 +27,12 @@ const waitForPayment = async (userAddress, timeout = 30000000) => {
                 console.log(`Checking transactions in blocks ${lastCheckedBlock + 1} to ${latestBlockNumber}...`);
 
                 for (let blockNumber = lastCheckedBlock + 1; blockNumber <= latestBlockNumber; blockNumber++) {
-                    const block = await provider.getBlockWithTransactions(blockNumber); // Fetch block with transactions
+                    const block = await provider.getBlock(blockNumber); // Fetch block (no transactions)
                     console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
 
-                    for (const tx of block.transactions) {
+                    // Fetch transactions individually
+                    for (const txHash of block.transactions) {
+                        const tx = await provider.getTransaction(txHash);
                         console.log(`Transaction found: ${tx.hash}`);
                         console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
 
@@ -46,7 +48,7 @@ const waitForPayment = async (userAddress, timeout = 30000000) => {
                     }
                 }
 
-                lastCheckedBlock = latestBlockNumber; // Update the last checked block
+                lastCheckedBlock = latestBlockNumber; // Update last checked block
 
                 if (Date.now() - start > timeout) {
                     console.log("Timeout exceeded. No payment detected.");
