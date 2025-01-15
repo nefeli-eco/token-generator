@@ -28,8 +28,8 @@ const waitForPayment = async (userAddress, timeout = 300000) => {
                 for (let i = latestBlockNumber; i > latestBlockNumber - 5; i--) {
                     if (i < 0) break; // Stop if block number goes negative
 
-                    const block = await provider.getBlock(i); // Fetch the block (without transactions)
-                    console.log(`Scanning block ${block.number}`);
+                    const block = await provider.getBlock(i); // Fetch block (without transactions)
+                    console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
 
                     for (const txHash of block.transactions) {
                         const tx = await provider.getTransaction(txHash); // Fetch each transaction
@@ -64,6 +64,7 @@ const waitForPayment = async (userAddress, timeout = 300000) => {
         checkForTransaction();
     });
 };
+
 
 
 
