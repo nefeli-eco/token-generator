@@ -16,62 +16,52 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 33300000) => {
+const waitForPayment = async (userAddress, timeout = 3330000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
-        // Initialize lastCheckedBlock to the current block number
-        provider.getBlockNumber().then((currentBlockNumber) => {
-            let lastCheckedBlock = currentBlockNumber;
+        const checkForTransaction = async () => {
+            try {
+                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
+                const block = await provider.getBlock(blockNumber); // Fetch the block details
 
-            const checkForTransaction = async () => {
-                try {
-                    const latestBlockNumber = await provider.getBlockNumber();
-                    console.log(`Checking transactions in blocks ${lastCheckedBlock + 1} to ${latestBlockNumber}...`);
+                console.log(`Checking block ${blockNumber} for transactions...`);
 
-                    for (let blockNumber = lastCheckedBlock + 1; blockNumber <= latestBlockNumber; blockNumber++) {
-                        const block = await provider.getBlock(blockNumber);
-                        console.log(`Scanning block ${block.number}, with ${block.transactions.length} transactions.`);
+                // Loop through transaction hashes in the block
+                for (const txHash of block.transactions) {
+                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
 
-                        // Fetch and process transactions individually
-                        for (const txHash of block.transactions) {
-                            const tx = await provider.getTransaction(txHash);
-                            console.log(`Transaction found: ${tx.hash}`);
-                            console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)} ETH`);
+                    console.log(`Transaction found: ${tx.hash}`);
+                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
 
-                            if (
-                                tx.from.toLowerCase() === userAddress.toLowerCase() &&
-                                tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
-                                BigInt(tx.value) === REQUIRED_PAYMENT
-                            ) {
-                                console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                                resolve(tx.hash);
-                                return;
-                            }
-                        }
+                    if (
+                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                        BigInt(tx.value) === REQUIRED_PAYMENT
+                    ) {
+                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                        resolve(tx.hash); // Transaction found, return the hash
+                        return;
                     }
-
-                    // Update the last checked block
-                    lastCheckedBlock = latestBlockNumber;
-
-                    // Check if the timeout is exceeded
-                    if (Date.now() - start > timeout) {
-                        console.log("Timeout exceeded. No payment detected.");
-                        reject(new Error("Timeout: No payment detected."));
-                    } else {
-                        // Wait for the next block and check again
-                        setTimeout(checkForTransaction, 2000);
-                    }
-                } catch (error) {
-                    console.error("Error checking transactions:", error);
-                    reject(error);
                 }
-            };
 
-            checkForTransaction();
-        });
+                // Check if the timeout is exceeded
+                if (Date.now() - start > timeout) {
+                    reject(new Error("Timeout: No payment detected."));
+                } else {
+                    // Wait for the next block and check again
+                    setTimeout(checkForTransaction, 1000);
+                }
+            } catch (error) {
+                console.error("Error checking transactions:", error);
+                reject(error);
+            }
+        };
+
+        checkForTransaction();
     });
 };
+
 
 app.post("/api/create-token", async (req, res) => {
     const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
