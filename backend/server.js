@@ -16,7 +16,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
-const waitForPayment = async (userAddress, timeout = 3330000) => {
+const waitForPayment = async (userAddress, timeout = 33330000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
@@ -47,10 +47,11 @@ const waitForPayment = async (userAddress, timeout = 3330000) => {
 
                 // Check if the timeout is exceeded
                 if (Date.now() - start > timeout) {
+                    console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                 } else {
-                    // Wait for the next block and check again
-                    setTimeout(checkForTransaction, 1000);
+                    // Wait for 2 seconds before checking the next block
+                    setTimeout(checkForTransaction, 2000);
                 }
             } catch (error) {
                 console.error("Error checking transactions:", error);
