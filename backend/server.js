@@ -17,17 +17,19 @@ const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
 // Function to wait for a valid transaction
-const waitForPayment = async (userAddress, timeout = 1200000) => {
+const waitForPayment = async (userAddress, timeout = 30000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
 
         const checkForTransaction = async () => {
             try {
-                const blockNumber = await provider.getBlockNumber();
-                const block = await provider.getBlockWithTransactions(blockNumber);
+                const blockNumber = await provider.getBlockNumber(); // Get latest block number
+                const block = await provider.getBlock(blockNumber); // Get the block details
 
-                // Look for a transaction from the user's address to the receiver
-                for (const tx of block.transactions) {
+                // Loop through transaction hashes in the block
+                for (const txHash of block.transactions) {
+                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
+
                     if (
                         tx.from.toLowerCase() === userAddress.toLowerCase() &&
                         tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
@@ -53,6 +55,7 @@ const waitForPayment = async (userAddress, timeout = 1200000) => {
         checkForTransaction();
     });
 };
+
 
 app.post("/api/create-token", async (req, res) => {
     const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
