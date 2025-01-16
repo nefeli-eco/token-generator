@@ -76,6 +76,7 @@
         .faq-slider .carousel-item {
             text-align: center;
             color: white;
+            padding: 20px;
         }
         footer {
             background: #121212;
@@ -93,7 +94,7 @@
 
 <header class="main-header">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
-    <p aria-live="polite">No coding skills required. Easy and fast process.</p>
+    <p>No coding skills required. Easy and fast process.</p>
     <div class="crypto-icons" aria-label="Cryptocurrency Icons">
         <i class="material-icons">currency_bitcoin</i>
         <i class="material-icons">currency_ethereum</i>
@@ -135,7 +136,7 @@
     <section class="faq-slider" aria-labelledby="faq-section">
         <h2 id="faq-section" class="center-align">Frequently Asked Questions</h2>
         <div class="carousel carousel-slider center">
-            <div class="carousel-item">
+        <div class="carousel-item">
                 <h5>What is Cryptonow?</h5>
                 <p>Cryptonow is a platform that allows you to create your own ERC-20 tokens easily and quickly without requiring any coding skills.</p>
             </div>
@@ -165,14 +166,50 @@
             </div>
         </div>
     </section>
+
+    <!-- Token Creation Form -->
+    <section class="form-section" aria-labelledby="form-section">
+        <div class="card">
+            <div class="card-content">
+                <span id="form-section" class="card-title">Token Creation Form</span>
+                <form id="tokenForm">
+                    <div class="input-field">
+                        <input id="tokenName" type="text" placeholder="Ethereum" required>
+                        <label for="tokenName">Token Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="tokenSymbol" type="text" placeholder="ETH" required>
+                        <label for="tokenSymbol">Token Symbol (Ticker)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="initialSupply" type="number" placeholder="10000000" required>
+                        <label for="initialSupply">Initial Supply</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="receiverAddress" type="text" placeholder="0xYourEthereumAddress" required>
+                        <label for="receiverAddress">Token Receiver Address</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
+                        <label for="userAddress">Payment Sender's Address</label>
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
+                </form>
+            </div>
+        </div>
+        <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
+    </section>
 </main>
 
 <?php include 'footer.php'; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const elems = document.querySelectorAll('.collapsible');
-        M.Collapsible.init(elems, { accordion: false });
+        const carouselElems = document.querySelectorAll('.carousel');
+        M.Carousel.init(carouselElems, {
+            fullWidth: true,
+            indicators: true
+        });
     });
 
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
@@ -197,6 +234,5 @@
         }
     });
 </script>
-
 </body>
 </html>
