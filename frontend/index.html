@@ -4,84 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cryptonow Token Generator</title>
-    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/825/825517.png" type="image/png">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <style>
         body {
-            background: linear-gradient(to right, #F3F9FF, #D1E7FF);
-            color: #333;
+            background: #f8f9fa;
             font-family: 'Arial', sans-serif;
         }
-        .header {
+        .main-header {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #fff;
+            padding: 40px 20px;
             text-align: center;
-            margin: 30px 0;
         }
-        .header img {
-            width: 100px;
-            margin-bottom: 10px;
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
         }
-        .container {
-            margin-top: 20px;
-            max-width: 600px;
-            background: #fff;
+        .main-header p {
+            font-size: 1.25rem;
+        }
+        .alert-info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+        .alert-warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        .crypto-icons {
+            font-size: 3rem;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .eth-address {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        footer {
+            text-align: center;
             padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            background: #e9ecef;
         }
-        .btn-primary {
-            background-color: #0056B3;
-            border: none;
-        }
-        .btn-primary:hover {
-            background-color: #004494;
-        }
-        .crypto-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
-            opacity: 0.1;
-        }
-        .social-icons {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .social-icons a {
+        footer a {
             margin: 0 10px;
-            color: #555;
-            font-size: 24px;
+            color: #007bff;
             text-decoration: none;
         }
-        .social-icons a:hover {
-            color: #0056B3;
-        }
-        .navigation {
-            text-align: center;
-            margin-top: 20px;
-        }
-        .navigation a {
-            margin: 0 10px;
-            color: #0056B3;
-            text-decoration: none;
-        }
-        .navigation a:hover {
+        footer a:hover {
             text-decoration: underline;
         }
     </style>
 </head>
 <body>
-    <div class="crypto-bg"></div>
-    <div class="header">
-        <img src="https://cdn-icons-png.flaticon.com/512/825/825517.png" alt="Crypto Icon">
-        <h1>Create Your Own Crypto Coin</h1>
-        <p>Send **0.01 ETH** to <b>0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</b> and complete the form to create your ERC-20 token.</p>
-    </div>
-    <div class="container">
+    <header class="main-header">
+        <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
+        <p>No coding skills required. Easy and fast process.</p>
+        <div class="crypto-icons">
+            <i class="bi bi-currency-bitcoin"></i>
+            <i class="bi bi-currency-ethereum"></i>
+            <i class="bi bi-currency-exchange"></i>
+        </div>
+    </header>
+
+    <main class="container mt-5">
+        <div class="alert alert-info">
+            <h5 class="text-center">Payment Information</h5>
+            <p>Send <b>**0.01 ETH**</b> to the following address:</p>
+            <div class="eth-address text-center">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
+            <p class="text-muted text-center small">Double-check the address before sending to avoid errors.</p>
+        </div>
+
+        <div class="alert alert-warning">
+            <h5 class="text-center">Steps to Create Your Token</h5>
+            <ul>
+                <li>Send 0.01 ETH to the address above.</li>
+                <li>Fill out the form below with your token details.</li>
+                <li>Submit the form and wait for the magic to happen!</li>
+            </ul>
+        </div>
+
         <form id="tokenForm">
             <div class="mb-3">
                 <label for="tokenName" class="form-label">Token Name</label>
@@ -105,23 +110,59 @@
             </div>
             <button type="submit" class="btn btn-primary w-100">Create Token</button>
         </form>
+
         <div id="statusMessage" class="mt-4"></div>
+
         <div class="progress mt-4" id="progressContainer" style="display: none;">
             <div id="progressBar" class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;"></div>
         </div>
-    </div>
-    <div class="navigation">
-        <a href="support.html">Support</a> | <a href="about.html">About</a>
-    </div>
-    <div class="social-icons">
-        <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook"></i></a>
-        <a href="https://twitter.com" target="_blank"><i class="fab fa-twitter"></i></a>
-        <a href="https://linkedin.com" target="_blank"><i class="fab fa-linkedin"></i></a>
-    </div>
+    </main>
 
-    <!-- Bootstrap JS -->
+    <footer>
+        <p>© 2025 Cryptonow. All rights reserved.</p>
+        <a href="/support.html">Support</a> | <a href="/about.html">About</a>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script>
+        document.getElementById('tokenForm').addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const statusMessage = document.getElementById('statusMessage');
+            const progressContainer = document.getElementById('progressContainer');
+            const progressBar = document.getElementById('progressBar');
+            statusMessage.innerHTML = '';
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+
+            const formData = {
+                tokenName: document.getElementById('tokenName').value,
+                tokenSymbol: document.getElementById('tokenSymbol').value,
+                initialSupply: document.getElementById('initialSupply').value,
+                receiverAddress: document.getElementById('receiverAddress').value,
+                userAddress: document.getElementById('userAddress').value,
+            };
+
+            try {
+                statusMessage.innerHTML = '<div class="alert alert-info">Waiting for payment confirmation...</div>';
+                progressBar.style.width = '25%';
+
+                const response = await axios.post('http://192.168.1.42:3001/api/create-token', formData);
+
+                statusMessage.innerHTML = '<div class="alert alert-warning">Payment detected! Creating your token...</div>';
+                progressBar.style.width = '75%';
+
+                const txHash = response.data.transactionHash;
+                statusMessage.innerHTML = `<div class="alert alert-success">Your token was created successfully!<br>Transaction Hash: <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></div>`;
+                progressBar.style.width = '100%';
+            } catch (err) {
+                statusMessage.innerHTML = `<div class="alert alert-danger">An error occurred: ${err.message}</div>`;
+                progressBar.style.width = '0%';
+            } finally {
+                progressContainer.style.display = 'none';
+            }
+        });
+    </script>
 </body>
 </html>
