@@ -78,7 +78,7 @@
             <i class="bi bi-currency-ethereum" aria-hidden="true"></i>
             <i class="bi bi-currency-exchange" aria-hidden="true"></i>
         </div>
-        <a href="/qna.php" class="btn btn-outline-light mt-3">Learn More in Q&A</a>
+        <a href="/qna." class="btn btn-outline-light mt-3">Learn More in Q&A</a>
     </header>
 
     <main class="container mt-5">
@@ -123,7 +123,7 @@
                     <input type="text" class="form-control" id="receiverAddress" name="receiverAddress" placeholder="0xYourEthereumAddress" required aria-required="true">
                 </div>
                 <div class="mb-3">
-                    <label for="userAddress" class="form-label">Payment Sender's Address</label>
+                    <label for="userAddress" class="form-label">Payment Sender's Address (can be the same or different from the Token Receiver)</label>
                     <input type="text" class="form-control" id="userAddress" name="userAddress" placeholder="0xYourEthereumAddress" required aria-required="true">
                 </div>
                 <button type="submit" class="btn btn-primary w-100">Create Token</button>
