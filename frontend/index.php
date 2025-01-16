@@ -131,6 +131,22 @@
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>What payment methods are accepted?</div>
                 <div class="collapsible-body"><span>We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.</span></div>
             </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">help_outline</i>How long does it take to create a token?</div>
+                <div class="collapsible-body"><span>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">help_outline</i>What are the costs involved?</div>
+                <div class="collapsible-body"><span>The cost to create a token is <strong>0.04 ETH</strong> + network fees, which covers all processing and deployment fees.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">help_outline</i>Who owns the token after it is created?</div>
+                <div class="collapsible-body"><span>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">help_outline</i>Can I create tokens on other blockchains?</div>
+                <div class="collapsible-body"><span>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</span></div>
+            </li>
         </ul>
     </section>
 
