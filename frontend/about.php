@@ -119,8 +119,6 @@
         </section>
     </main>
 
-    <footer>
-        <p>© 2025 Cryptonow. All rights reserved. <a href="/terms.html">Terms of Service</a></p>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
