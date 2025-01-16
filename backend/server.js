@@ -3,17 +3,21 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const { ethers } = require("ethers");
 const { exec } = require("child_process");
+const sgMail = require("@sendgrid/mail"); // Import SendGrid module
 require("dotenv").config();
 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
+// SendGrid API Key
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
 // Load environment variables
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
-const NETWORK = process.env.SEPOLIA_RPC_URL; // Sepolia RPC URL from .env
-const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
-const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
+const NETWORK = process.env.SEPOLIA_RPC_URL;
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const REQUIRED_PAYMENT = ethers.parseEther("0.01");
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
 // IP restriction cache
@@ -23,53 +27,31 @@ const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
 const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
-
         const checkForTransaction = async () => {
             try {
-                const elapsed = Date.now() - start; // Elapsed time
-                console.log(`Elapsed time: ${elapsed} ms (Timeout: ${timeout} ms)`);
-
-                // Check if the timeout is exceeded
+                const elapsed = Date.now() - start;
                 if (elapsed > timeout) {
-                    console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                     return;
                 }
-
-                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
-                const block = await provider.getBlock(blockNumber); // Fetch the block details
-
-                console.log(`Checking block ${blockNumber} for transactions...`);
-
-                // Loop through transaction hashes in the block
+                const blockNumber = await provider.getBlockNumber();
+                const block = await provider.getBlock(blockNumber);
                 for (const txHash of block.transactions) {
-                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
-
-                    console.log(`Transaction found: ${tx.hash}`);
-                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
-                    console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
-
+                    const tx = await provider.getTransaction(txHash);
                     if (
                         tx.from.toLowerCase() === userAddress.toLowerCase() &&
                         tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
                         BigInt(tx.value) === REQUIRED_PAYMENT
                     ) {
-                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                        resolve(tx.hash); // Transaction found, return the hash
+                        resolve(tx.hash);
                         return;
-                    } else {
-                        console.log("Transaction does not match the required criteria.");
                     }
                 }
-
-                // Wait for the next block and check again
                 setTimeout(checkForTransaction, 2000);
             } catch (error) {
-                console.error("Error checking transactions:", error);
                 reject(error);
             }
         };
-
         checkForTransaction();
     });
 };
@@ -81,7 +63,6 @@ app.post("/create-token", async (req, res) => {
     if (submissionCache.has(clientIp)) {
         const lastSubmissionTime = submissionCache.get(clientIp);
         const currentTime = Date.now();
-
         if (currentTime - lastSubmissionTime < TIME_LIMIT) {
             return res.status(429).json({
                 message: "Too many submissions. Please wait 5 minutes before trying again.",
@@ -99,9 +80,26 @@ app.post("/create-token", async (req, res) => {
     }
 
     try {
+        // Send form data via email using SendGrid
+        const emailMessage = {
+            to: "savvaniss@yahoo.gr", // Replace with your email address
+            from: "form@cryptonow.cc", // Replace with a verified sender email
+            subject: "New Token Creation Request",
+            html: `
+                <h1>New Token Request</h1>
+                <p><strong>Token Name:</strong> ${tokenName}</p>
+                <p><strong>Token Symbol:</strong> ${tokenSymbol}</p>
+                <p><strong>Initial Supply:</strong> ${initialSupply}</p>
+                <p><strong>Receiver Address:</strong> ${receiverAddress}</p>
+                <p><strong>Payment Sender Address:</strong> ${userAddress}</p>
+            `,
+        };
+        await sgMail.send(emailMessage);
+        console.log("Form data email sent successfully!");
+
         // Wait for the user to send the required payment
         console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 33300000); // Timeout for payment detection
+        const txHash = await waitForPayment(userAddress, 33300000);
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
@@ -113,7 +111,6 @@ app.post("/create-token", async (req, res) => {
                     console.error(`Error: ${error.message}`);
                     return res.status(500).json({ message: "Failed to create the token." });
                 }
-
                 const match = stdout.match(/Contract deployed to sepolia at address: (0x[a-fA-F0-9]{40})/);
                 if (match) {
                     return res.json({
@@ -127,7 +124,7 @@ app.post("/create-token", async (req, res) => {
             }
         );
     } catch (error) {
-        console.error(error.message);
+        console.error("Error:", error.message);
         res.status(400).json({ message: error.message });
     }
 });
