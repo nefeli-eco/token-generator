@@ -6,14 +6,7 @@ const { exec } = require("child_process");
 require("dotenv").config();
 
 const app = express();
-// CORS options
-const corsOptions = {
-    origin: "https://cryptonow.cc", // Replace with the exact domain of your frontend
-    methods: "GET,POST,OPTIONS",
-    allowedHeaders: "Content-Type",
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(bodyParser.json());
 
 // Load environment variables
@@ -80,11 +73,6 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
         checkForTransaction();
     });
 };
-
-
-app.get('/api/test', (req, res) => {
-    res.send('API is working!');
-});
 
 app.post("/api/create-token", async (req, res) => {
     const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
