@@ -35,11 +35,6 @@
             color: #fbc02d;
             margin: 20px 0;
         }
-        .card {
-            background: #212121;
-            color: #ffffff;
-            border-radius: 10px;
-        }
         .steps-section {
             margin: 30px 0;
         }
@@ -78,7 +73,7 @@
             text-align: center;
             color: #fbc02d;
         }
-            .carousel {
+        .carousel {
             margin: 30px auto;
             max-width: 800px;
         }
@@ -86,7 +81,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 200px;
+            height: auto;
         }
         .carousel .carousel-item .card {
             width: 100%;
@@ -168,44 +163,45 @@
         <p class="small-text">Please double-check the address before sending your payment to avoid any errors.</p>
     </section>
 
-<!-- FAQ Section -->
-<section class="faq-section" aria-labelledby="faq-section">
-    <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
-    <div class="carousel center-align">
-        <div class="carousel-item">
-            <div class="card">
-                <div class="card-content">
-                    <h6>What is Cryptonow?</h6>
-                    <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+    <!-- FAQ Section -->
+    <section class="faq-section" aria-labelledby="faq-section">
+        <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
+        <div class="carousel center-align">
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What is Cryptonow?</h6>
+                        <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>How do I create my token?</h6>
+                        <p>Fill out the form, make payment, and let our automated system do the rest.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What payment methods are accepted?</h6>
+                        <p>We accept Ethereum (ETH) only.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>How long does it take to create a token?</h6>
+                        <p>Tokens are created within minutes of payment confirmation.</p>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="carousel-item">
-            <div class="card">
-                <div class="card-content">
-                    <h6>How do I create my token?</h6>
-                    <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="card">
-                <div class="card-content">
-                    <h6>What payment methods are accepted?</h6>
-                    <p>We accept Ethereum (ETH) only.</p>
-                </div>
-            </div>
-        </div>
-        <div class="carousel-item">
-            <div class="card">
-                <div class="card-content">
-                    <h6>How long does it take to create a token?</h6>
-                    <p>Tokens are created within minutes of payment confirmation.</p>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+    </section>
+
     <!-- Token Creation Form -->
     <section class="form-section" aria-labelledby="form-section">
         <div class="card">
@@ -243,21 +239,16 @@
 <footer>
     <p>© 2025 Cryptonow. All rights reserved.</p>
 </footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselElems = document.querySelectorAll('.carousel');
         M.Carousel.init(carouselElems, {
             fullWidth: true,
-            indicators: true,
-            duration: 200 // Smooth transition
+            indicators: true
         });
-    });
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselElems = document.querySelectorAll('.carousel');
-        M.Carousel.init(carouselElems, { fullWidth: true, indicators: true });
     });
 
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
