@@ -10,6 +10,7 @@
     <link rel="canonical" href="https://cryptonow.cc/support">
     <title>Contact Us - Cryptonow Token Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+    <?php include 'google.php'; ?>
     <style>
         body {
             background: #1a1a1a; /* Darker background */
