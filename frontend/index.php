@@ -34,8 +34,19 @@
             margin: 20px 0;
         }
         .accordion-header button {
-            font-size: 1.1rem;
+            background-color: #007bff;
+            color: white;
             font-weight: bold;
+        }
+        .accordion-header button:hover {
+            background-color: #0056b3;
+        }
+        .eth-address {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
         }
         footer {
             text-align: center;
@@ -61,7 +72,7 @@
             <i class="bi bi-currency-bitcoin" aria-hidden="true"></i>
             <i class="bi bi-currency-ethereum" aria-hidden="true"></i>
             <i class="bi bi-currency-exchange" aria-hidden="true"></i>
-        </div>  
+        </div>
     </header>
 
     <main class="container mt-5">
@@ -80,7 +91,7 @@
         <section aria-labelledby="payment-section">
             <div class="alert alert-info">
                 <h5 id="payment-section" class="text-center">Payment Information</h5>
-                <p>Send <b>0.03 ETH + network fees</b> to the following address:</p>
+                <p>Send<b> 0.03 ETH + network fees </b> to the following address:</p>
                 <div class="eth-address" aria-label="Ethereum Payment Address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
                 <p class="text-muted text-center small">Double-check the address before sending to avoid errors.</p>
             </div>
@@ -91,11 +102,11 @@
                 <legend id="form-section" class="mb-3">Token Creation Form</legend>
                 <div class="mb-3">
                     <label for="tokenName" class="form-label">Token Name</label>
-                    <input type="text" class="form-control" id="tokenName" name="tokenName" placeholder="Bitcoin" required aria-required="true">
+                    <input type="text" class="form-control" id="tokenName" name="tokenName" placeholder="Ethereum" required aria-required="true">
                 </div>
                 <div class="mb-3">
                     <label for="tokenSymbol" class="form-label">Token Symbol (Ticker)</label>
-                    <input type="text" class="form-control" id="tokenSymbol" name="tokenSymbol" placeholder="BTC" required aria-required="true">
+                    <input type="text" class="form-control" id="tokenSymbol" name="tokenSymbol" placeholder="ETH" required aria-required="true">
                 </div>
                 <div class="mb-3">
                     <label for="initialSupply" class="form-label">Initial Supply</label>
@@ -113,50 +124,54 @@
             </fieldset>
         </form>
 
-        <section class="accordion mt-5" id="faqAccordion">
-            <h2 class="text-center mb-4">Frequently Asked Questions</h2>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeading1">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true" aria-controls="faq1">
-                        What is Cryptonow?
-                    </button>
-                </h2>
-                <div id="faq1" class="accordion-collapse collapse show" aria-labelledby="faqHeading1">
-                    <div class="accordion-body">
-                        Cryptonow is a platform that allows you to create your own ERC-20 tokens easily and quickly without requiring any coding skills.
+        <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
+
+        <section id="qna-section" class="mt-5">
+            <h2 class="text-center">Frequently Asked Questions</h2>
+            <div class="accordion mt-4" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            What is Cryptonow?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Cryptonow is a platform that allows you to create your own ERC-20 tokens easily and quickly without requiring any coding skills.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeading2">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2" aria-expanded="false" aria-controls="faq2">
-                        How do I create my token?
-                    </button>
-                </h2>
-                <div id="faq2" class="accordion-collapse collapse" aria-labelledby="faqHeading2">1
-                    <div class="accordion-body">
-                        You simply need to fill out the form on our homepage with your desired token details, send the payment, and our automated system will handle the rest.
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            How do I create my token?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            You simply need to fill out the form on our homepage with your desired token details, send the payment, and our automated system will handle the rest.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="faqHeading3">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3" aria-expanded="false" aria-controls="faq3">
-                        What payment methods are accepted?
-                    </button>
-                </h2>
-                <div id="faq3" class="accordion-collapse collapse" aria-labelledby="faqHeading3">
-                    <div class="accordion-body">
-                        We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            What payment methods are accepted?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </main>
 
     <?php include 'footer.php'; ?>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>
