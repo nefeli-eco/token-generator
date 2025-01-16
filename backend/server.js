@@ -81,6 +81,11 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
     });
 };
 
+
+app.get('/api/test', (req, res) => {
+    res.send('API is working!');
+});
+
 app.post("/api/create-token", async (req, res) => {
     const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
