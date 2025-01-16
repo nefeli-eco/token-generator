@@ -3,5 +3,4 @@
         <a href="/index.php" aria-label="Home Page">Home</a> | 
         <a href="/support.php" aria-label="Support Page">Support</a> | 
         <a href="/about.php" aria-label="About Page">About</a> |
-        <a href="/qna.php" aria-label="Questions and Answers">Q&A</a>
 </footer>
