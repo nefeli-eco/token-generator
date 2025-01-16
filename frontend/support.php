@@ -66,14 +66,7 @@
 
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </main>
-
-    <footer>
-        <p>© 2025 Cryptonow. All rights reserved.</p>
-        <a href="/index" aria-label="Home Page">Home</a> | 
-        <a href="/support" aria-label="Support Page">Support</a> | 
-        <a href="/about" aria-label="About Page">About</a>
-    </footer>
-
+    <?php include 'footer.php'; ?>
     <script>
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();

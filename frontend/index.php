@@ -133,15 +133,7 @@
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
 
     </main>
-
-    <footer>
-        <p>© 2025 Cryptonow. All rights reserved.</p>
-        <a href="/index" aria-label="Home Page">Home</a> | 
-        <a href="/support" aria-label="Support Page">Support</a> | 
-        <a href="/about" aria-label="About Page">About</a> |
-        <a href="/qna" aria-label="Questions and Answers">Q&A</a>
-    </footer>
-
+    <?php include 'footer.php'; ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script>

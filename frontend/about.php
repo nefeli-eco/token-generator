@@ -126,12 +126,6 @@
             </div>
         </section>
     </main>
-
-    <footer>
-        <p>© 2025 Cryptonow. All rights reserved.</p>
-        <a href="/index">Home</a> | 
-        <a href="/support">Support</a> | 
-        <a href="/qna">Q&A</a>
-    </footer>
+    <?php include 'footer.php'; ?>
 </body>
 </html>
