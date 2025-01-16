@@ -219,6 +219,30 @@
                         </div>
                     </div>
                 </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                        <h6>What are the costs involved?</h6>
+                        <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                        <h6>Who owns the token after it is created?</h6>
+                        <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                            <h6>How long does it take to create a token?</h6>
+                            <p>Tokens are created within minutes of payment confirmation.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
