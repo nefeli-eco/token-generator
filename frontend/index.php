@@ -280,10 +280,8 @@
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </section>
 </main>
+<?php include 'footer.php'; ?>
 
-<footer>
-    <p>© 2025 Cryptonow. All rights reserved.</p>
-</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
