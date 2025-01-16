@@ -11,7 +11,7 @@ app.use(bodyParser.json());
 
 // Load environment variables
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
-const NETWORK = process.env.SEPOLIA_RPC_URL; // Sepolia RPC URL from .env
+const NETWORK = process.env.DEPLOY_ENV === "production" ? process.env.MAINNET_RPC_URL : process.env.SEPOLIA_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
@@ -37,14 +37,13 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
                 }
 
                 const blockNumber = await provider.getBlockNumber(); // Get the latest block number
-                const block = await provider.getBlock(blockNumber); // Fetch the block details
+                const targetBlockNumber = blockNumber - 2; // Process blocks 2 blocks behind the current block
+                const block = await provider.getBlockWithTransactions(targetBlockNumber); // Fetch block details with transactions
 
-                console.log(`Checking block ${blockNumber} for transactions...`);
+                console.log(`Checking block ${targetBlockNumber} for transactions...`);
 
                 // Loop through transaction hashes in the block
-                for (const txHash of block.transactions) {
-                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
-
+                for (const tx of block.transactions) {
                     console.log(`Transaction found: ${tx.hash}`);
                     console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
                     console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
@@ -138,4 +137,3 @@ const HOST = process.env.HOST || "0.0.0.0";
 app.listen(PORT, HOST, () => {
     console.log(`Server running on http://${HOST}:${PORT}`);
 });
-eeeeeeeee
