@@ -43,6 +43,12 @@ include 'header.php';
             <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
         </div>
     </main>
+
+    <footer>
+        <p>© 2025 Cryptonow. All rights reserved.</p>
+        <a href="/index">Home</a> | <a href="/support">Support</a> | <a href="/about">About</a>
+    </footer>
+
     <script>
         document.querySelectorAll('.faq-item h5').forEach(item => {
             item.addEventListener('click', () => {
