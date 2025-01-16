@@ -108,8 +108,6 @@
             <i class="bi bi-currency-exchange" aria-hidden="true"></i>
         </div>
     </header>
-
-    <main class="container mt-5">
     <section class="faq-accordion">
             <div class="accordion-container">
                 <div class="accordion-item">
@@ -130,6 +128,8 @@
                 </div>
             </div>
         </section>
+
+    <main class="container mt-5">
         <section aria-labelledby="steps-section">
             <div class="alert alert-info">
                 <h5 id="steps-section" class="text-center">Steps to Create Your Token</h5>
