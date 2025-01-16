@@ -34,51 +34,51 @@
             margin: 20px 0;
         }
         .faq-accordion {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 40px 0;
-        }
-        .accordion-container {
-            display: flex;
-            width: 100%;
-            max-width: 1200px;
-            overflow: hidden;
-        }
-        .accordion-item {
-            flex: 1;
-            text-align: center;
-            transition: flex 0.3s ease;
-            position: relative;
-            cursor: pointer;
-            background: linear-gradient(to bottom, #4facfe, #00f2fe);
-            color: white;
-            margin: 0 5px;
-            border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-        }
-        .accordion-item:hover {
-            flex: 3;
-            box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.2);
-        }
-        .accordion-item h5 {
-            margin: 20px 0;
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ffffff;
-        }
-        .accordion-item p {
-            font-size: 1rem;
-            margin: 0 20px;
-            display: none;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            color: #f8f9fa;
-        }
-        .accordion-item:hover p {
-            display: block;
-            opacity: 1;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 40px 0;
+    }
+    .accordion-container {
+        display: flex;
+        width: 100%;
+        max-width: 1200px;
+        overflow: hidden;
+    }
+    .accordion-item {
+        flex: 1;
+        text-align: center;
+        transition: flex 0.3s ease;
+        position: relative;
+        cursor: pointer;
+        background: linear-gradient(to bottom, #4facfe, #00f2fe);
+        color: white;
+        margin: 0 5px;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+    .accordion-item:hover {
+        flex: 3;
+    }
+    .accordion-item h5 {
+        margin: 20px 0;
+        font-size: 1.5rem;
+        font-weight: bold;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+    .accordion-item p {
+        font-size: 1rem;
+        margin: 10px 20px;
+        display: none;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+        color: #f0f0f0; /* Slightly lighter for better contrast */
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.6);
+    }
+    .accordion-item:hover p {
+        display: block;
+        opacity: 1;
+    }
         .eth-address {
             font-family: monospace;
             background: #e9ecef;
