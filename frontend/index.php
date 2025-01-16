@@ -78,7 +78,7 @@
             <i class="bi bi-currency-ethereum" aria-hidden="true"></i>
             <i class="bi bi-currency-exchange" aria-hidden="true"></i>
         </div>
-        <a href="/qna." class="btn btn-outline-light mt-3">Learn More in Q&A</a>
+        <a href="/qna" class="btn btn-outline-light mt-3">Learn More in Q&A</a>
     </header>
 
     <main class="container mt-5">
@@ -97,7 +97,7 @@
         <section aria-labelledby="payment-section">
             <div class="alert alert-info">
                 <h5 id="payment-section" class="text-center">Payment Information</h5>
-                <p>Send<b>0.03 ETH + network fees </b> to the following address:</p>
+                <p>Send<b> 0.03 ETH + network fees </b> to the following address:</p>
                 <div class="eth-address" aria-label="Ethereum Payment Address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
                 <p class="text-muted text-center small">Double-check the address before sending to avoid errors.</p>
             </div>
