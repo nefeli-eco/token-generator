@@ -108,11 +108,17 @@
         <section class="team-section">
             <h2>Meet Our Team</h2>
             <div class="row">
+            <div class="col-md-4 team-member">
+
+                </div>
                 <div class="col-md-4 team-member">
                     <img src="https://via.placeholder.com/150" alt="Team Member">
                     <h5>Savvanis Spyros</h5>
                     <p>Founder</p>
                 </div>
+                <div class="col-md-4 team-member">
+
+            </div>
             </div>
         </section>
     </main>
