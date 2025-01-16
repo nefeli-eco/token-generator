@@ -157,7 +157,6 @@
     padding: 10px; /* Add padding */
     border-radius: 4px; /* Rounded corners */
 }
-
 /* Success message styling */
 #statusMessage.green {
     background-color: #e8f5e9; /* Light green background */
@@ -175,9 +174,10 @@
 /* Processing message styling */
 #statusMessage.yellow {
     background-color: #fffde7; /* Light yellow background */
-    color: #f57f17; /* Dark yellow text */
-    border: 1px solid #f57f17; /* Border to match the text */
+    color: #000000; /* Black text for better visibility */
+    border: 1px solid #f57f17; /* Border to match the processing theme */
 }
+
 
     </style>
 </head>
