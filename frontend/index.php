@@ -310,7 +310,7 @@
         const statusMessage = document.getElementById('statusMessage');
         statusMessage.innerHTML = '<div class="card-panel yellow lighten-4">Processing...</div>';
         try {
-            const response = await axios.post('http://api.cryptonow.cc:3001/api/create-token', {
+            const response = await axios.post('https://api.cryptonow.cc:3001/api/create-token', {
                 tokenName: document.getElementById('tokenName').value,
                 tokenSymbol: document.getElementById('tokenSymbol').value,
                 initialSupply: document.getElementById('initialSupply').value,
