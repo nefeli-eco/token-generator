@@ -153,10 +153,13 @@
 
 /* Styling for the status message */
 #statusMessage {
-    font-size: 1.1rem; /* Slightly larger text */
-    padding: 10px; /* Add padding */
-    border-radius: 4px; /* Rounded corners */
+    padding: 16px;
+    margin-top: 10px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
 }
+
 /* Success message styling */
 #statusMessage.green {
     background-color: #e8f5e9; /* Light green background */
