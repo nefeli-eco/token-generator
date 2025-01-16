@@ -356,25 +356,35 @@
             carouselInstance[0].next();
         });
     });
-
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const statusMessage = document.getElementById('statusMessage');
-        statusMessage.innerHTML = '<div class="card-panel yellow lighten-4">Processing...</div>';
-        try {
-            const response = await axios.post('/api/create-token', {
-                tokenName: document.getElementById('tokenName').value,
-                tokenSymbol: document.getElementById('tokenSymbol').value,
-                initialSupply: document.getElementById('initialSupply').value,
-                receiverAddress: document.getElementById('receiverAddress').value,
-                userAddress: document.getElementById('userAddress').value,
-            });
-            const txHash = response.data.transactionHash;
-            statusMessage.innerHTML = `<div class="card-panel green lighten-4">Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a></div>`;
-        } catch (err) {
-            statusMessage.innerHTML = `<div class="card-panel red lighten-4">Error: ${err.message}</div>`;
-        }
-    });
+    e.preventDefault();
+    const statusMessage = document.getElementById('statusMessage');
+
+    // Reset the status message and apply the "yellow" class for processing
+    statusMessage.className = "yellow";
+    statusMessage.innerText = "Processing...";
+
+    try {
+        const response = await axios.post('/api/create-token', {
+            tokenName: document.getElementById('tokenName').value,
+            tokenSymbol: document.getElementById('tokenSymbol').value,
+            initialSupply: document.getElementById('initialSupply').value,
+            receiverAddress: document.getElementById('receiverAddress').value,
+            userAddress: document.getElementById('userAddress').value,
+        });
+
+        const txHash = response.data.transactionHash;
+
+        // Update the status message on success
+        statusMessage.className = "green";
+        statusMessage.innerHTML = `Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
+    } catch (err) {
+        // Update the status message on error
+        statusMessage.className = "red";
+        statusMessage.innerText = `Error: ${err.message}`;
+    }
+});
+
 </script>
 </body>
 </html>
