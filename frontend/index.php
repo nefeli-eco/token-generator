@@ -327,7 +327,7 @@
                     </div>
                     <div class="input-field">
                         <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
-                        <label for="userAddress">Payment Sender's Address (can be the same or different for the Token Receiver Address</label>
+                        <label for="userAddress">Payment Sender's Address (can be the same or different for the Token Receiver Address)</label>
                     </div>
                     <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
                 </form>
