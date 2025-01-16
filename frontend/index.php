@@ -240,8 +240,8 @@
                 <div class="carousel-item">
                     <div class="card">
                         <div class="card-content">
-                            <h6>How long does it take to create a token?</h6>
-                            <p>Tokens are created within minutes of payment confirmation.</p>
+                            <h6>Can I create tokens on other blockchains?</h6>
+                            <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
                         </div>
                     </div>
                 </div>
