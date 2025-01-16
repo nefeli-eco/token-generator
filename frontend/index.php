@@ -314,7 +314,7 @@
                 userAddress: document.getElementById('userAddress').value,
             });
             const txHash = response.data.transactionHash;
-            statusMessage.innerHTML = `<div class="card-panel green lighten-4">Token created! <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">View Transaction</a></div>`;
+            statusMessage.innerHTML = `<div class="card-panel green lighten-4">Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a></div>`;
         } catch (err) {
             statusMessage.innerHTML = `<div class="card-panel red lighten-4">Error: ${err.message}</div>`;
         }
