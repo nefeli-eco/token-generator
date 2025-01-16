@@ -11,11 +11,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            background: #f5f5f5;
+            background: #121212; /* Dark background for a cryptocurrency feel */
             font-family: 'Roboto', sans-serif;
+            color: #ffffff;
         }
         .main-header {
-            background: linear-gradient(120deg, #4caf50, #81c784);
+            background: linear-gradient(120deg, #673ab7, #512da8);
             color: white;
             padding: 50px 20px;
             text-align: center;
@@ -27,29 +28,54 @@
         .main-header p {
             font-size: 1.4rem;
         }
-        .faq-section {
-            margin: 40px 0;
+        .crypto-icons {
+            font-size: 3rem;
+            color: #ffca28;
+            margin: 20px 0;
+        }
+        .card {
+            background: #212121; /* Dark background for cards */
+            color: #ffffff;
+            border-radius: 10px;
         }
         .collapsible-header {
-            background-color: #4caf50;
+            background-color: #673ab7;
             color: white;
             font-weight: bold;
         }
         .collapsible-body {
-            background-color: #e8f5e9;
-            color: #2e7d32;
+            background-color: #311b92;
+            color: #d1c4e9;
         }
         .form-section {
             margin-top: 40px;
         }
+        .payment-section {
+            background-color: #212121;
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffffff;
+            margin-bottom: 30px;
+        }
+        .payment-section h5 {
+            color: #ffca28;
+        }
+        .payment-section .eth-address {
+            font-family: monospace;
+            background: #311b92;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            color: #ffca28;
+        }
         footer {
-            background: #4caf50;
+            background: #212121;
             color: white;
             padding: 20px 0;
             text-align: center;
         }
         footer a {
-            color: #fff9c4;
+            color: #ffca28;
             text-decoration: none;
         }
     </style>
@@ -59,6 +85,11 @@
 <header class="main-header">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
     <p>No coding skills required. Easy and fast process.</p>
+    <div class="crypto-icons" aria-label="Cryptocurrency Icons">
+        <i class="material-icons">currency_bitcoin</i>
+        <i class="material-icons">currency_ethereum</i>
+        <i class="material-icons">account_balance_wallet</i>
+    </div>
 </header>
 
 <main class="container">
@@ -75,6 +106,14 @@
                 </ol>
             </div>
         </div>
+    </section>
+
+    <!-- Payment Section -->
+    <section class="payment-section">
+        <h5>Payment Information</h5>
+        <p>Send <strong>0.04 ETH + network fees</strong> to the following address:</p>
+        <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
+        <p class="small-text">Please double-check the address before sending your payment to avoid any errors.</p>
     </section>
 
     <!-- FAQ Section -->
@@ -98,7 +137,7 @@
             </li>
             <li>
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>What are the costs involved?</div>
-                <div class="collapsible-body"><span>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</span></div>
+                <div class="collapsible-body"><span>The cost to create a token is <strong>0.04 ETH</strong> + network fees, which covers all processing and deployment fees.</span></div>
             </li>
             <li>
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>Who owns the token after it is created?</div>
@@ -133,7 +172,7 @@
                         <input id="userAddress" type="text" required>
                         <label for="userAddress">Payment Sender's Address</label>
                     </div>
-                    <button type="submit" class="btn waves-effect waves-light green">Create Token</button>
+                    <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
                 </form>
             </div>
         </div>
