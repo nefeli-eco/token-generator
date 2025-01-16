@@ -12,6 +12,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <?php include 'google.php'; ?>
     <style>
         body {
@@ -275,7 +276,7 @@
                         <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
                         <label for="userAddress">Payment Sender's Address</label>
                     </div>
-                    <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
+                    <button type="submit" class="g-recaptcha btn waves-effect waves-light purple darken-1" data-sitekey="6Lezu7kqAAAAAFocFGUPY30hM0VYyDqLhivi9Twm">Create Token</button>
                 </form>
             </div>
         </div>
@@ -283,7 +284,11 @@
     </section>
 </main>
 <?php include 'footer.php'; ?>
-
+<script>
+   function onSubmit(token) {
+     document.getElementById("tokenForm").submit();
+   }
+ </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
