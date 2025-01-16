@@ -6,17 +6,19 @@
     <meta name="description" content="Create your own ERC-20 cryptocurrency token in just 5 minutes with Cryptonow. No coding skills required.">
     <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token">
     <meta name="author" content="Cryptonow">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cryptonow.cc/">
     <title>Cryptonow Token Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            background: #1a1a1a; /* Slightly softer black */
+            background: #1a1a1a;
             font-family: 'Roboto', sans-serif;
-            color: #e0e0e0; /* Softer white for text */
+            color: #e0e0e0;
         }
         .main-header {
-            background: linear-gradient(120deg, #5e35b1, #4527a0); /* Softer purple gradient */
+            background: linear-gradient(120deg, #5e35b1, #4527a0);
             color: white;
             padding: 50px 20px;
             text-align: center;
@@ -30,22 +32,22 @@
         }
         .crypto-icons {
             font-size: 3rem;
-            color: #fbc02d; /* Gold-inspired color */
+            color: #fbc02d;
             margin: 20px 0;
         }
         .card {
-            background: #212121; /* Dark gray for cards */
+            background: #212121;
             color: #ffffff;
             border-radius: 10px;
         }
         .collapsible-header {
-            background-color: #5e35b1; /* Softer purple */
+            background-color: #5e35b1;
             color: white;
             font-weight: bold;
         }
         .collapsible-body {
-            background-color: #2e2e2e; /* Subtle contrast for body */
-            color: #bdbdbd; /* Softer text color */
+            background-color: #2e2e2e;
+            color: #bdbdbd;
         }
         .payment-section {
             background-color: #212121;
@@ -55,18 +57,18 @@
             margin-bottom: 30px;
         }
         .payment-section h5 {
-            color: #fbc02d; /* Gold-inspired for emphasis */
+            color: #fbc02d;
         }
         .payment-section .eth-address {
             font-family: monospace;
-            background: #311b92; /* Darker purple */
+            background: #311b92;
             padding: 10px;
             border-radius: 5px;
             text-align: center;
-            color: #fbc02d; /* Gold for address */
+            color: #fbc02d;
         }
         footer {
-            background: #121212; /* Darker black for footer */
+            background: #121212;
             color: #bdbdbd;
             padding: 20px 0;
             text-align: center;
@@ -81,7 +83,7 @@
 
 <header class="main-header">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
-    <p>No coding skills required. Easy and fast process.</p>
+    <p aria-live="polite">No coding skills required. Easy and fast process.</p>
     <div class="crypto-icons" aria-label="Cryptocurrency Icons">
         <i class="material-icons">currency_bitcoin</i>
         <i class="material-icons">currency_ethereum</i>
@@ -91,10 +93,10 @@
 
 <main class="container">
     <!-- Steps Section -->
-    <section class="form-section">
+    <section class="form-section" aria-labelledby="steps-section">
         <div class="card">
             <div class="card-content">
-                <span class="card-title">Steps to Create Your Token</span>
+                <span id="steps-section" class="card-title">Steps to Create Your Token</span>
                 <ol>
                     <li>Fill out the form below with your token details.</li>
                     <li>Submit the form.</li>
@@ -106,15 +108,16 @@
     </section>
 
     <!-- Payment Section -->
-    <section class="payment-section">
-        <h5>Payment Information</h5>
+    <section class="payment-section" aria-labelledby="payment-section">
+        <h5 id="payment-section">Payment Information</h5>
         <p>Send <strong>0.04 ETH + network fees</strong> to the following address:</p>
         <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
         <p class="small-text">Please double-check the address before sending your payment to avoid any errors.</p>
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="faq-section" aria-labelledby="faq-section">
+        <h5 id="faq-section" class="card-title">Frequently Asked Questions</h5>
         <ul class="collapsible expandable">
             <li>
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>What is Cryptonow?</div>
@@ -128,30 +131,14 @@
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>What payment methods are accepted?</div>
                 <div class="collapsible-body"><span>We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.</span></div>
             </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">help_outline</i>How long does it take to create a token?</div>
-                <div class="collapsible-body"><span>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">help_outline</i>What are the costs involved?</div>
-                <div class="collapsible-body"><span>The cost to create a token is <strong>0.04 ETH</strong> + network fees, which covers all processing and deployment fees.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">help_outline</i>Who owns the token after it is created?</div>
-                <div class="collapsible-body"><span>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</span></div>
-            </li>
-            <li>
-                <div class="collapsible-header"><i class="material-icons">help_outline</i>Can I create tokens on other blockchains?</div>
-                <div class="collapsible-body"><span>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</span></div>
-            </li>
         </ul>
     </section>
 
     <!-- Token Creation Form -->
-    <section class="form-section">
+    <section class="form-section" aria-labelledby="form-section">
         <div class="card">
             <div class="card-content">
-                <span class="card-title">Token Creation Form</span>
+                <span id="form-section" class="card-title">Token Creation Form</span>
                 <form id="tokenForm">
                     <div class="input-field">
                         <input id="tokenName" type="text" required>
@@ -180,9 +167,7 @@
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </section>
 </main>
-
 <?php include 'footer.php'; ?>
-
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
