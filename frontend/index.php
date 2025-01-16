@@ -35,23 +35,25 @@
             color: #fbc02d;
             margin: 20px 0;
         }
+        .card {
+            background: #212121;
+            color: #ffffff;
+            border-radius: 10px;
+        }
         .steps-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
+            margin: 30px 0;
         }
         .step-card {
             background: #212121;
             color: #ffffff;
             padding: 20px;
             border-radius: 10px;
-            flex: 1 1 calc(25% - 1rem);
-            text-align: center;
-            min-width: 200px;
-            max-width: 300px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 180px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .step-card i {
             font-size: 3rem;
@@ -76,39 +78,8 @@
             text-align: center;
             color: #fbc02d;
         }
-        .faq-slider {
-            margin-bottom: 40px;
-        }
-        .carousel.carousel-slider {
-            overflow: hidden;
-            position: relative;
-        }
-        .carousel-item {
-            text-align: center;
-            padding: 20px;
-            color: white;
-        }
-        .carousel .indicators {
-            bottom: -20px;
-        }
-        .carousel .indicators .indicator-item {
-            background-color: #fbc02d;
-        }
-        .carousel-nav {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            display: flex;
-            justify-content: space-between;
-            transform: translateY(-50%);
-            z-index: 10;
-        }
-        .carousel-nav .prev,
-        .carousel-nav .next {
-            font-size: 2rem;
-            color: white;
-            cursor: pointer;
-            padding: 0 15px;
+        .carousel {
+            margin: 30px 0;
         }
         footer {
             background: #121212;
@@ -126,7 +97,7 @@
 
 <header class="main-header">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
-    <p>No coding skills required. Easy and fast process.</p>
+    <p aria-live="polite">No coding skills required. Easy and fast process.</p>
     <div class="crypto-icons" aria-label="Cryptocurrency Icons">
         <i class="material-icons">currency_bitcoin</i>
         <i class="material-icons">currency_ethereum</i>
@@ -138,21 +109,31 @@
     <!-- Steps Section -->
     <section class="steps-section" aria-labelledby="steps-section">
         <h2 id="steps-section" class="center-align">Steps to Create Your Token</h2>
-        <div class="step-card">
-            <i class="material-icons">edit</i>
-            <p>Fill out the form with your token details.</p>
-        </div>
-        <div class="step-card">
-            <i class="material-icons">send</i>
-            <p>Submit the form.</p>
-        </div>
-        <div class="step-card">
-            <i class="material-icons">account_balance</i>
-            <p>Make your payment.</p>
-        </div>
-        <div class="step-card">
-            <i class="material-icons">check_circle</i>
-            <p>Wait for the magic to happen!</p>
+        <div class="row">
+            <div class="col s12 m6 l3">
+                <div class="card step-card center-align">
+                    <i class="material-icons">edit</i>
+                    <p>Fill out the form with your token details.</p>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card step-card center-align">
+                    <i class="material-icons">send</i>
+                    <p>Submit the form.</p>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card step-card center-align">
+                    <i class="material-icons">account_balance</i>
+                    <p>Make your payment.</p>
+                </div>
+            </div>
+            <div class="col s12 m6 l3">
+                <div class="card step-card center-align">
+                    <i class="material-icons">check_circle</i>
+                    <p>Wait for the magic to happen!</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -165,62 +146,75 @@
     </section>
 
     <!-- FAQ Section -->
-    <section class="faq-slider" aria-labelledby="faq-section">
-        <h2 id="faq-section" class="center-align">Frequently Asked Questions</h2>
-        <div class="carousel carousel-slider center">
-            <div class="carousel-item">
-                <h5>What is Cryptonow?</h5>
-                <p>Cryptonow is a platform that allows you to create your own ERC-20 tokens easily and quickly without requiring any coding skills.</p>
-            </div>
-            <div class="carousel-item">
-                <h5>How do I create my token?</h5>
-                <p>You simply need to fill out the form on our homepage with your desired token details, send the payment, and our automated system will handle the rest.</p>
-            </div>
-            <div class="carousel-item">
-                <h5>What payment methods are accepted?</h5>
-                <p>We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.</p>
-            </div>
-            <div class="carousel-item">
-                <h5>How long does it take to create a token?</h5>
-                <p>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</p>
+    <section class="faq-section" aria-labelledby="faq-section">
+        <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
+        <div class="carousel">
+            <a class="carousel-item" href="#"><h6>What is Cryptonow?</h6><p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p></a>
+            <a class="carousel-item" href="#"><h6>How do I create my token?</h6><p>Fill out the form, make payment, and let our automated system do the rest.</p></a>
+            <a class="carousel-item" href="#"><h6>What payment methods are accepted?</h6><p>We accept Ethereum (ETH) only.</p></a>
+            <a class="carousel-item" href="#"><h6>How long does it take to create a token?</h6><p>Tokens are created within minutes of payment confirmation.</p></a>
+        </div>
+    </section>
+
+    <!-- Token Creation Form -->
+    <section class="form-section" aria-labelledby="form-section">
+        <div class="card">
+            <div class="card-content">
+                <span id="form-section" class="card-title">Token Creation Form</span>
+                <form id="tokenForm">
+                    <div class="input-field">
+                        <input id="tokenName" type="text" placeholder="Ethereum" required>
+                        <label for="tokenName">Token Name</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="tokenSymbol" type="text" placeholder="ETH" required>
+                        <label for="tokenSymbol">Token Symbol (Ticker)</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="initialSupply" type="number" placeholder="10000000" required>
+                        <label for="initialSupply">Initial Supply</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="receiverAddress" type="text" placeholder="0xYourEthereumAddress" required>
+                        <label for="receiverAddress">Token Receiver Address</label>
+                    </div>
+                    <div class="input-field">
+                        <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
+                        <label for="userAddress">Payment Sender's Address</label>
+                    </div>
+                    <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
+                </form>
             </div>
         </div>
-        <div class="carousel-nav">
-            <span class="prev material-icons">chevron_left</span>
-            <span class="next material-icons">chevron_right</span>
-        </div>
+        <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </section>
 </main>
 
+<footer>
+    <p>© 2025 Cryptonow. All rights reserved.</p>
+</footer>
 
-<?php include 'footer.php'; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselElems = document.querySelectorAll('.carousel');
-        M.Carousel.init(carouselElems, {
-            fullWidth: true,
-            indicators: true
-        });
+        M.Carousel.init(carouselElems, { fullWidth: true, indicators: true });
     });
 
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const statusMessage = document.getElementById('statusMessage');
-        statusMessage.innerHTML = '';
-        const formData = {
-            tokenName: document.getElementById('tokenName').value,
-            tokenSymbol: document.getElementById('tokenSymbol').value,
-            initialSupply: document.getElementById('initialSupply').value,
-            receiverAddress: document.getElementById('receiverAddress').value,
-            userAddress: document.getElementById('userAddress').value,
-        };
-
+        statusMessage.innerHTML = '<div class="card-panel yellow lighten-4">Processing...</div>';
         try {
-            statusMessage.innerHTML = '<div class="card-panel yellow lighten-4">Waiting for payment confirmation...</div>';
-            const response = await axios.post('http://api.cryptonow.cc:3001/api/create-token', formData);
+            const response = await axios.post('http://api.cryptonow.cc:3001/api/create-token', {
+                tokenName: document.getElementById('tokenName').value,
+                tokenSymbol: document.getElementById('tokenSymbol').value,
+                initialSupply: document.getElementById('initialSupply').value,
+                receiverAddress: document.getElementById('receiverAddress').value,
+                userAddress: document.getElementById('userAddress').value,
+            });
             const txHash = response.data.transactionHash;
-            statusMessage.innerHTML = `<div class="card-panel green lighten-4">Your token was created! Transaction Hash: <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></div>`;
+            statusMessage.innerHTML = `<div class="card-panel green lighten-4">Token created! <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">View Transaction</a></div>`;
         } catch (err) {
             statusMessage.innerHTML = `<div class="card-panel red lighten-4">Error: ${err.message}</div>`;
         }
