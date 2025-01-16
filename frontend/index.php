@@ -81,6 +81,18 @@
         .carousel {
             margin: 30px 0;
         }
+        .carousel .carousel-item {
+            background: #2e2e2e;
+            padding: 20px;
+            border-radius: 10px;
+            color: #ffffff;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .carousel h6 {
+            font-size: 1.5rem;
+            color: #fbc02d;
+        }
         footer {
             background: #121212;
             color: #bdbdbd;
@@ -149,10 +161,22 @@
     <section class="faq-section" aria-labelledby="faq-section">
         <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
         <div class="carousel">
-            <a class="carousel-item" href="#"><h6>What is Cryptonow?</h6><p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p></a>
-            <a class="carousel-item" href="#"><h6>How do I create my token?</h6><p>Fill out the form, make payment, and let our automated system do the rest.</p></a>
-            <a class="carousel-item" href="#"><h6>What payment methods are accepted?</h6><p>We accept Ethereum (ETH) only.</p></a>
-            <a class="carousel-item" href="#"><h6>How long does it take to create a token?</h6><p>Tokens are created within minutes of payment confirmation.</p></a>
+            <div class="carousel-item">
+                <h6>What is Cryptonow?</h6>
+                <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+            </div>
+            <div class="carousel-item">
+                <h6>How do I create my token?</h6>
+                <p>Fill out the form, make payment, and let our automated system do the rest.</p>
+            </div>
+            <div class="carousel-item">
+                <h6>What payment methods are accepted?</h6>
+                <p>We accept Ethereum (ETH) only.</p>
+            </div>
+            <div class="carousel-item">
+                <h6>How long does it take to create a token?</h6>
+                <p>Tokens are created within minutes of payment confirmation.</p>
+            </div>
         </div>
     </section>
 
@@ -189,7 +213,11 @@
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </section>
 </main>
-<?php include 'footer.php'; ?>
+
+<footer>
+    <p>© 2025 Cryptonow. All rights reserved.</p>
+</footer>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
