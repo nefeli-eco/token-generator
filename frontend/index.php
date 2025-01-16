@@ -130,6 +130,55 @@
             color: #fbc02d;
             text-decoration: none;
         }
+        /* Styling for input fields in the form */
+#tokenForm input[type="text"],
+#tokenForm input[type="number"] {
+    color: #e0e0e0; /* Light color for text */
+    background-color: #212121; /* Match the card background */
+    border: 1px solid #4527a0; /* Border for better visibility */
+    padding: 8px; /* Add padding for better readability */
+    border-radius: 4px; /* Rounded corners for input fields */
+}
+
+/* Placeholder text styling */
+#tokenForm input[type="text"]::placeholder,
+#tokenForm input[type="number"]::placeholder {
+    color: #a0a0a0; /* Lighter placeholder text */
+}
+
+/* Label text styling */
+#tokenForm label {
+    color: #bdbdbd; /* Light gray label text */
+}
+
+/* Styling for the status message */
+#statusMessage {
+    font-size: 1.1rem; /* Slightly larger text */
+    padding: 10px; /* Add padding */
+    border-radius: 4px; /* Rounded corners */
+}
+
+/* Success message styling */
+#statusMessage.green {
+    background-color: #e8f5e9; /* Light green background */
+    color: #1b5e20; /* Dark green text */
+    border: 1px solid #1b5e20; /* Border to match the text */
+}
+
+/* Error message styling */
+#statusMessage.red {
+    background-color: #ffebee; /* Light red background */
+    color: #b71c1c; /* Dark red text */
+    border: 1px solid #b71c1c; /* Border to match the text */
+}
+
+/* Processing message styling */
+#statusMessage.yellow {
+    background-color: #fffde7; /* Light yellow background */
+    color: #f57f17; /* Dark yellow text */
+    border: 1px solid #f57f17; /* Border to match the text */
+}
+
     </style>
 </head>
 <body>
