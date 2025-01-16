@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Create your own ERC-20 cryptocurrency token in just 5 minutes with Cryptonow. No coding skills required.">
-    <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum">
+    <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token">
     <meta name="author" content="Cryptonow">
     <title>Cryptonow Token Generator</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -85,19 +85,19 @@
         <section aria-labelledby="steps-section">
             <div class="alert alert-info">
                 <h5 id="steps-section" class="text-center">Steps to Create Your Token</h5>
-                <ul>
+                <ol>
                     <li>Fill out the form below with your token details.</li>
                     <li>Submit the form.</li>
-                    <li>Send 0.01 ETH to the address below.</li>
+                    <li>Make your payment.</li>
                     <li>Wait for the magic to happen!</li>
-                </ul>
+                </ol>
             </div>
         </section>
 
         <section aria-labelledby="payment-section">
             <div class="alert alert-info">
                 <h5 id="payment-section" class="text-center">Payment Information</h5>
-                <p>Send <b>0.01 ETH</b> to the following address:</p>
+                <p>Send<b>0.03 ETH + network fees </b> to the following address:</p>
                 <div class="eth-address" aria-label="Ethereum Payment Address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
                 <p class="text-muted text-center small">Double-check the address before sending to avoid errors.</p>
             </div>
