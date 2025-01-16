@@ -126,6 +126,26 @@
                     <h5>How long does it take to create a token?</h5>
                     <p>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</p>
                 </div>
+                <div class="accordion-item">
+                    <h5>What are the costs involved?</h5>
+                    <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
+                </div>
+                <div class="accordion-item">
+                    <h5>Can I create tokens on other blockchains?</h5>
+                    <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
+                </div>
+                <div class="accordion-item">
+                    <h5>How long does it take to create a token?</h5>
+                    <p>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</p>
+                </div>
+                <div class="accordion-item">
+                    <h5>How long does it take to create a token?</h5>
+                    <p>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</p>
+                </div>
+                <div class="accordion-item">
+                    <h5>Who owns the token after it is created?</h5>
+                    <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
+                </div>
             </div>
         </section>
 
@@ -145,7 +165,7 @@
         <section aria-labelledby="payment-section">
             <div class="alert alert-info">
                 <h5 id="payment-section" class="text-center">Payment Information</h5>
-                <p>Send<b> 0.03 ETH + network fees </b> to the following address:</p>
+                <p>Send<b> 0.04 ETH + network fees </b> to the following address:</p>
                 <div class="eth-address" aria-label="Ethereum Payment Address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
                 <p class="text-muted text-center small">Double-check the address before sending to avoid errors.</p>
             </div>
