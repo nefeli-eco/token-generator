@@ -78,20 +78,31 @@
             text-align: center;
             color: #fbc02d;
         }
-        .carousel {
-            margin: 30px 0;
+            .carousel {
+            margin: 30px auto;
+            max-width: 800px;
         }
         .carousel .carousel-item {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 200px;
+        }
+        .carousel .carousel-item .card {
+            width: 100%;
+            max-width: 400px;
             background: #2e2e2e;
-            padding: 20px;
-            border-radius: 10px;
             color: #ffffff;
-            text-align: center;
+            border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
         .carousel h6 {
             font-size: 1.5rem;
             color: #fbc02d;
+            margin-bottom: 10px;
+        }
+        .carousel p {
+            font-size: 1rem;
         }
         footer {
             background: #121212;
@@ -157,29 +168,44 @@
         <p class="small-text">Please double-check the address before sending your payment to avoid any errors.</p>
     </section>
 
-    <!-- FAQ Section -->
-    <section class="faq-section" aria-labelledby="faq-section">
-        <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
-        <div class="carousel">
-            <div class="carousel-item">
-                <h6>What is Cryptonow?</h6>
-                <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
-            </div>
-            <div class="carousel-item">
-                <h6>How do I create my token?</h6>
-                <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-            </div>
-            <div class="carousel-item">
-                <h6>What payment methods are accepted?</h6>
-                <p>We accept Ethereum (ETH) only.</p>
-            </div>
-            <div class="carousel-item">
-                <h6>How long does it take to create a token?</h6>
-                <p>Tokens are created within minutes of payment confirmation.</p>
+<!-- FAQ Section -->
+<section class="faq-section" aria-labelledby="faq-section">
+    <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
+    <div class="carousel center-align">
+        <div class="carousel-item">
+            <div class="card">
+                <div class="card-content">
+                    <h6>What is Cryptonow?</h6>
+                    <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+                </div>
             </div>
         </div>
-    </section>
-
+        <div class="carousel-item">
+            <div class="card">
+                <div class="card-content">
+                    <h6>How do I create my token?</h6>
+                    <p>Fill out the form, make payment, and let our automated system do the rest.</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card">
+                <div class="card-content">
+                    <h6>What payment methods are accepted?</h6>
+                    <p>We accept Ethereum (ETH) only.</p>
+                </div>
+            </div>
+        </div>
+        <div class="carousel-item">
+            <div class="card">
+                <div class="card-content">
+                    <h6>How long does it take to create a token?</h6>
+                    <p>Tokens are created within minutes of payment confirmation.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
     <!-- Token Creation Form -->
     <section class="form-section" aria-labelledby="form-section">
         <div class="card">
@@ -217,7 +243,16 @@
 <footer>
     <p>© 2025 Cryptonow. All rights reserved.</p>
 </footer>
-
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const carouselElems = document.querySelectorAll('.carousel');
+        M.Carousel.init(carouselElems, {
+            fullWidth: true,
+            indicators: true,
+            duration: 200 // Smooth transition
+        });
+    });
+</script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
