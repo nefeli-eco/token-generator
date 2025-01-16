@@ -16,6 +16,10 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
+// IP restriction cache
+const submissionCache = new Map();
+const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
+
 const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
@@ -71,6 +75,23 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
 };
 
 app.post("/api/create-token", async (req, res) => {
+    const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+    // Check IP restriction
+    if (submissionCache.has(clientIp)) {
+        const lastSubmissionTime = submissionCache.get(clientIp);
+        const currentTime = Date.now();
+
+        if (currentTime - lastSubmissionTime < TIME_LIMIT) {
+            return res.status(429).json({
+                message: "Too many submissions. Please wait 5 minutes before trying again.",
+            });
+        }
+    }
+
+    // Update submission cache for the current IP
+    submissionCache.set(clientIp, Date.now());
+
     const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
 
     if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress) {
@@ -80,7 +101,7 @@ app.post("/api/create-token", async (req, res) => {
     try {
         // Wait for the user to send the required payment
         console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress,  33300000); // 300 seconds timeout
+        const txHash = await waitForPayment(userAddress, 33300000); // Timeout for payment detection
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
@@ -95,7 +116,10 @@ app.post("/api/create-token", async (req, res) => {
 
                 const match = stdout.match(/Contract deployed to sepolia at address: (0x[a-fA-F0-9]{40})/);
                 if (match) {
-                    return res.json({ transactionHash: match[1], paymentTransactionHash: txHash });
+                    return res.json({
+                        transactionHash: match[1],
+                        paymentTransactionHash: txHash,
+                    });
                 } else {
                     console.error(`Deployment Error: ${stderr}`);
                     return res.status(500).json({ message: "Deployment script failed." });
