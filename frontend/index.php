@@ -137,7 +137,7 @@
     <p>No coding skills required. Easy and fast process.</p>
     <div class="crypto-icons" aria-label="Cryptocurrency Icons">
         <i class="material-icons">currency_bitcoin</i>
-        <i class="material-icons">currency_ethereum</i>
+        <i class="material-icons">token</i>
         <i class="material-icons">account_balance_wallet</i>
     </div>
 </header>
