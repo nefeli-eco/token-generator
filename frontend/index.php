@@ -140,6 +140,10 @@
                 <div class="collapsible-header"><i class="material-icons">help_outline</i>Who owns the token after it is created?</div>
                 <div class="collapsible-body"><span>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</span></div>
             </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">help_outline</i>Can I create tokens on other blockchains?</div>
+                <div class="collapsible-body"><span>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</span></div>
+            </li>
         </ul>
     </section>
 
