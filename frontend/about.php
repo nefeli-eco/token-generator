@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us - Cryptonow</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
         body {
             background: #f8f9fa;
@@ -61,6 +64,18 @@
             margin-top: 15px;
             font-size: 1.1rem;
         }
+        .social-links {
+            margin-top: 10px;
+        }
+        .social-links a {
+            color: #007bff;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        .social-links a:hover {
+            color: #0056b3;
+        }
         footer {
             text-align: center;
             padding: 20px;
@@ -107,18 +122,18 @@
 
         <section class="team-section">
             <h2>Meet Our Team</h2>
-            <div class="row">
-            <div class="col-md-4 team-member">
-
-                </div>
+            <div class="row justify-content-center">
+                <!-- Example Team Member -->
                 <div class="col-md-4 team-member">
                     <img src="https://via.placeholder.com/150" alt="Team Member">
                     <h5>Savvanis Spyros</h5>
                     <p>Founder</p>
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/spyros-savvanis-7041549b/" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://github.com/savvaniss" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    </div>
                 </div>
-                <div class="col-md-4 team-member">
-
-            </div>
+                <!-- Add more team members as needed -->
             </div>
         </section>
     </main>
