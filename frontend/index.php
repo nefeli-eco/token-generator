@@ -151,36 +151,36 @@
     color: #bdbdbd; /* Light gray label text */
 }
 
-/* Styling for the status message */
+/* General Status Message Styling */
 #statusMessage {
     padding: 16px;
     margin-top: 10px;
     border-radius: 5px;
     font-size: 16px;
     font-weight: bold;
+    text-align: center;
 }
 
-/* Success message styling */
+/* Success Message Styling */
 #statusMessage.green {
     background-color: #e8f5e9; /* Light green background */
-    color: #1b5e20; /* Dark green text */
+    color: #1b5e20 !important; /* Dark green text */
     border: 1px solid #1b5e20; /* Border to match the text */
 }
 
-/* Error message styling */
+/* Error Message Styling */
 #statusMessage.red {
     background-color: #ffebee; /* Light red background */
-    color: #b71c1c; /* Dark red text */
+    color: #b71c1c !important; /* Dark red text */
     border: 1px solid #b71c1c; /* Border to match the text */
 }
 
-/* Processing message styling */
+/* Processing Message Styling */
 #statusMessage.yellow {
     background-color: #fffde7; /* Light yellow background */
-    color: #000000; /* Black text for better visibility */
+    color: #000000 !important; /* Black text for better visibility */
     border: 1px solid #f57f17; /* Border to match the processing theme */
 }
-
 
     </style>
 </head>
