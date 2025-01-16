@@ -144,7 +144,7 @@
 
             try {
                 statusMessage.innerHTML = '<div class="alert alert-info">Waiting for payment confirmation...</div>';
-                const response = await axios.post('http://192.168.1.42:3001/api/create-token', formData);
+                const response = await axios.post('http://api.cryptonow.cc:3001/api/create-token', formData);
                 const txHash = response.data.transactionHash;
                 statusMessage.innerHTML = `<div class="alert alert-success">Your token was created! Transaction Hash: <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></div>`;
             } catch (err) {
