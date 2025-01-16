@@ -131,26 +131,6 @@
             </div>
         </section>
         <section aria-labelledby="steps-section">
-        <section class="faq-accordion">
-            <div class="accordion-container">
-                <div class="accordion-item">
-                    <h5>What is Cryptonow?</h5>
-                    <p>Cryptonow is a platform that allows you to create your own ERC-20 tokens easily and quickly without requiring any coding skills.</p>
-                </div>
-                <div class="accordion-item">
-                    <h5>How do I create my token?</h5>
-                    <p>You simply need to fill out the form on our homepage with your desired token details, send the payment, and our automated system will handle the rest.</p>
-                </div>
-                <div class="accordion-item">
-                    <h5>What payment methods are accepted?</h5>
-                    <p>We currently accept payments in Ethereum (ETH). The payment address is displayed on the homepage.</p>
-                </div>
-                <div class="accordion-item">
-                    <h5>How long does it take to create a token?</h5>
-                    <p>Once your payment is confirmed on the blockchain, your token will be created within a few minutes.</p>
-                </div>
-            </div>
-        </section>
             <div class="alert alert-info">
                 <h5 id="steps-section" class="text-center">Steps to Create Your Token</h5>
                 <ol>
