@@ -11,12 +11,12 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         body {
-            background: #121212; /* Dark background for a cryptocurrency feel */
+            background: #1a1a1a; /* Slightly softer black */
             font-family: 'Roboto', sans-serif;
-            color: #ffffff;
+            color: #e0e0e0; /* Softer white for text */
         }
         .main-header {
-            background: linear-gradient(120deg, #673ab7, #512da8);
+            background: linear-gradient(120deg, #5e35b1, #4527a0); /* Softer purple gradient */
             color: white;
             padding: 50px 20px;
             text-align: center;
@@ -30,25 +30,22 @@
         }
         .crypto-icons {
             font-size: 3rem;
-            color: #ffca28;
+            color: #fbc02d; /* Gold-inspired color */
             margin: 20px 0;
         }
         .card {
-            background: #212121; /* Dark background for cards */
+            background: #212121; /* Dark gray for cards */
             color: #ffffff;
             border-radius: 10px;
         }
         .collapsible-header {
-            background-color: #673ab7;
+            background-color: #5e35b1; /* Softer purple */
             color: white;
             font-weight: bold;
         }
         .collapsible-body {
-            background-color: #311b92;
-            color: #d1c4e9;
-        }
-        .form-section {
-            margin-top: 40px;
+            background-color: #2e2e2e; /* Subtle contrast for body */
+            color: #bdbdbd; /* Softer text color */
         }
         .payment-section {
             background-color: #212121;
@@ -58,24 +55,24 @@
             margin-bottom: 30px;
         }
         .payment-section h5 {
-            color: #ffca28;
+            color: #fbc02d; /* Gold-inspired for emphasis */
         }
         .payment-section .eth-address {
             font-family: monospace;
-            background: #311b92;
+            background: #311b92; /* Darker purple */
             padding: 10px;
             border-radius: 5px;
             text-align: center;
-            color: #ffca28;
+            color: #fbc02d; /* Gold for address */
         }
         footer {
-            background: #212121;
-            color: white;
+            background: #121212; /* Darker black for footer */
+            color: #bdbdbd;
             padding: 20px 0;
             text-align: center;
         }
         footer a {
-            color: #ffca28;
+            color: #fbc02d;
             text-decoration: none;
         }
     </style>
