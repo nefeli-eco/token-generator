@@ -121,7 +121,6 @@
             <h2 id="meet-our-team" aria-label="Meet Our Team">Meet Our Team</h2>
             <div class="team-member-wrapper">
                 <div class="team-member">
-                    <img src="https://via.placeholder.com/150" alt="Portrait of Savvanis Spyros">
                     <h5 id="team-founder">Savvanis Spyros</h5>
                     <p>Founder</p>
                     <div class="social-links">

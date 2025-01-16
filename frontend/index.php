@@ -78,6 +78,9 @@
             text-align: center;
             color: #fbc02d;
         }
+        .carousel-container {
+            position: relative;
+        }
         .carousel {
             margin: 30px auto;
         }
@@ -93,6 +96,25 @@
             color: #ffffff;
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+        .carousel-prev,
+        .carousel-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            color: #fff;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 2rem;
+            z-index: 10;
+        }
+        .carousel-prev {
+            left: -20px;
+        }
+        .carousel-next {
+            right: -20px;
         }
         footer {
             background: #121212;
@@ -161,63 +183,43 @@
     <!-- FAQ Section -->
     <section class="faq-section" aria-labelledby="faq-section">
         <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
-        <div class="carousel carousel-slider center">
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What is Cryptonow?</h6>
-                        <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+        <div class="carousel-container">
+            <button class="carousel-prev material-icons">chevron_left</button>
+            <button class="carousel-next material-icons">chevron_right</button>
+            <div class="carousel carousel-slider center">
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                            <h6>What is Cryptonow?</h6>
+                            <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                            <h6>How do I create my token?</h6>
+                            <p>Fill out the form, make payment, and let our automated system do the rest.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                            <h6>What payment methods are accepted?</h6>
+                            <p>We accept Ethereum (ETH) only.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="card">
+                        <div class="card-content">
+                            <h6>How long does it take to create a token?</h6>
+                            <p>Tokens are created within minutes of payment confirmation.</p>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How do I create my token?</h6>
-                        <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What payment methods are accepted?</h6>
-                        <p>We accept Ethereum (ETH) only.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How long does it take to create a token?</h6>
-                        <p>Tokens are created within minutes of payment confirmation.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What are the costs involved?</h6>
-                        <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>Can I create tokens on other blockchains?</h6>
-                        <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>Who owns the token after it is created?</h6>
-                        <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
-                    </div>
-                </div>
-            </div>      
         </div>
     </section>
 
@@ -255,15 +257,25 @@
     </section>
 </main>
 
-<?php include 'footer.php'; ?>
+<footer>
+    <p>© 2025 Cryptonow. All rights reserved.</p>
+</footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const carouselElems = document.querySelectorAll('.carousel');
-        M.Carousel.init(carouselElems, {
+        const carouselInstance = M.Carousel.init(carouselElems, {
             fullWidth: true,
             indicators: true,
             duration: 200
+        });
+
+        document.querySelector('.carousel-prev').addEventListener('click', function () {
+            carouselInstance[0].prev();
+        });
+
+        document.querySelector('.carousel-next').addEventListener('click', function () {
+            carouselInstance[0].next();
         });
     });
 
