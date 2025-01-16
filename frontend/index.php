@@ -73,17 +73,25 @@
             text-align: center;
             color: #fbc02d;
         }
-        .carousel {
+        .carousel-container {
             margin: 30px auto;
             max-width: 800px;
         }
-        .carousel .carousel-item {
+        .carousel {
+            overflow: hidden;
+            position: relative;
+        }
+        .carousel-items {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-item {
+            min-width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: auto;
         }
-        .carousel .carousel-item .card {
+        .carousel-item .card {
             width: 100%;
             max-width: 400px;
             background: #2e2e2e;
@@ -91,13 +99,18 @@
             border-radius: 10px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
         }
-        .carousel h6 {
+        .carousel-item h6 {
             font-size: 1.5rem;
             color: #fbc02d;
             margin-bottom: 10px;
         }
-        .carousel p {
+        .carousel-item p {
             font-size: 1rem;
+        }
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
         }
         footer {
             background: #121212;
@@ -166,38 +179,46 @@
     <!-- FAQ Section -->
     <section class="faq-section" aria-labelledby="faq-section">
         <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
-        <div class="carousel center-align">
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What is Cryptonow?</h6>
-                        <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+        <div class="carousel-container">
+            <div class="carousel">
+                <div class="carousel-items">
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h6>What is Cryptonow?</h6>
+                                <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h6>How do I create my token?</h6>
+                                <p>Fill out the form, make payment, and let our automated system do the rest.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h6>What payment methods are accepted?</h6>
+                                <p>We accept Ethereum (ETH) only.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="card">
+                            <div class="card-content">
+                                <h6>How long does it take to create a token?</h6>
+                                <p>Tokens are created within minutes of payment confirmation.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How do I create my token?</h6>
-                        <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What payment methods are accepted?</h6>
-                        <p>We accept Ethereum (ETH) only.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How long does it take to create a token?</h6>
-                        <p>Tokens are created within minutes of payment confirmation.</p>
-                    </div>
-                </div>
+            <div class="carousel-controls">
+                <button id="prev" class="btn-flat"><i class="material-icons">arrow_back</i></button>
+                <button id="next" class="btn-flat"><i class="material-icons">arrow_forward</i></button>
             </div>
         </div>
     </section>
@@ -240,17 +261,28 @@
     <p>© 2025 Cryptonow. All rights reserved.</p>
 </footer>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselElems = document.querySelectorAll('.carousel');
-        M.Carousel.init(carouselElems, {
-            fullWidth: true,
-            indicators: true
-        });
+    // Carousel Functionality
+    let currentIndex = 0;
+    const items = document.querySelectorAll('.carousel-item');
+    const totalItems = items.length;
+
+    document.getElementById('prev').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + totalItems) % totalItems;
+        updateCarousel();
     });
 
+    document.getElementById('next').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % totalItems;
+        updateCarousel();
+    });
+
+    function updateCarousel() {
+        const carousel = document.querySelector('.carousel-items');
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+    }
+
+    // Form Submission
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const statusMessage = document.getElementById('statusMessage');
@@ -270,5 +302,6 @@
         }
     });
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>
