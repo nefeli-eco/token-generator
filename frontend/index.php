@@ -194,6 +194,30 @@
                     </div>
                 </div>
             </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What are the costs involved?</h6>
+                        <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>Can I create tokens on other blockchains?</h6>
+                        <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>Who owns the token after it is created?</h6>
+                        <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
+                    </div>
+                </div>
+            </div>      
         </div>
     </section>
 
@@ -231,9 +255,7 @@
     </section>
 </main>
 
-<footer>
-    <p>© 2025 Cryptonow. All rights reserved.</p>
-</footer>
+<?php include 'footer.php'; ?>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script>
     document.addEventListener('DOMContentLoaded', function () {
