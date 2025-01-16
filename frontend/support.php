@@ -5,36 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Contact Cryptonow Token Generator for any support or inquiries. We are here to assist you.">
     <meta name="keywords" content="Cryptonow, contact, support, inquiries, token creation">
-    <meta name="author" content="Cryptonow">
     <title>Contact Us - Cryptonow Token Generator</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <style>
         body {
-            background: #f8f9fa;
-            font-family: 'Arial', sans-serif;
+            background: #1a1a1a; /* Darker background */
+            font-family: 'Roboto', sans-serif;
+            color: #e0e0e0;
         }
         header {
-            background: linear-gradient(to right, #4facfe, #00f2fe);
-            color: #fff;
-            padding: 40px 20px;
+            background: linear-gradient(120deg, #5e35b1, #4527a0); /* Purple gradient */
+            color: white;
+            padding: 50px 20px;
             text-align: center;
         }
         header h1 {
             font-size: 2.5rem;
         }
-        footer {
-            text-align: center;
+        .form-section {
             padding: 20px;
-            margin-top: 30px;
-            background: #e9ecef;
+        }
+        .input-field label {
+            color: #bdbdbd; /* Softer label color */
+        }
+        .btn {
+            background: #5e35b1; /* Purple button */
+        }
+        footer {
+            background: #121212;
+            color: #bdbdbd;
+            padding: 20px 0;
+            text-align: center;
         }
         footer a {
-            margin: 0 10px;
-            color: #007bff;
+            color: #fbc02d;
             text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
         }
     </style>
 </head>
@@ -44,38 +49,39 @@
         <p>We'd love to hear from you! Fill out the form below to get in touch.</p>
     </header>
 
-    <main class="container mt-5">
+    <main class="container form-section">
         <form id="contactForm" aria-labelledby="contact-form-section">
             <fieldset>
                 <legend id="contact-form-section" class="mb-4">Contact Form</legend>
-                <div class="mb-3">
-                    <label for="name" class="form-label">Your Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="John Doe" required aria-required="true">
+                <div class="input-field">
+                    <input id="name" type="text" required>
+                    <label for="name">Your Name</label>
                 </div>
-                <div class="mb-3">
-                    <label for="email" class="form-label">Your Email</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="john.doe@example.com" required aria-required="true">
+                <div class="input-field">
+                    <input id="email" type="email" required>
+                    <label for="email">Your Email</label>
                 </div>
-                <div class="mb-3">
-                    <label for="message" class="form-label">Your Message</label>
-                    <textarea class="form-control" id="message" name="message" rows="4" placeholder="Type your message here..." required aria-required="true"></textarea>
+                <div class="input-field">
+                    <textarea id="message" class="materialize-textarea" required></textarea>
+                    <label for="message">Your Message</label>
                 </div>
-                <button type="submit" class="btn btn-primary w-100">Submit</button>
+                <button type="submit" class="btn waves-effect waves-light">Submit</button>
             </fieldset>
         </form>
 
         <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
     </main>
-    <?php include 'footer.php'; ?>
+
+    <footer>
+        <p>© 2025 Cryptonow. All rights reserved. <a href="/terms.html">Terms of Service</a></p>
+    </footer>
     <script>
         document.getElementById('contactForm').addEventListener('submit', function (e) {
             e.preventDefault();
-
             const statusMessage = document.getElementById('statusMessage');
-            statusMessage.innerHTML = '<div class="alert alert-info">Submitting your message...</div>';
-
+            statusMessage.innerHTML = '<div class="card-panel yellow lighten-4">Submitting your message...</div>';
             setTimeout(() => {
-                statusMessage.innerHTML = '<div class="alert alert-success">Thank you! Your message has been sent successfully.</div>';
+                statusMessage.innerHTML = '<div class="card-panel green lighten-4">Thank you! Your message has been sent successfully.</div>';
             }, 2000);
         });
     </script>
