@@ -6,7 +6,14 @@ const { exec } = require("child_process");
 require("dotenv").config();
 
 const app = express();
-app.use(cors());
+// CORS options
+const corsOptions = {
+    origin: "https://cryptonow.cc", // Replace with the exact domain of your frontend
+    methods: "GET,POST,OPTIONS",
+    allowedHeaders: "Content-Type",
+};
+
+app.use(cors(corsOptions));
 app.use(bodyParser.json());
 
 // Load environment variables
