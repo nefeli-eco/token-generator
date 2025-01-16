@@ -1,7 +1,74 @@
-<?php
-$pageTitle = "Cryptonow Token Generator";
-include 'header.php';
-?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Create your own ERC-20 cryptocurrency token in just 5 minutes with Cryptonow. No coding skills required.">
+    <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum">
+    <meta name="author" content="Cryptonow">
+    <title>Cryptonow Token Generator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            background: #f8f9fa;
+            font-family: 'Arial', sans-serif;
+        }
+        .main-header {
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            color: #fff;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        .main-header h1 {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+        .main-header p {
+            font-size: 1.25rem;
+        }
+        .crypto-icons {
+            font-size: 3rem;
+            color: #007bff;
+            margin: 20px 0;
+        }
+        .qna-section {
+            background: #e9ecef;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 40px;
+        }
+        .qna-section h2 {
+            text-align: center;
+            color: #007bff;
+        }
+        .qna-list {
+            margin-top: 20px;
+        }
+        .eth-address {
+            font-family: monospace;
+            background: #e9ecef;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            margin-top: 30px;
+            background: #e9ecef;
+        }
+        footer a {
+            margin: 0 10px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        footer a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
 <body>
     <header class="main-header">
         <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
