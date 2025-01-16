@@ -3,7 +3,6 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const { ethers } = require("ethers");
 const { exec } = require("child_process");
-const axios = require("axios");
 require("dotenv").config();
 
 const app = express();
@@ -12,31 +11,10 @@ app.use(bodyParser.json());
 
 // Load environment variables
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
-const NETWORK = process.env.SEPOLIA_RPC_URL;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const REQUIRED_PAYMENT = ethers.parseEther("0.01");
+const NETWORK = process.env.SEPOLIA_RPC_URL; // Sepolia RPC URL from .env
+const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
+const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
-const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET; // Your Google reCAPTCHA secret key
-
-const verifyRecaptcha = async (recaptchaToken) => {
-    const url = `https://www.google.com/recaptcha/api/siteverify`;
-    try {
-        const response = await axios.post(
-            url,
-            new URLSearchParams({
-                secret: RECAPTCHA_SECRET,
-                response: recaptchaToken,
-            }).toString(),
-            {
-                headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            }
-        );
-        return response.data.success;
-    } catch (error) {
-        console.error("reCAPTCHA verification failed:", error);
-        return false;
-    }
-};
 
 const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
@@ -44,29 +22,46 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
 
         const checkForTransaction = async () => {
             try {
-                const elapsed = Date.now() - start;
+                const elapsed = Date.now() - start; // Elapsed time
+                console.log(`Elapsed time: ${elapsed} ms (Timeout: ${timeout} ms)`);
+
+                // Check if the timeout is exceeded
                 if (elapsed > timeout) {
+                    console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                     return;
                 }
 
-                const blockNumber = await provider.getBlockNumber();
-                const block = await provider.getBlock(blockNumber);
+                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
+                const block = await provider.getBlock(blockNumber); // Fetch the block details
 
+                console.log(`Checking block ${blockNumber} for transactions...`);
+
+                // Loop through transaction hashes in the block
                 for (const txHash of block.transactions) {
-                    const tx = await provider.getTransaction(txHash);
+                    const tx = await provider.getTransaction(txHash); // Fetch each transaction
+
+                    console.log(`Transaction found: ${tx.hash}`);
+                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
+                    console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
+
                     if (
                         tx.from.toLowerCase() === userAddress.toLowerCase() &&
                         tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
                         BigInt(tx.value) === REQUIRED_PAYMENT
                     ) {
-                        resolve(tx.hash);
+                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                        resolve(tx.hash); // Transaction found, return the hash
                         return;
+                    } else {
+                        console.log("Transaction does not match the required criteria.");
                     }
                 }
 
+                // Wait for the next block and check again
                 setTimeout(checkForTransaction, 2000);
             } catch (error) {
+                console.error("Error checking transactions:", error);
                 reject(error);
             }
         };
@@ -76,23 +71,20 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
 };
 
 app.post("/api/create-token", async (req, res) => {
-    const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress, recaptcha } = req.body;
+    const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
 
-    if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress || !recaptcha) {
+    if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress) {
         return res.status(400).json({ message: "All fields are required." });
     }
 
-    const isRecaptchaValid = await verifyRecaptcha(recaptcha);
-    if (!isRecaptchaValid) {
-        return res.status(400).json({ message: "Invalid reCAPTCHA." });
-    }
-
     try {
+        // Wait for the user to send the required payment
         console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 33300000);
+        const txHash = await waitForPayment(userAddress,  33300000); // 300 seconds timeout
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
+        // Run deployment script
         exec(
             `node deploy.js sepolia "${tokenName}" "${tokenSymbol}" ${initialSupply} 18 "${receiverAddress}"`,
             (error, stdout, stderr) => {
@@ -116,6 +108,7 @@ app.post("/api/create-token", async (req, res) => {
     }
 });
 
+// Start the server
 const PORT = process.env.PORT || 3001;
 const HOST = process.env.HOST || "0.0.0.0";
 app.listen(PORT, HOST, () => {
