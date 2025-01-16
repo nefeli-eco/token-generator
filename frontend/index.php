@@ -276,7 +276,7 @@
                         <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
                         <label for="userAddress">Payment Sender's Address</label>
                     </div>
-                    <div class="g-recaptcha" data-sitekey="6Lezu7kqAAAAAFocFGUPY30hM0VYyDqLhivi9Twm"></div>
+                    <div class="g-recaptcha" data-sitekey="6Lc8wbkqAAAAAGtJ_aDCKr5DuiEq9Tkai-JnD7PQ"></div>
                     <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
                 </form>
             </div>
