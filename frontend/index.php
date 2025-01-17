@@ -219,12 +219,10 @@
 #tokenForm input[type="number"]::placeholder {
     color: #a0a0a0; /* Lighter placeholder text */
 }
-
-/* Center and style the button */
 .form-section button {
     display: block; /* Center-align */
     margin: 30px auto; /* Add spacing above and below */
-    padding: 12px 40px; /* More padding for larger button */
+    padding: 15px 40px; /* Increased padding for better spacing inside */
     font-size: 1.2rem; /* Larger text */
     font-weight: bold; /* Bold text */
     background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for polished look */
@@ -244,6 +242,7 @@
 .form-section button:active {
     transform: scale(0.95); /* Slight shrink effect */
 }
+
 
 /* Form card adjustments */
 .form-section .card {
