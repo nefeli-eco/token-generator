@@ -193,75 +193,82 @@
 }
 /* Input field and label spacing */
 .form-section .input-field {
-    margin-bottom: 25px; /* Increase spacing between fields */
+    margin-bottom: 20px; /* Spacing between fields */
 }
 
 .form-section label {
-    margin-bottom: 10px; /* Add spacing between the label and input field */
+    margin-bottom: 5px; /* Add space between the label and field */
     display: block; /* Ensure labels are on their own line */
+    font-size: 1.1rem; /* Slightly larger text for better readability */
     color: #bdbdbd; /* Maintain consistent label color */
 }
 
-/* Center and style the button */
-.form-section button {
-    display: block; /* Center the button */
-    margin: 20px auto; /* Add top spacing and auto-center */
-    padding: 12px 30px; /* Increase padding for a larger clickable area */
-    font-size: 1.2rem; /* Increase font size for better readability */
-    font-weight: bold; /* Make the text bold */
-    background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for a more polished look */
-    color: white; /* Make the button text stand out */
-    border: none;
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
-    cursor: pointer; /* Change cursor to pointer */
-    transition: background 0.3s ease, transform 0.2s ease; /* Smooth transitions */
-}
-
-.form-section button:hover {
-    background: linear-gradient(120deg, #4527a0, #311b92); /* Slightly different gradient on hover */
-    transform: scale(1.05); /* Slight enlargement on hover */
-}
-
-.form-section button:active {
-    transform: scale(0.95); /* Slight shrink on click */
-}
-
-/* Improve input field appearance */
+/* Input field styling */
 #tokenForm input[type="text"],
 #tokenForm input[type="number"] {
-    padding: 12px; /* Increase padding inside fields */
-    font-size: 1rem; /* Larger text for readability */
-    border-radius: 6px; /* Match input field corners to button */
-    background-color: #1f1f1f; /* Darker input background for contrast */
-    border: 1px solid #5e35b1; /* Accent border color */
+    padding: 12px; /* Increase padding for better feel */
+    font-size: 1rem; /* Larger font size for readability */
+    border-radius: 6px; /* Rounded edges */
+    background-color: #1f1f1f; /* Input background matches form style */
+    border: 1px solid #5e35b1; /* Purple border */
     color: #ffffff; /* White text */
+    margin-top: 5px; /* Spacing between label and field */
 }
 
 #tokenForm input[type="text"]::placeholder,
 #tokenForm input[type="number"]::placeholder {
-    color: #a0a0a0; /* Lighter placeholder text for readability */
+    color: #a0a0a0; /* Lighter placeholder text */
+}
+
+/* Center and style the button */
+.form-section button {
+    display: block; /* Center-align */
+    margin: 30px auto; /* Add spacing above and below */
+    padding: 12px 40px; /* More padding for larger button */
+    font-size: 1.2rem; /* Larger text */
+    font-weight: bold; /* Bold text */
+    background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for polished look */
+    color: #ffffff; /* White text for visibility */
+    border: none;
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
+    cursor: pointer; /* Pointer cursor */
+    transition: background 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
+}
+
+.form-section button:hover {
+    background: linear-gradient(120deg, #4527a0, #311b92); /* Hover effect */
+    transform: scale(1.05); /* Slight zoom effect */
+}
+
+.form-section button:active {
+    transform: scale(0.95); /* Slight shrink effect */
+}
+
+/* Form card adjustments */
+.form-section .card {
+    padding: 30px; /* Increase padding inside the card */
+    margin-bottom: 40px; /* Add space below the form */
 }
 
 /* Footer alignment fix */
 footer {
     text-align: center; /* Center footer content */
-    padding: 20px 0; /* Add padding for better separation */
-    background-color: #121212; /* Match background with site theme */
-    color: #bdbdbd; /* Footer text color */
+    padding: 20px 0; /* Add padding for space */
+    background-color: #121212; /* Dark background */
+    color: #bdbdbd; /* Light gray text */
     font-size: 0.9rem; /* Slightly smaller font size */
 }
 
 footer a {
-    color: #fbc02d; /* Match site accent color */
+    color: #fbc02d; /* Yellow link color */
     text-decoration: none; /* Remove underline */
-    margin: 0 10px; /* Add spacing between links */
+    margin: 0 10px; /* Space between links */
 }
 
 footer a:hover {
     text-decoration: underline; /* Underline on hover */
 }
-
 
     </style>
 </head>
