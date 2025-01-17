@@ -239,14 +239,22 @@
             </div>
         </div>
     </section>
+<!-- Payment Section -->
+<section class="payment-section center-align" aria-labelledby="payment-section">
+    <h5 id="payment-section" style="font-weight: bold; font-size: 1.8rem; color: #fbc02d;">Payment Information</h5>
+    <div class="card-panel deep-purple lighten-1 white-text">
+        <p style="font-size: 1.2rem;">Please send <strong>0.04 ETH + Network Fees</strong> to the following address:</p>
+        <div class="eth-address" style="font-size: 1.5rem; color: #ffeb3b; background-color: #311b92; padding: 12px; border-radius: 8px; display: inline-block; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
+            0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805
+        </div>
+        <p style="margin-top: 15px; font-size: 1rem;">Scan the QR code below or copy the address to make your payment:</p>
+        <div style="margin: 15px;">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150" alt="Payment QR Code" style="border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
+        </div>
+        <p style="font-size: 1rem; color: #e1bee7;">💡 Ensure the payment amount matches the required amount to avoid errors.</p>
+    </div>
+</section>
 
-    <!-- Payment Section -->
-    <section class="payment-section" aria-labelledby="payment-section">
-        <h5 id="payment-section">Payment Information</h5>
-        <p>Send <strong>0.04 ETH + network fees</strong> to the following address:</p>
-        <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
-        <p class="small-text">Please double-check the address before sending your payment to avoid any errors.</p>
-    </section>
 
     <!-- FAQ Section -->
     <section class="faq-section" aria-labelledby="faq-section">
