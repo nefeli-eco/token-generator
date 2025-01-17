@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta
     name="description"
-    content="Create your own ERC-20 cryptocurrency token in just 5 minutes with Cryptonow. No coding skills required."
+    content="Create your own ERC-20 cryptocurrency coin in just 5 minutes with Cryptonow. No coding skills required."
   />
   <meta
     name="keywords"
-    content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token"
+    content="ERC-20, cryptocurrency, coin creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token"
   />
-  <meta name="author" content="Cryptonow" />
-  <meta name="robots" content="index, follow" />
-  <link rel="canonical" href="https://token.cryptonow.cc/" />
-  <title>Cryptonow Token Generator</title>
+  <meta name="author" content="Cryptonow"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://token.cryptonow.cc/"/>
+  <title>Cryptonow Coin Generator</title>
 
   <!-- Materialize CSS -->
   <link
@@ -27,12 +27,12 @@
     rel="stylesheet"
   />
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 
   <!-- Axios (Optional for handling form submission) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <?php /* Your Analytics or includes if needed */ ?>
+  <?php /* If you have analytics scripts, include them here */ ?>
   <?php // include 'google.php'; ?>
 
   <style>
@@ -45,7 +45,7 @@
       padding: 0;
     }
     h1, h2, h3, h4, h5, h6 {
-      color: #333333;
+      color: #333;
       margin-top: 0.5rem;
     }
     p {
@@ -60,10 +60,10 @@
 
     /* ========== HERO / HEADER ========== */
     .hero {
-      background: #ffffff; 
+      background: #ffffff;
       text-align: center;
       padding: 60px 20px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: relative;
     }
     .hero h1 {
@@ -76,20 +76,50 @@
       margin-bottom: 1.5rem;
       color: #555555;
     }
-    .hero .crypto-icons i {
+    .crypto-icons i {
       font-size: 2.5rem;
-      color: #1565c0; /* Blue accent for icons */
+      color: #1565c0;
       margin: 0 5px;
     }
-    .hero .btn-large {
-      background-color: #1565c0;
+
+    /* ========== BUTTON STYLES (Neumorphic-ish / Soft Glow) ========== */
+    /*
+      - Slightly raised, soft edges, subtle glow on hover
+      - Uses transitions and shadows for a "modern" or "fresh" feel
+      - You can adjust background, shadow, or radius as needed
+    */
+    .soft-button {
+      display: inline-block;
+      padding: 0.8rem 2rem;
       font-weight: 600;
-      text-transform: uppercase;
-      border-radius: 8px;
-      margin-top: 20px;
+      text-transform: none;
+      border-radius: 30px;
+      background-color: #e0e0e0;
+      color: #333 !important;
+      transition: all 0.3s ease;
+      box-shadow:
+        5px 5px 10px rgba(0,0,0,0.2),
+        -5px -5px 10px rgba(255,255,255,0.5);
     }
-    .hero .btn-large:hover {
-      background-color: #0d47a1;
+    .soft-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow:
+        5px 5px 10px rgba(0,0,0,0.25),
+        -5px -5px 10px rgba(255,255,255,0.7);
+    }
+    .soft-button:active {
+      transform: translateY(1px);
+      box-shadow:
+        2px 2px 6px rgba(0,0,0,0.25),
+        -2px -2px 6px rgba(255,255,255,0.5);
+    }
+
+    /* Large version for Hero CTA */
+    .soft-button-large {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border-radius: 40px;
     }
 
     /* ========== STEPS SECTION ========== */
@@ -175,22 +205,7 @@
       box-shadow: none;
     }
 
-    /* Buttons in modal */
-    .btn-step {
-      background-color: #1565c0;
-      color: #ffffff;
-      margin-right: 10px;
-      border-radius: 6px;
-      text-transform: none;
-    }
-    .btn-step:hover {
-      background-color: #0d47a1;
-    }
-    .btn-flat {
-      text-transform: none;
-    }
-
-    /* ---------- Payment Info in Step 2 ---------- */
+    /* ========== Payment Info in Step 2 ========== */
     .payment-info {
       background-color: #ffffff;
       border-radius: 4px;
@@ -273,19 +288,24 @@
       <i class="material-icons">token</i>
       <i class="material-icons">account_balance_wallet</i>
     </div>
-    <!-- Open modal with form/wizard -->
-    <a href="#tokenModal" class="btn btn-large waves-effect waves-light modal-trigger">Create Token</a>
+    <!-- Button with new "soft" style -->
+    <a
+      href="#coinModal"
+      class="soft-button soft-button-large modal-trigger"
+    >
+      Create Coin
+    </a>
   </section>
 
   <!-- ========== STEPS SECTION ========== -->
   <section class="steps-section">
     <div class="container">
-      <h2>Steps to Create Your Token</h2>
+      <h2>Steps to Create Your Coin</h2>
       <div class="row">
         <div class="col s12 m3">
           <div class="step-box">
             <i class="material-icons">edit</i>
-            <p>Fill out the form with your token details.</p>
+            <p>Fill out the form with your coin details.</p>
           </div>
         </div>
         <div class="col s12 m3">
@@ -303,89 +323,146 @@
         <div class="col s12 m3">
           <div class="step-box">
             <i class="material-icons">check_circle</i>
-            <p>Confirm and let magic happen!</p>
+            <p>Confirm and watch your coin deploy!</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ========== FAQ SECTION ========== -->
+  <!-- ========== FAQ SECTION (References to 'coin') ========== -->
   <section class="faq-section">
     <div class="container">
       <h5>Frequently Asked Questions</h5>
       <ul class="collapsible popout">
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>What is Cryptonow?</div>
-          <div class="collapsible-body"><p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What is Cryptonow?
+          </div>
+          <div class="collapsible-body">
+            <p>Cryptonow is a platform for creating custom ERC-20 coins easily.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>How do I create my token?</div>
-          <div class="collapsible-body"><p>Fill out the form, get payment instructions, make payment, and let our system do the rest.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>How do I create my coin?
+          </div>
+          <div class="collapsible-body">
+            <p>Fill out the form, get payment instructions, make payment, and let our system handle the rest.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>What payment methods are accepted?</div>
-          <div class="collapsible-body"><p>We accept Ethereum (ETH) only.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What payment methods are accepted?
+          </div>
+          <div class="collapsible-body">
+            <p>We accept Ethereum (ETH) only.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>Can the token be traded on exchanges?</div>
-          <div class="collapsible-body"><p>The token follows ERC-20, compatible with most wallets/exchanges. Listing is up to you.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can the coin be traded on exchanges?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin follows the ERC-20 standard, compatible with most wallets/exchanges. Listing is up to you.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>How long does it take to create a token?</div>
-          <div class="collapsible-body"><p>Tokens are created within minutes after payment confirmation.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>How long does it take to create a coin?
+          </div>
+          <div class="collapsible-body">
+            <p>Coins are created within minutes after payment confirmation.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>What are the costs involved?</div>
-          <div class="collapsible-body"><p>It costs <strong>0.05 ETH</strong> + network fees to create a token.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What are the costs involved?
+          </div>
+          <div class="collapsible-body">
+            <p>It costs <strong>0.05 ETH</strong> + network fees to create a coin.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>Who owns the token after it's created?</div>
-          <div class="collapsible-body"><p>The token belongs to the wallet address you specify as receiver.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Who owns the coin after it's created?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin belongs to the wallet address you specify as the receiver.</p>
+          </div>
         </li>
         <li>
-          <div class="collapsible-header"><i class="material-icons">help_outline</i>Can I create tokens on other blockchains?</div>
-          <div class="collapsible-body"><p>Currently we only support Ethereum. More blockchains coming soon.</p></div>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can I create coins on other blockchains?
+          </div>
+          <div class="collapsible-body">
+            <p>Currently we only support Ethereum. More blockchains coming soon.</p>
+          </div>
         </li>
       </ul>
     </div>
   </section>
 
-  <!-- ========== MODAL: TOKEN CREATION WIZARD ========== -->
-  <div id="tokenModal" class="modal">
+  <!-- ========== MODAL: 2-STEP COIN CREATION WIZARD ========== -->
+  <div id="coinModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
-        <h5>Token Creation Wizard</h5>
+        <h5>Coin Creation Wizard</h5>
       </div>
-      <!-- Step 1: Token Details -->
+      <!-- Step 1: Coin Details -->
       <div class="form-step active" id="step1">
-        <h6>Step 1: Enter Token Details</h6>
-        <form id="tokenForm">
+        <h6>Step 1: Enter Coin Details</h6>
+        <form id="coinForm">
           <div class="row">
-            <!-- Token Name -->
+            <!-- Coin Name -->
             <div class="input-field col s12 m6">
-              <label for="tokenName">Token Name</label>
-              <input type="text" id="tokenName" placeholder="Ethereum" required/>
+              <label for="tokenName">Coin Name</label>
+              <input
+                type="text"
+                id="tokenName"
+                placeholder="Ethereum"
+                required
+              />
             </div>
-            <!-- Token Symbol -->
+            <!-- Coin Symbol -->
             <div class="input-field col s12 m6">
-              <label for="tokenSymbol">Token Symbol (3-5 uppercase)</label>
-              <input type="text" id="tokenSymbol" placeholder="ETH" required/>
+              <label for="tokenSymbol">Coin Symbol (3-5 uppercase)</label>
+              <input
+                type="text"
+                id="tokenSymbol"
+                placeholder="ETH"
+                required
+              />
             </div>
             <!-- Initial Supply -->
             <div class="input-field col s12 m6">
               <label for="initialSupply">Initial Supply</label>
-              <input type="number" id="initialSupply" placeholder="10000000" required/>
+              <input
+                type="number"
+                id="initialSupply"
+                placeholder="10000000"
+                required
+              />
             </div>
             <!-- Receiver Address -->
             <div class="input-field col s12 m6">
-              <label for="receiverAddress">Token Receiver Address</label>
-              <input type="text" id="receiverAddress" placeholder="0xYourEthereumAddress" required/>
+              <label for="receiverAddress">Coin Receiver Address</label>
+              <input
+                type="text"
+                id="receiverAddress"
+                placeholder="0xYourEthereumAddress"
+                required
+              />
             </div>
             <!-- Payment Sender Address -->
             <div class="input-field col s12">
               <label for="userAddress">Payment Sender Address</label>
-              <input type="text" id="userAddress" placeholder="0xYourEthereumAddress" required/>
+              <input
+                type="text"
+                id="userAddress"
+                placeholder="0xYourEthereumAddress"
+                required
+              />
             </div>
           </div>
         </form>
@@ -395,32 +472,47 @@
       <div class="form-step" id="step2">
         <h6>Step 2: Payment Information</h6>
         <div class="payment-info">
-          <p>Please send <strong>0.05 ETH + Network Fees</strong> to the address below:</p>
+          <p>
+            Please send <strong>0.05 ETH + Network Fees</strong> to the address below:
+          </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
           <p>Or scan the QR code:</p>
           <img
             src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150"
             alt="Payment QR Code"
           />
-          <p style="color: #ff9800;">Make sure to match the exact amount to avoid errors.</p>
+          <p style="color: #ff9800;">
+            Make sure to match the exact amount to avoid errors.
+          </p>
         </div>
         <p class="center" style="color: #555;">
-          Once payment is detected, your token will be created automatically.
+          Once payment is detected, your coin will be created automatically.
         </p>
       </div>
     </div>
-    <div class="modal-footer">
-      <!-- Step Navigation Buttons -->
-      <button id="btnPrev" class="btn-step waves-effect waves-light btn" style="display: none;">
+    <div class="modal-footer" style="margin-bottom: 1rem;">
+      <!-- Step Navigation Buttons with new "soft-button" style -->
+      <button
+        id="btnPrev"
+        class="soft-button waves-effect"
+        style="display: none; margin-right: 10px;"
+      >
         Back
       </button>
-      <button id="btnNext" class="btn-step waves-effect waves-light btn">
-        Next
+      <button
+        id="btnNext"
+        class="soft-button waves-effect"
+      >
+        Show Payment Info
       </button>
-      <button id="btnSubmit" class="btn-step waves-effect waves-light btn" style="display: none;">
-        Create Token
+      <button
+        id="btnSubmit"
+        class="soft-button waves-effect"
+        style="display: none; margin-right: 10px;"
+      >
+        Create My Coin
       </button>
-      <a href="#!" class="modal-close waves-effect btn-flat">Close</a>
+      <a href="#!" class="modal-close btn-flat" style="text-transform: none;">Close</a>
     </div>
   </div>
 
@@ -429,7 +521,7 @@
     <p>&copy; <?php echo date('Y'); ?> Cryptonow. All rights reserved.</p>
     <!-- Example footer links: -->
     <p>
-      <a href="#tokenModal" class="modal-trigger">Create Token</a> |
+      <a href="#coinModal" class="modal-trigger">Create Coin</a> |
       <a href="#!">Privacy Policy</a> |
       <a href="#!">Terms of Service</a>
     </p>
@@ -445,33 +537,31 @@
       const modalElems = document.querySelectorAll(".modal");
       M.Modal.init(modalElems);
 
-      // Init collapsible FAQ
+      // Init collapsible (FAQ)
       const collapsibles = document.querySelectorAll(".collapsible");
       M.Collapsible.init(collapsibles);
 
-      // Form Wizard Navigation
+      // Wizard Navigation
       const step1 = document.getElementById("step1");
       const step2 = document.getElementById("step2");
       const btnPrev = document.getElementById("btnPrev");
       const btnNext = document.getElementById("btnNext");
       const btnSubmit = document.getElementById("btnSubmit");
 
-      // Status message for validation
+      // Status message
       const statusMessage = document.getElementById("statusMessage");
-
-      let currentStep = 1; // We start on Step 1
+      let currentStep = 1;
 
       function showStep(step) {
-        // Hide both steps
         step1.classList.remove("active");
         step2.classList.remove("active");
-
         if (step === 1) {
           step1.classList.add("active");
           btnNext.style.display = "inline-block";
+          btnNext.innerText = "Show Payment Info"; // Per your request
           btnPrev.style.display = "none";
           btnSubmit.style.display = "none";
-        } else if (step === 2) {
+        } else {
           step2.classList.add("active");
           btnNext.style.display = "none";
           btnPrev.style.display = "inline-block";
@@ -480,63 +570,54 @@
       }
       showStep(currentStep);
 
-      // "Next" -> Validate Step 1 fields
+      // Validate Step 1 fields, then go to Step 2
       btnNext.addEventListener("click", function () {
-        // Clear any previous messages
         statusMessage.innerHTML = "";
         statusMessage.className = "";
 
-        // Collect form values
         const tokenName = document.getElementById("tokenName").value.trim();
         const tokenSymbol = document.getElementById("tokenSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const receiverAddress = document.getElementById("receiverAddress").value.trim();
         const userAddress = document.getElementById("userAddress").value.trim();
 
-        // Basic validations
-        // 1. Token Name (3-50 chars)
+        // Validation checks
         if (tokenName.length < 3 || tokenName.length > 50) {
           statusMessage.classList.add("red");
           statusMessage.innerHTML =
-            '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
+            '<div class="card-panel red lighten-4">Coin Name must be between 3 and 50 characters.</div>';
           return;
         }
-        // 2. Token Symbol (uppercase letters only, 3-5 chars)
-        const symbolRegex = /^[A-Z]{3,5}$/;
-        if (!symbolRegex.test(tokenSymbol)) {
+        if (!/^[A-Z]{3,5}$/.test(tokenSymbol)) {
           statusMessage.classList.add("red");
           statusMessage.innerHTML =
-            '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
+            '<div class="card-panel red lighten-4">Coin Symbol must be 3-5 uppercase letters only.</div>';
           return;
         }
-        // 3. Initial Supply (positive integer)
         if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
           statusMessage.classList.add("red");
           statusMessage.innerHTML =
             '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
           return;
         }
-        // 4. Ethereum addresses
-        const ethRegex = /^0x[a-fA-F0-9]{40}$/;
-        if (!ethRegex.test(receiverAddress)) {
+        if (!/^0x[a-fA-F0-9]{40}$/.test(receiverAddress)) {
           statusMessage.classList.add("red");
           statusMessage.innerHTML =
-            '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
+            '<div class="card-panel red lighten-4">Coin Receiver Address must be a valid Ethereum address.</div>';
           return;
         }
-        if (!ethRegex.test(userAddress)) {
+        if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
           statusMessage.classList.add("red");
           statusMessage.innerHTML =
             '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
           return;
         }
 
-        // If all pass, go to Step 2
         currentStep = 2;
         showStep(currentStep);
       });
 
-      // "Prev" -> Go back to Step 1
+      // "Back" -> Step 1
       btnPrev.addEventListener("click", function () {
         statusMessage.innerHTML = "";
         statusMessage.className = "";
@@ -544,13 +625,12 @@
         showStep(currentStep);
       });
 
-      // "Submit" -> Final Submit to create token
+      // Final Submit
       btnSubmit.addEventListener("click", async function () {
         statusMessage.innerHTML = "";
         statusMessage.className = "yellow";
         statusMessage.innerText = "Waiting for payment...";
 
-        // Gather values again (already validated, but let's be consistent)
         const tokenName = document.getElementById("tokenName").value.trim();
         const tokenSymbol = document.getElementById("tokenSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
@@ -558,7 +638,7 @@
         const userAddress = document.getElementById("userAddress").value.trim();
 
         try {
-          // Example POST request
+          // Example: Adjust endpoint/payload to your needs
           const response = await axios.post("/api/create-token", {
             tokenName,
             tokenSymbol,
@@ -567,14 +647,13 @@
             userAddress,
           });
 
-          // Simulate token creation wait
           statusMessage.innerText = "Payment detected! Creating your coin...";
           setTimeout(() => {
             const txHash = response.data.transactionHash;
             statusMessage.classList.remove("yellow");
             statusMessage.classList.add("green");
             statusMessage.innerHTML =
-              `Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
+              `Coin created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
           }, 2000);
         } catch (err) {
           statusMessage.classList.remove("yellow");
