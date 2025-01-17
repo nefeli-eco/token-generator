@@ -82,9 +82,13 @@
                 <div class="collapsible-header"><i class="material-icons">support</i>No Support or Maintenance</div>
                 <div class="collapsible-body"><span>After the token is created, we do not offer ongoing support, maintenance, or modifications.</span></div>
             </li>
-            <li>
+            <li>    
                 <div class="collapsible-header"><i class="material-icons">warning</i>Disclaimer of Liability</div>
                 <div class="collapsible-body"><span>We are not liable for any loss, damage, or misuse of the token after creation. Use our platform at your own risk.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">error_outline</i>Incorrect Payment</div>
+                <div class="collapsible-body"><span>We are not responsible if the user sends payment to the wrong address or sends an incorrect amount. Ensure the details are accurate before proceeding.</span></div>
             </li>
             <li>
                 <div class="collapsible-header"><i class="material-icons">gavel</i>Acceptance of Terms</div>
