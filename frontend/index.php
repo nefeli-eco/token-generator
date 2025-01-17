@@ -367,6 +367,22 @@ footer a:hover {
             <div class="carousel-item">
                 <div class="card">
                     <div class="card-content">
+                        <h6>Can the token be traded on exchanges?</h6>
+                        <p>Yes, the token follows the ERC-20 standard, which makes it compatible with most exchanges and wallets. However, it is up to the token owner to list it on exchanges.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What advance function Token has?</h6>
+                        <p>Burn fucntion to reduce serculation and Mint function to increase. Include by default. no extra cost</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
                         <h6>How long does it take to create a token?</h6>
                         <p>Tokens are created within minutes of payment confirmation.</p>
                     </div>
