@@ -92,11 +92,7 @@
             </li>
         </ul>
     </main>
-
-    <footer>
-        <p>&copy; 2025 Cryptonow. All rights reserved.</p>
-        <a href="/">Home</a> | <a href="/support">Support</a> | <a href="/about">About</a>
-    </footer>
+   <?php include 'footer.php'; ?>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script>
