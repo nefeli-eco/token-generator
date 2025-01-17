@@ -16,203 +16,210 @@
 
     <?php include 'google.php'; ?>
     <style>
-        body {
-            background: #1a1a1a;
-            font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
-        }
-        .main-header {
-            background: linear-gradient(120deg, #5e35b1, #4527a0);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        .main-header h1 {
-            font-size: 2.8rem;
-            font-weight: bold;
-        }
-        .main-header p {
-            font-size: 1.4rem;
-        }
-        .crypto-icons {
-            font-size: 3rem;
-            color: #fbc02d;
-            margin: 20px 0;
-        }
-        .card {
-            background: #212121;
-            color: #ffffff;
-            border-radius: 10px;
-        }
-        .steps-section {
-            margin: 30px 0;
-        }
-        .step-card {
-            background: #212121;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 180px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .step-card i {
-            font-size: 3rem;
-            color: #fbc02d;
-            margin-bottom: 10px;
-        }
-        .payment-section {
-            background-color: #212121;
-            padding: 20px;
-            border-radius: 10px;
-            color: #ffffff;
-            margin-bottom: 30px;
-        }
-        .payment-section h5 {
-            color: #fbc02d;
-        }
-        .payment-section .eth-address {
-            font-family: monospace;
-            background: #311b92;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            color: #fbc02d;
-        }
-        .carousel-container {
-            position: relative;
-        }
-        .carousel {
-            margin: 30px auto;
-        }
-        .carousel .carousel-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .carousel .carousel-item .card {
-    width: 100%;
-    max-width: 400px;
-    background: #311b92; /* Matches your site color scheme */
-    color: #ffffff; /* White text for visibility */
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Slight shadow for depth */
-    text-align: center;
-    padding: 20px; /* Add padding for better readability */
-}
+    /* General Body Styling */
+    body {
+        background: #1a1a1a;
+        font-family: 'Roboto', sans-serif;
+        color: #e0e0e0;
+    }
 
-.carousel .carousel-item .card h6 {
-    color: #fbc02d; /* Highlight question headers with the site's yellow color */
-    font-weight: bold;
-}
+    /* Header Section */
+    .main-header {
+        background: linear-gradient(120deg, #5e35b1, #4527a0);
+        color: white;
+        padding: 50px 20px;
+        text-align: center;
+    }
+    .main-header h1 {
+        font-size: 2.8rem;
+        font-weight: bold;
+    }
+    .main-header p {
+        font-size: 1.4rem;
+    }
+    .crypto-icons {
+        font-size: 3rem;
+        color: #fbc02d;
+        margin: 20px 0;
+    }
 
-.carousel .carousel-item .card p {
-    font-size: 1.1rem; /* Slightly larger font for better readability */
-    line-height: 1.6;
-}
+    /* Card Styling */
+    .card, .card-panel {
+        background: #311b92;
+        color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        padding: 20px;
+    }
 
-/* Navigation button styles */
-/* Center the carousel navigation arrows */
-.carousel-prev,
-.carousel-next {
-    position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for proper vertical centering */
-    background: #311b92; /* Matches the FAQ card background */
-    color: #fbc02d; /* Matches the site's yellow color */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.3s ease;
-}
+    /* Steps Section */
+    .steps-section {
+        margin: 30px 0;
+        background: #212121;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .step-card {
+        background: #212121;
+        color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 180px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+    }
+    .step-card i {
+        font-size: 3rem;
+        color: #fbc02d;
+        margin-bottom: 10px;
+    }
 
-.carousel-prev {
-    left: -50px; /* Position the left arrow to the left of the carousel */
-}
+    /* Payment Section */
+    .payment-section {
+        background: #311b92;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        color: #ffffff;
+        margin-bottom: 30px;
+    }
+    .payment-section h5 {
+        color: #fbc02d;
+        font-size: 1.8rem;
+        font-weight: bold;
+    }
+    .payment-section .eth-address {
+        font-family: monospace;
+        background: #4527a0;
+        padding: 12px;
+        border-radius: 8px;
+        display: inline-block;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        color: #fbc02d;
+        font-size: 1.5rem;
+    }
+    .payment-section img {
+        border-radius: 8px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        margin: 15px;
+    }
+    .payment-section p {
+        font-size: 1.2rem;
+    }
 
-.carousel-next {
-    right: -50px; /* Position the right arrow to the right of the carousel */
-}
+    /* FAQ Section */
+    .faq-section {
+        background: #311b92;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    }
+    .faq-section h5 {
+        color: #fbc02d;
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+    .carousel .carousel-item .card {
+        background: #311b92;
+        color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        text-align: center;
+        padding: 20px;
+    }
+    .carousel .carousel-item .card h6 {
+        color: #fbc02d;
+        font-weight: bold;
+    }
+    .carousel .carousel-item .card p {
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
 
-.carousel-prev:hover,
-.carousel-next:hover {
-    background: #4527a0; /* Slightly lighter purple on hover */
-}
+    /* Carousel Navigation Buttons */
+    .carousel-prev,
+    .carousel-next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: #4527a0;
+        color: #fbc02d;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+        cursor: pointer;
+        z-index: 10;
+        transition: background 0.3s ease;
+    }
+    .carousel-prev {
+        left: -50px;
+    }
+    .carousel-next {
+        right: -50px;
+    }
+    .carousel-prev:hover,
+    .carousel-next:hover {
+        background: #5e35b1;
+    }
 
-        /* Styling for input fields in the form */
-#tokenForm input[type="text"],
-#tokenForm input[type="number"] {
-    color: #e0e0e0; /* Light color for text */
-    background-color: #212121; /* Match the card background */
-    border: 1px solid #4527a0; /* Border for better visibility */
-    padding: 8px; /* Add padding for better readability */
-    border-radius: 4px; /* Rounded corners for input fields */
-}
+    /* Form Section */
+    #tokenForm input[type="text"],
+    #tokenForm input[type="number"] {
+        color: #e0e0e0;
+        background-color: #212121;
+        border: 1px solid #4527a0;
+        padding: 8px;
+        border-radius: 4px;
+    }
+    #tokenForm input[type="text"]::placeholder,
+    #tokenForm input[type="number"]::placeholder {
+        color: #a0a0a0;
+    }
+    #tokenForm label {
+        color: #bdbdbd;
+    }
 
-/* Placeholder text styling */
-#tokenForm input[type="text"]::placeholder,
-#tokenForm input[type="number"]::placeholder {
-    color: #a0a0a0; /* Lighter placeholder text */
-}
+    /* Status Messages */
+    #statusMessage {
+        padding: 16px;
+        margin-top: 10px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        text-align: center;
+    }
+    #statusMessage.green {
+        background-color: #e8f5e9;
+        color: #1b5e20 !important;
+        border: 1px solid #1b5e20;
+    }
+    #statusMessage.red {
+        background-color: #ffebee;
+        color: #b71c1c !important;
+        border: 1px solid #b71c1c;
+    }
+    #statusMessage.yellow {
+        background-color: #fffde7;
+        color: #000000 !important;
+        border: 1px solid #f57f17;
+    }
+    #statusMessage.green a {
+        color: #ffffff !important;
+        font-weight: bold;
+        text-decoration: underline;
+    }
+</style>
 
-/* Label text styling */
-#tokenForm label {
-    color: #bdbdbd; /* Light gray label text */
-}
-
-/* General Status Message Styling */
-#statusMessage {
-    padding: 16px;
-    margin-top: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-}
-
-/* Success Message Styling */
-#statusMessage.green {
-    background-color: #e8f5e9; /* Light green background */
-    color: #1b5e20 !important; /* Dark green text */
-    border: 1px solid #1b5e20; /* Border to match the text */
-}
-
-/* Error Message Styling */
-#statusMessage.red {
-    background-color: #ffebee; /* Light red background */
-    color: #b71c1c !important; /* Dark red text */
-    border: 1px solid #b71c1c; /* Border to match the text */
-}
-
-/* Processing Message Styling */
-#statusMessage.yellow {
-    background-color: #fffde7; /* Light yellow background */
-    color: #000000 !important; /* Black text for better visibility */
-    border: 1px solid #f57f17; /* Border to match the processing theme */
-}/* Success Message Styling */
-#statusMessage.green {
-    background-color: #e8f5e9; /* Light green background */
-    color: #1b5e20 !important; /* Dark green text for default message */
-    border: 1px solid #1b5e20; /* Border to match the text */
-}
-
-/* Adjust link styling inside the success message */
-#statusMessage.green a {
-    color: #ffffff !important; /* White text for better contrast */
-    font-weight: bold; /* Bold text for visibility */
-    text-decoration: underline; /* Underline for emphasis */
-}
-
-    </style>
 </head>
 <body>
 
@@ -224,7 +231,7 @@
         <i class="material-icons">token</i>
         <i class="material-icons">account_balance_wallet</i>
     </div>
-</header>
+</header>  
 
 <main class="container">
     <!-- Steps Section -->
@@ -260,24 +267,22 @@
     
         <!-- Payment Section -->
         <section class="payment-section center-align" aria-labelledby="payment-section">
-            <h5 id="payment-section" style="font-weight: bold; font-size: 1.8rem; color: #fbc02d;">Payment Information</h5>
-            <div class="card-panel" style="background-color: #4527a0; color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
-                <p style="font-size: 1.2rem;">Please send <strong>0.04 ETH + Network Fees</strong> to the following address:</p>
-                <div class="eth-address" style="font-size: 1.5rem; color: #fbc02d; background-color: #311b92; padding: 12px; border-radius: 8px; display: inline-block; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
-                    0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805
-                </div>
-                <p style="margin-top: 15px; font-size: 1rem;">Scan the QR code below or copy the address to make your payment:</p>
-                <div style="margin: 15px;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150" alt="Payment QR Code" style="border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
-                </div>
-                <p style="font-size: 1rem; color: #fbc02d;">💡 Ensure the payment amount matches the required amount to avoid errors.</p>
-            </div>
-        </section>
+    <h5 id="payment-section">Payment Information</h5>
+    <div class="card-panel">
+        <p>Please send <strong>0.04 ETH + Network Fees</strong> to the following address:</p>
+        <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
+        <p>Scan the QR code below or copy the address to make your payment:</p>
+        <div>
+            <img src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150" alt="Payment QR Code">
+        </div>
+        <p>💡 Ensure the payment amount matches the required amount to avoid errors.</p>
+    </div>
+</section>
 
-
-        <section class="faq-section" aria-labelledby="faq-section">
-    <h5 id="faq-section" class="center-align" style="color: #fbc02d; font-size: 1.8rem; font-weight: bold;">Frequently Asked Questions</h5>
-    <div class="carousel-container" style="position: relative;">
+         <!-- Faq Section -->
+         <section class="faq-section" aria-labelledby="faq-section">
+    <h5 id="faq-section">Frequently Asked Questions</h5>
+    <div class="carousel-container">
         <button class="carousel-prev material-icons">chevron_left</button>
         <button class="carousel-next material-icons">chevron_right</button>
         <div class="carousel carousel-slider center">
