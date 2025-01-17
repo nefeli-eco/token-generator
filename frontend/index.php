@@ -384,7 +384,7 @@ footer a:hover {
                 <div class="card">
                     <div class="card-content">
                         <h6>How long does it take to create a token?</h6>
-                        <p>Tokens are created within minutes of payment confirmation.</p>
+                        <p>Tokens are created within minutes after form sumbission and payment confirmation.</p>
                     </div>
                 </div>
             </div>
