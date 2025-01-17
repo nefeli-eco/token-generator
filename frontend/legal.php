@@ -30,7 +30,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- If you have analytics scripts, include them here -->
-  <?php // include 'google.php'; ?>
+  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */

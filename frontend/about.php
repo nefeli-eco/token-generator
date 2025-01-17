@@ -33,7 +33,7 @@
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
   <!-- If you have analytics scripts, include them here -->
-  <?php // include 'google.php'; ?>
+  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
@@ -595,14 +595,10 @@
   </div>
 
   <!-- FOOTER -->
-  <footer style="margin-top:40px;">
-    <p>&copy; <?php echo date('Y'); ?> Cryptonow. All rights reserved.</p>
-    <p>
-      <a href="#coinModal" class="modal-trigger">Create Coin</a> |
-      <a href="#!">Privacy Policy</a> |
-      <a href="#!">Terms of Service</a>
-    </p>
-  </footer>
+  <?php include 'footer.php'; ?>
+  <!-- If you don't have a separate footer file, replace the above line with
+       <footer>...your footer content...</footer>
+  -->
 
   <!-- MATERIALIZE JS -->
   <script

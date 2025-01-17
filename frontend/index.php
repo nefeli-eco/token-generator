@@ -32,7 +32,7 @@
   <!-- Axios (For handling form submission) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <?php // include 'google.php'; /* If you have analytics scripts, include them here */ ?>
+  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
@@ -536,15 +536,12 @@
   </div>
 
   <!-- ========== FOOTER ========== -->
-  <footer>
-    <p>&copy; <?php echo date('Y'); ?> Cryptonow. All rights reserved.</p>
-    <p>
-      <a href="#coinModal" class="modal-trigger">Create Coin</a> |
-      <a href="#!">Privacy Policy</a> |
-      <a href="#!">Terms of Service</a>
-    </p>
-  </footer>
+  <?php include 'footer.php'; ?>
+  <!-- If you don't have a separate footer file, replace the above line with
+       <footer>...your footer content...</footer>
+  -->
 
+  <
   <!-- Materialize JS -->
   <script
     src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"

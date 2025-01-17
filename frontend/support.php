@@ -30,7 +30,7 @@
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- If you have analytics scripts, include them here -->
-  <?php // include 'google.php'; ?>
+  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
@@ -223,14 +223,10 @@
   </main>
 
   <!-- FOOTER -->
-  <footer>
-    <p>
-      &copy; <?php echo date('Y'); ?> Cryptonow. All rights reserved.<br />
-      <a href="/">Home</a> |
-      <a href="#!">Privacy Policy</a> |
-      <a href="#!">Terms of Service</a>
-    </p>
-  </footer>
+  <?php include 'footer.php'; ?>
+  <!-- If you don't have a separate footer file, replace the above line with
+       <footer>...your footer content...</footer>
+  -->
 
   <!-- MATERIALIZE JS -->
   <script
