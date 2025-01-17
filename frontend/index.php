@@ -222,12 +222,14 @@
 .form-section button {
     display: block; /* Center-align */
     margin: 30px auto; /* Add spacing above and below */
-    padding: 15px 40px; /* Increased padding for better spacing inside */
-    font-size: 1.2rem; /* Larger text */
+    padding: 10px 40px; /* Balanced padding for better alignment */
+    font-size: 1rem; /* Adjust font size for readability */
     font-weight: bold; /* Bold text */
+    line-height: 1.5; /* Adjust line height to avoid text clipping */
+    text-align: center; /* Ensure text is centered */
     background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for polished look */
     color: #ffffff; /* White text for visibility */
-    border: none;
+    border: none; /* Remove border */
     border-radius: 8px; /* Rounded corners */
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
     cursor: pointer; /* Pointer cursor */
