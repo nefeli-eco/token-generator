@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 // Load environment variables
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
 const NETWORK = process.env.DEPLOY_ENV === "production" ? process.env.MAINNET_RPC_URL : process.env.SEPOLIA_RPC_URL;
-const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
+const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
@@ -23,46 +23,53 @@ const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
 const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
+        let lastCheckedBlock = null;
 
         const checkForTransaction = async () => {
             try {
-                const elapsed = Date.now() - start; // Elapsed time
+                const elapsed = Date.now() - start;
                 console.log(`Elapsed time: ${elapsed} ms (Timeout: ${timeout} ms)`);
 
-                // Check if the timeout is exceeded
                 if (elapsed > timeout) {
                     console.log("Timeout exceeded. No payment detected.");
                     reject(new Error("Timeout: No payment detected."));
                     return;
                 }
 
-                const blockNumber = await provider.getBlockNumber(); // Get the latest block number
-                const targetBlockNumber = blockNumber - 2; // Process blocks 2 blocks behind the current block
-                const block = await provider.getBlock(targetBlockNumber); // Fetch block details
+                // Get the latest block number
+                const latestBlockNumber = await provider.getBlockNumber();
+                console.log(`Latest block number: ${latestBlockNumber}`);
 
-                console.log(`Checking block ${targetBlockNumber} for transactions...`);
+                // Start checking from the lastCheckedBlock + 1 or from the latest block
+                const fromBlock = lastCheckedBlock ? lastCheckedBlock + 1 : latestBlockNumber - 2;
 
-                // Loop through transaction hashes in the block
-                for (const txHash of block.transactions) {
-                    const tx = await provider.getTransaction(txHash); // Fetch transaction details
-                    console.log(`Transaction found: ${tx.hash}`);
-                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
-                    console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
+                for (let blockNumber = fromBlock; blockNumber <= latestBlockNumber; blockNumber++) {
+                    console.log(`Checking block ${blockNumber} for transactions...`);
+                    const block = await provider.getBlockWithTransactions(blockNumber);
 
-                    if (
-                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
-                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
-                        BigInt(tx.value) === REQUIRED_PAYMENT
-                    ) {
-                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                        resolve(tx.hash); // Transaction found, return the hash
-                        return;
-                    } else {
-                        console.log("Transaction does not match the required criteria.");
+                    for (const tx of block.transactions) {
+                        console.log(`Transaction found: ${tx.hash}`);
+                        console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
+                        console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
+
+                        if (
+                            tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                            tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                            BigInt(tx.value) === REQUIRED_PAYMENT
+                        ) {
+                            console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                            resolve(tx.hash); // Transaction found
+                            return;
+                        } else {
+                            console.log("Transaction does not match the required criteria.");
+                        }
                     }
                 }
 
-                // Wait for the next block and check again
+                // Update the last checked block
+                lastCheckedBlock = latestBlockNumber;
+
+                // Retry after a delay
                 setTimeout(checkForTransaction, 2000);
             } catch (error) {
                 console.error("Error checking transactions:", error);
