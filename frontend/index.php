@@ -148,26 +148,6 @@
     background: #4527a0; /* Slightly lighter purple on hover */
 }
 
-        /* Styling for input fields in the form */
-#tokenForm input[type="text"],
-#tokenForm input[type="number"] {
-    color: #e0e0e0; /* Light color for text */
-    background-color: #212121; /* Match the card background */
-    border: 1px solid #4527a0; /* Border for better visibility */
-    padding: 8px; /* Add padding for better readability */
-    border-radius: 4px; /* Rounded corners for input fields */
-}
-
-/* Placeholder text styling */
-#tokenForm input[type="text"]::placeholder,
-#tokenForm input[type="number"]::placeholder {
-    color: #a0a0a0; /* Lighter placeholder text */
-}
-
-/* Label text styling */
-#tokenForm label {
-    color: #bdbdbd; /* Light gray label text */
-}
 
 /* General Status Message Styling */
 #statusMessage {
@@ -211,50 +191,77 @@
     font-weight: bold; /* Bold text for visibility */
     text-decoration: underline; /* Underline for emphasis */
 }
-
-/* Footer Styling */
-footer {
-    background: #121212;
-    color: #bdbdbd;
-    padding: 20px 0;
-    text-align: center;
-    border-top: 1px solid #4527a0; /* Optional: A subtle border */
-}
-
-footer a {
-    color: #fbc02d;
-    text-decoration: none;
-    margin: 0 10px; /* Add some spacing between links */
-}
-
-footer a:hover {
-    text-decoration: underline; /* Add hover effect for links */
-}
+/* Input field and label spacing */
 .form-section .input-field {
-    margin-bottom: 20px; /* Add space between input fields */
+    margin-bottom: 25px; /* Increase spacing between fields */
 }
 
 .form-section label {
-    margin-bottom: 8px; /* Add space between the label and input field */
+    margin-bottom: 10px; /* Add spacing between the label and input field */
     display: block; /* Ensure labels are on their own line */
     color: #bdbdbd; /* Maintain consistent label color */
 }
 
+/* Center and style the button */
 .form-section button {
-    display: block; /* Ensure the button is centered */
-    margin: 20px auto 0 auto; /* Center the button and add top spacing */
-    padding: 10px 20px; /* Add padding for a larger clickable area */
-    font-size: 1.2rem; /* Increase font size for better visibility */
-    background-color: #4527a0; /* Ensure button color matches the theme */
-    color: white; /* Make text stand out */
+    display: block; /* Center the button */
+    margin: 20px auto; /* Add top spacing and auto-center */
+    padding: 12px 30px; /* Increase padding for a larger clickable area */
+    font-size: 1.2rem; /* Increase font size for better readability */
+    font-weight: bold; /* Make the text bold */
+    background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for a more polished look */
+    color: white; /* Make the button text stand out */
     border: none;
-    border-radius: 8px; /* Rounded corners for the button */
-    transition: background-color 0.3s ease; /* Add hover effect */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+    cursor: pointer; /* Change cursor to pointer */
+    transition: background 0.3s ease, transform 0.2s ease; /* Smooth transitions */
 }
 
 .form-section button:hover {
-    background-color: #5e35b1; /* Slightly lighter purple on hover */
+    background: linear-gradient(120deg, #4527a0, #311b92); /* Slightly different gradient on hover */
+    transform: scale(1.05); /* Slight enlargement on hover */
 }
+
+.form-section button:active {
+    transform: scale(0.95); /* Slight shrink on click */
+}
+
+/* Improve input field appearance */
+#tokenForm input[type="text"],
+#tokenForm input[type="number"] {
+    padding: 12px; /* Increase padding inside fields */
+    font-size: 1rem; /* Larger text for readability */
+    border-radius: 6px; /* Match input field corners to button */
+    background-color: #1f1f1f; /* Darker input background for contrast */
+    border: 1px solid #5e35b1; /* Accent border color */
+    color: #ffffff; /* White text */
+}
+
+#tokenForm input[type="text"]::placeholder,
+#tokenForm input[type="number"]::placeholder {
+    color: #a0a0a0; /* Lighter placeholder text for readability */
+}
+
+/* Footer alignment fix */
+footer {
+    text-align: center; /* Center footer content */
+    padding: 20px 0; /* Add padding for better separation */
+    background-color: #121212; /* Match background with site theme */
+    color: #bdbdbd; /* Footer text color */
+    font-size: 0.9rem; /* Slightly smaller font size */
+}
+
+footer a {
+    color: #fbc02d; /* Match site accent color */
+    text-decoration: none; /* Remove underline */
+    margin: 0 10px; /* Add spacing between links */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Underline on hover */
+}
+
 
     </style>
 </head>
