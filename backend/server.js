@@ -46,17 +46,23 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
                     if (checkedBlocks.has(blockNumber)) continue;
 
                     console.log(`Checking block ${blockNumber} for transactions...`);
-                    const block = await provider.getBlockWithTransactions(blockNumber);
+                    const block = await provider.getBlock(blockNumber);
 
-                    if (!block) {
-                        console.log(`Block ${blockNumber} not found. Retrying...`);
+                    if (!block || !block.transactions) {
+                        console.log(`Block ${blockNumber} not found or contains no transactions. Retrying...`);
                         missingBlocks.push(blockNumber);
                         continue;
                     }
 
                     checkedBlocks.add(blockNumber);
 
-                    for (const tx of block.transactions) {
+                    for (const txHash of block.transactions) {
+                        const tx = await provider.getTransaction(txHash);
+                        if (!tx) {
+                            console.log(`Transaction ${txHash} not found. Skipping.`);
+                            continue;
+                        }
+
                         console.log(`Transaction found in block ${blockNumber}:`);
                         console.log(`- Transaction Hash: ${tx.hash}`);
                         console.log(`- From: ${tx.from}`);
