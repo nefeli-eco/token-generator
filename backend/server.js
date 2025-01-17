@@ -99,6 +99,40 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
     });
 };
 
+app.post("/support", async (req, res) => {
+    const { name, email, message } = req.body;
+
+    if (!name || !email || !message) {
+        return res.status(400).json({ message: "All fields are required." });
+    }
+
+    try {
+        // Compose email
+        const msg = {
+            to: "support@cryptonow.cc", // Replace with your support email
+            from: "form@cryptonow.cc", // Replace with your sender email
+            subject: "New Support Request",
+            text: `A new support request was received:\n\nName: ${name}\nEmail: ${email}\nMessage: ${message}`,
+            html: `
+                <h3>New Support Request</h3>
+                <p><strong>Name:</strong> ${name}</p>
+                <p><strong>Email:</strong> ${email}</p>
+                <p><strong>Message:</strong></p>
+                <p>${message}</p>
+            `,
+        };
+
+        // Send email using SendGrid
+        await sgMail.send(msg);
+        console.log("Support email sent successfully!");
+
+        return res.json({ message: "Your message has been sent successfully." });
+    } catch (error) {
+        console.error("Error sending support email:", error);
+        return res.status(500).json({ message: "Failed to send your message. Please try again later." });
+    }
+});
+
 app.post("/create-token", async (req, res) => {
     const clientIp = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
@@ -131,8 +165,8 @@ app.post("/create-token", async (req, res) => {
 
         // Compose email
         const msg = {
-            to: "your-email@yourdomain.com", // Replace with your email
-            from: "no-reply@cryptonow.cc", // Replace with your sender email
+            to: "admin@cryptonow.cc", // Replace with your email
+            from: "form@cryptonow.cc", // Replace with your sender email
             subject: "New Token Creation Request",
             text: `A new token creation request was received:\n\nToken Name: ${tokenName}\nToken Symbol: ${tokenSymbol}\nInitial Supply: ${initialSupply}\nReceiver Address: ${receiverAddress}\nUser Address: ${userAddress}\nTransaction Hash: ${txHash}`,
             html: `

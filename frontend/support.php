@@ -86,14 +86,38 @@
     </main>
     <?php include 'footer.php'; ?>
     <script>
-        document.getElementById('contactForm').addEventListener('submit', function (e) {
-            e.preventDefault();
-            const statusMessage = document.getElementById('statusMessage');
-            statusMessage.innerHTML = '<div class="card-panel yellow lighten-4" aria-live="polite">Submitting your message...</div>';
-            setTimeout(() => {
+    document.getElementById("contactForm").addEventListener("submit", async function (e) {
+        e.preventDefault();
+
+        const statusMessage = document.getElementById("statusMessage");
+        statusMessage.innerHTML = '<div class="card-panel yellow lighten-4" aria-live="polite">Submitting your message...</div>';
+
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        try {
+            const response = await fetch("/support", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, email, message }),
+            });
+
+            if (response.ok) {
                 statusMessage.innerHTML = '<div class="card-panel green lighten-4" aria-live="polite">Thank you! Your message has been sent successfully.</div>';
-            }, 2000);
-        });
-    </script>
+                document.getElementById("contactForm").reset();
+            } else {
+                const errorData = await response.json();
+                statusMessage.innerHTML = `<div class="card-panel red lighten-4" aria-live="polite">${errorData.message || "Failed to send your message. Please try again later."}</div>`;
+            }
+        } catch (error) {
+            console.error("Error submitting the form:", error);
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4" aria-live="polite">Failed to send your message. Please try again later.</div>';
+        }
+    });
+</script>
+
 </body>
 </html>
