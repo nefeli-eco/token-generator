@@ -321,7 +321,7 @@ footer a:hover {
         <section class="payment-section center-align" aria-labelledby="payment-section">
             <h5 id="payment-section" style="font-weight: bold; font-size: 1.8rem; color: #fbc02d;">Payment Information</h5>
             <div class="card-panel" style="background-color: #4527a0; color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
-                <p style="font-size: 1.2rem;">Please send <strong>0.04 ETH + Network Fees</strong> to the following address:</p>
+                <p style="font-size: 1.2rem;">Please send <strong>0.05 ETH + Network Fees</strong> to the following address:</p>
                 <div class="eth-address" style="font-size: 1.5rem; color: #fbc02d; background-color: #311b92; padding: 12px; border-radius: 8px; display: inline-block; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
                     0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805
                 </div>
@@ -372,14 +372,14 @@ footer a:hover {
                     </div>
                 </div>
             </div>
-            <div class="carousel-item">
+            <!-- <div class="carousel-item">
                 <div class="card">
                     <div class="card-content">
                         <h6>What advance function Token has?</h6>
                         <p>Burn fucntion to reduce serculation and Mint function to increase. Include by default. no extra cost</p>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="carousel-item">
                 <div class="card">
                     <div class="card-content">
@@ -392,7 +392,7 @@ footer a:hover {
                 <div class="card">
                     <div class="card-content">
                         <h6>What are the costs involved?</h6>
-                        <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
+                        <p>The cost to create a token is **0.05 ETH** + network fees, which covers all processing and deployment fees.</p>
                     </div>
                 </div>
             </div>

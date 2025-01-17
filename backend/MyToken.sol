@@ -19,8 +19,6 @@ contract MyToken is IERC20 {
     uint8 public decimals;
     uint256 private _totalSupply;
 
-    address public owner;
-
     mapping(address => uint256) private _balances;
     mapping(address => mapping(address => uint256)) private _allowances;
 
@@ -35,14 +33,8 @@ contract MyToken is IERC20 {
         symbol = _symbol;
         decimals = _decimals;
         _totalSupply = _initialSupply * (10 ** uint256(_decimals));
-        _balances[_recipient] = _totalSupply;
-        owner = msg.sender; // Set contract deployer as the owner
+        _balances[_recipient] = _totalSupply; // Assign total supply to recipient
         emit Transfer(address(0), _recipient, _totalSupply);
-    }
-
-    modifier onlyOwner() {
-        require(msg.sender == owner, "Only the owner can perform this action");
-        _;
     }
 
     function totalSupply() external view override returns (uint256) {
@@ -80,13 +72,5 @@ contract MyToken is IERC20 {
         _allowances[sender][msg.sender] -= amount;
         emit Transfer(sender, recipient, amount);
         return true;
-    }
-
-    // Mint function to increase total supply
-    function mint(address recipient, uint256 amount) external onlyOwner {
-        uint256 mintAmount = amount * (10 ** uint256(decimals)); // Apply decimal precision
-        _totalSupply += mintAmount;
-        _balances[recipient] += mintAmount;
-        emit Transfer(address(0), recipient, mintAmount);
     }
 }
