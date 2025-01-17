@@ -115,8 +115,12 @@
 }
 
 /* Navigation button styles */
+/* Center the carousel navigation arrows */
 .carousel-prev,
 .carousel-next {
+    position: absolute;
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for proper vertical centering */
     background: #311b92; /* Matches the FAQ card background */
     color: #fbc02d; /* Matches the site's yellow color */
     border-radius: 50%;
@@ -126,7 +130,17 @@
     align-items: center;
     justify-content: center;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    z-index: 10;
     transition: background 0.3s ease;
+}
+
+.carousel-prev {
+    left: -50px; /* Position the left arrow to the left of the carousel */
+}
+
+.carousel-next {
+    right: -50px; /* Position the right arrow to the right of the carousel */
 }
 
 .carousel-prev:hover,
@@ -134,16 +148,6 @@
     background: #4527a0; /* Slightly lighter purple on hover */
 }
 
-        footer {
-            background: #121212;
-            color: #bdbdbd;
-            padding: 20px 0;
-            text-align: center;
-        }
-        footer a {
-            color: #fbc02d;
-            text-decoration: none;
-        }
         /* Styling for input fields in the form */
 #tokenForm input[type="text"],
 #tokenForm input[type="number"] {
@@ -273,7 +277,7 @@
 
         <section class="faq-section" aria-labelledby="faq-section">
     <h5 id="faq-section" class="center-align" style="color: #fbc02d; font-size: 1.8rem; font-weight: bold;">Frequently Asked Questions</h5>
-    <div class="carousel-container">
+    <div class="carousel-container" style="position: relative;">
         <button class="carousel-prev material-icons">chevron_left</button>
         <button class="carousel-next material-icons">chevron_right</button>
         <div class="carousel carousel-slider center">
