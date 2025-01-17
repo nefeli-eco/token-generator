@@ -11,11 +11,17 @@
   <title>Cryptonow Token Generator</title>
 
   <!-- Materialize CSS -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
+  <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    rel="stylesheet"
+  />
   <!-- Material Icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
   <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="/favicon.ico">
+  <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
   <!-- Axios (Optional for handling form submission) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
@@ -25,7 +31,7 @@
   <style>
     /* ========== BASE STYLES ========== */
     body {
-      background: #1f1f1f; /* Darker background for a business/tech feel */
+      background: #121212; /* Dark background */
       font-family: 'Roboto', sans-serif;
       color: #e0e0e0; /* Off-white text for contrast */
       margin: 0;
@@ -37,8 +43,8 @@
 
     /* ========== HEADER ========== */
     .main-header {
-      /* Teal-based gradient */
-      background: linear-gradient(120deg, #00b8d4, #008394);
+      /* Navy-based gradient */
+      background: linear-gradient(120deg, #0A244E, #001f3f);
       color: white;
       padding: 50px 20px;
       text-align: center;
@@ -52,17 +58,15 @@
       font-size: 1.4rem;
       margin-bottom: 30px;
     }
-
-    /* Icons in the header */
     .crypto-icons {
       font-size: 3rem;
-      color: #00b8d4; /* Use teal for the icons (or leave white if you prefer) */
+      color: #c5a900; /* Gold for icon highlights */
       margin: 20px 0;
     }
 
     /* ========== CARDS AND GENERAL CONTAINERS ========== */
     .card {
-      background: #2b2b2b; /* Slightly lighter than body for contrast */
+      background: #1e1e1e; /* Slightly lighter than body for contrast */
       color: #ffffff;
       border-radius: 10px;
       box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
@@ -73,7 +77,7 @@
       margin: 30px 0;
     }
     .step-card {
-      background: #2b2b2b;
+      background: #1e1e1e;
       color: #ffffff;
       padding: 20px;
       border-radius: 10px;
@@ -86,29 +90,29 @@
     }
     .step-card i {
       font-size: 3rem;
-      color: #00b8d4; /* Teal for step icons */
+      color: #c5a900; /* Gold icons for steps */
       margin-bottom: 10px;
     }
 
     /* ========== PAYMENT SECTION ========== */
     .payment-section {
-      background-color: #2b2b2b;
+      background-color: #1e1e1e;
       padding: 20px;
       border-radius: 10px;
       color: #ffffff;
       margin-bottom: 30px;
     }
     .payment-section h5 {
-      color: #00b8d4; /* Payment heading in teal */
+      color: #0A244E; /* Headings in navy */
       font-weight: bold;
     }
     .payment-section .eth-address {
       font-family: monospace;
-      background: #333333;
+      background: #2b2b2b;
       padding: 10px;
       border-radius: 5px;
       text-align: center;
-      color: #00b8d4;
+      color: #c5a900; /* Gold text for ETH address */
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
     }
 
@@ -128,7 +132,7 @@
     .carousel .carousel-item .card {
       width: 100%;
       max-width: 400px;
-      background: #2b2b2b;
+      background: #1e1e1e;
       color: #ffffff;
       border-radius: 10px;
       box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
@@ -137,7 +141,7 @@
       margin: 0 auto; /* Center items in the card */
     }
     .carousel .carousel-item .card h6 {
-      color: #00b8d4;
+      color: #c5a900; /* Gold sub-headings in FAQ */
       font-weight: bold;
       margin-bottom: 10px;
     }
@@ -152,8 +156,8 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      background: #333333;
-      color: #00b8d4;
+      background: #2b2b2b;
+      color: #c5a900;
       border-radius: 50%;
       width: 40px;
       height: 40px;
@@ -173,7 +177,8 @@
     }
     .carousel-prev:hover,
     .carousel-next:hover {
-      background: #008394;
+      background: #0A244E;
+      color: #ffffff;
     }
 
     /* ========== STATUS MESSAGES ========== */
@@ -201,7 +206,7 @@
       border: 1px solid #f57f17;
     }
     #statusMessage.green a {
-      color: #ffffff !important; 
+      color: #ffffff !important;
       font-weight: bold;
       text-decoration: underline;
     }
@@ -214,15 +219,15 @@
       margin-bottom: 5px;
       display: block;
       font-size: 1.1rem;
-      color: #9e9e9e; /* Lighter gray labels */
+      color: #9e9e9e; /* Lighter gray label */
     }
     #tokenForm input[type="text"],
     #tokenForm input[type="number"] {
       padding: 12px;
       font-size: 1rem;
       border-radius: 6px;
-      background-color: #1f1f1f; 
-      border: 1px solid #00b8d4; 
+      background-color: #121212; 
+      border: 1px solid #0A244E; /* Navy border */
       color: #ffffff;
       margin-top: 5px;
     }
@@ -239,8 +244,8 @@
       font-weight: bold;
       line-height: 1.5;
       text-align: center;
-      /* Teal gradient button */
-      background: linear-gradient(120deg, #00b8d4, #008394);
+      /* Navy button */
+      background: #0A244E;
       color: #ffffff;
       border: none;
       border-radius: 8px;
@@ -249,7 +254,7 @@
       transition: background 0.3s ease, transform 0.2s ease;
     }
     .form-section button:hover {
-      background: linear-gradient(120deg, #008394, #006c7d);
+      background: #001f3f;
       transform: scale(1.05);
     }
     .form-section button:active {
@@ -264,12 +269,12 @@
     footer {
       text-align: center;
       padding: 20px 0;
-      background-color: #121212;
+      background-color: #0A244E; /* Navy footer */
       color: #bdbdbd;
       font-size: 0.9rem;
     }
     footer a {
-      color: #00b8d4;
+      color: #c5a900;
       text-decoration: none;
       margin: 0 10px;
     }
@@ -334,22 +339,36 @@
     <!-- Payment Section -->
     <section class="payment-section center-align" aria-labelledby="payment-section">
       <h5 id="payment-section" style="font-size: 1.8rem;">Payment Information</h5>
-      <div class="card-panel" style="background-color: #2b2b2b; color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
-        <p style="font-size: 1.2rem;">Please send <strong>0.05 ETH + Network Fees</strong> to the following address:</p>
+      <div class="card-panel" style="background-color: #1e1e1e; color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
+        <p style="font-size: 1.2rem;">
+          Please send <strong>0.05 ETH + Network Fees</strong> to the following address:
+        </p>
         <div class="eth-address" style="font-size: 1.5rem;">
           0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805
         </div>
-        <p style="margin-top: 15px; font-size: 1rem;">Scan the QR code below or copy the address to make your payment:</p>
+        <p style="margin-top: 15px; font-size: 1rem;">
+          Scan the QR code below or copy the address to make your payment:
+        </p>
         <div style="margin: 15px;">
-          <img src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150" alt="Payment QR Code" style="border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150"
+            alt="Payment QR Code"
+            style="border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);"
+          />
         </div>
-        <p style="font-size: 1rem; color: #00b8d4;">💡 Ensure the payment amount matches the required amount to avoid errors.</p>
+        <p style="font-size: 1rem; color: #c5a900;">
+          💡 Ensure the payment amount matches the required amount to avoid errors.
+        </p>
       </div>
     </section>
 
     <!-- FAQ Section -->
     <section class="faq-section" aria-labelledby="faq-section">
-      <h5 id="faq-section" class="center-align" style="color: #00b8d4; font-size: 1.8rem; font-weight: bold;">
+      <h5
+        id="faq-section"
+        class="center-align"
+        style="color: #0A244E; font-size: 1.8rem; font-weight: bold;"
+      >
         Frequently Asked Questions
       </h5>
       <div class="carousel-container">
@@ -384,7 +403,11 @@
             <div class="card">
               <div class="card-content">
                 <h6>Can the token be traded on exchanges?</h6>
-                <p>Yes, the token follows the ERC-20 standard, which makes it compatible with most exchanges and wallets. However, it is up to the token owner to list it on exchanges.</p>
+                <p>
+                  Yes, the token follows the ERC-20 standard, which makes it compatible
+                  with most exchanges and wallets. However, it is up to the token
+                  owner to list it on exchanges.
+                </p>
               </div>
             </div>
           </div>
@@ -392,7 +415,10 @@
             <div class="card">
               <div class="card-content">
                 <h6>How long does it take to create a token?</h6>
-                <p>Tokens are created within minutes after form submission and payment confirmation.</p>
+                <p>
+                  Tokens are created within minutes after form submission and payment
+                  confirmation.
+                </p>
               </div>
             </div>
           </div>
@@ -400,7 +426,10 @@
             <div class="card">
               <div class="card-content">
                 <h6>What are the costs involved?</h6>
-                <p>The cost to create a token is <strong>0.05 ETH</strong> + network fees, which covers all processing and deployment fees.</p>
+                <p>
+                  The cost to create a token is <strong>0.05 ETH</strong> + network fees,
+                  which covers all processing and deployment fees.
+                </p>
               </div>
             </div>
           </div>
@@ -408,7 +437,10 @@
             <div class="card">
               <div class="card-content">
                 <h6>Who owns the token after it is created?</h6>
-                <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
+                <p>
+                  Once the token is created, it belongs to the wallet address you
+                  specified as the receiver during the token creation process.
+                </p>
               </div>
             </div>
           </div>
@@ -416,7 +448,10 @@
             <div class="card">
               <div class="card-content">
                 <h6>Can I create tokens on other blockchains?</h6>
-                <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
+                <p>
+                  Currently, Cryptonow supports the Ethereum blockchain only. We plan
+                  to add support for other blockchains in the future.
+                </p>
               </div>
             </div>
           </div>
@@ -450,7 +485,9 @@
               <label for="userAddress">Payment Sender's Address (can be the same or different from the Token Receiver Address)</label>
               <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
             </div>
-            <button type="submit" class="btn waves-effect waves-light">Create Token</button>
+            <button type="submit" class="btn waves-effect waves-light">
+              Create Token
+            </button>
           </form>
         </div>
       </div>
@@ -487,6 +524,7 @@
       
       // Clear previous messages
       statusMessage.innerHTML = '';
+      statusMessage.className = '';
 
       // Get form values
       const tokenName = document.getElementById('tokenName').value.trim();
@@ -495,38 +533,43 @@
       const receiverAddress = document.getElementById('receiverAddress').value.trim();
       const userAddress = document.getElementById('userAddress').value.trim();
 
-      // Basic validation
+      // Basic validation:
 
       // 1. Token Name (3-50 chars)
       if (tokenName.length < 3 || tokenName.length > 50) {
         statusMessage.className = "red";
-        statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
+        statusMessage.innerHTML = 
+          '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
         return;
       }
 
       // 2. Token Symbol (uppercase letters only, 3-5 chars)
       if (!/^[A-Z]{3,5}$/.test(tokenSymbol)) {
         statusMessage.className = "red";
-        statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
+        statusMessage.innerHTML = 
+          '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
         return;
       }
 
       // 3. Initial Supply (positive integer)
       if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
         statusMessage.className = "red";
-        statusMessage.innerHTML = '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
+        statusMessage.innerHTML = 
+          '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
         return;
       }
 
       // 4. Ethereum addresses (must start with 0x + 40 hex chars)
       if (!/^0x[a-fA-F0-9]{40}$/.test(receiverAddress)) {
         statusMessage.className = "red";
-        statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
+        statusMessage.innerHTML = 
+          '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
         return;
       }
       if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
         statusMessage.className = "red";
-        statusMessage.innerHTML = '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
+        statusMessage.innerHTML = 
+          '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
         return;
       }
 
@@ -541,7 +584,7 @@
           tokenSymbol,
           initialSupply,
           receiverAddress,
-          userAddress,
+          userAddress
         });
 
         // Update message to: Creating your coin
@@ -553,7 +596,10 @@
           statusMessage.className = "green";
           statusMessage.innerHTML = `
             Token created! 
-            <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">
+            <a 
+              href="https://sepolia.etherscan.io/address/${txHash}" 
+              target="_blank"
+            >
               View Transaction
             </a>`;
         }, 2000);
