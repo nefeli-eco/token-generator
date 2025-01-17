@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 // Load environment variables
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
 const NETWORK = process.env.DEPLOY_ENV === "production" ? process.env.MAINNET_RPC_URL : process.env.SEPOLIA_RPC_URL;
-const PRIVATE_KEY = process.env.PRIVATE_KEY;
+const PRIVATE_KEY = process.env.PRIVATE_KEY; // Private key from .env
 const REQUIRED_PAYMENT = ethers.parseEther("0.01"); // 0.01 ETH in wei
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
@@ -20,10 +20,10 @@ const provider = new ethers.JsonRpcProvider(NETWORK);
 const submissionCache = new Map();
 const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
 
+// Function to wait for a payment
 const waitForPayment = async (userAddress, timeout = 33300000) => {
     return new Promise((resolve, reject) => {
         const start = Date.now();
-        let lastCheckedBlock = null;
 
         const checkForTransaction = async () => {
             try {
@@ -36,40 +36,38 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
                     return;
                 }
 
-                // Get the latest block number
-                const latestBlockNumber = await provider.getBlockNumber();
-                console.log(`Latest block number: ${latestBlockNumber}`);
+                const currentBlockNumber = await provider.getBlockNumber();
+                const targetBlockNumber = currentBlockNumber - 2; // Process 2 blocks behind
 
-                // Start checking from the lastCheckedBlock + 1 or from the latest block
-                const fromBlock = lastCheckedBlock ? lastCheckedBlock + 1 : latestBlockNumber - 2;
+                console.log(`Checking block ${targetBlockNumber} for transactions...`);
+                const block = await provider.getBlock(targetBlockNumber);
 
-                for (let blockNumber = fromBlock; blockNumber <= latestBlockNumber; blockNumber++) {
-                    console.log(`Checking block ${blockNumber} for transactions...`);
-                    const block = await provider.getBlockWithTransactions(blockNumber);
+                if (!block) {
+                    console.log("Block not found. Retrying...");
+                    setTimeout(checkForTransaction, 2000);
+                    return;
+                }
 
-                    for (const tx of block.transactions) {
-                        console.log(`Transaction found: ${tx.hash}`);
-                        console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
-                        console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
+                // Fetch all transactions in the block
+                for (const txHash of block.transactions) {
+                    const tx = await provider.getTransaction(txHash);
 
-                        if (
-                            tx.from.toLowerCase() === userAddress.toLowerCase() &&
-                            tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
-                            BigInt(tx.value) === REQUIRED_PAYMENT
-                        ) {
-                            console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
-                            resolve(tx.hash); // Transaction found
-                            return;
-                        } else {
-                            console.log("Transaction does not match the required criteria.");
-                        }
+                    console.log(`Transaction found: ${tx.hash}`);
+                    console.log(`From: ${tx.from} | To: ${tx.to} | Value: ${ethers.formatEther(tx.value)}`);
+                    console.log(`Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)}`);
+
+                    if (
+                        tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                        tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
+                        BigInt(tx.value) === REQUIRED_PAYMENT
+                    ) {
+                        console.log(`Payment detected! Transaction Hash: ${tx.hash}`);
+                        resolve(tx.hash);
+                        return;
                     }
                 }
 
-                // Update the last checked block
-                lastCheckedBlock = latestBlockNumber;
-
-                // Retry after a delay
+                // Wait and check the next block
                 setTimeout(checkForTransaction, 2000);
             } catch (error) {
                 console.error("Error checking transactions:", error);
@@ -106,9 +104,8 @@ app.post("/create-token", async (req, res) => {
     }
 
     try {
-        // Wait for the user to send the required payment
         console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 33300000); // Timeout for payment detection
+        const txHash = await waitForPayment(userAddress, 33300000);
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
