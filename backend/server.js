@@ -22,8 +22,9 @@ const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
 
 // Function to wait for a payment
 const waitForPayment = async (userAddress, timeout = 33300000) => {
-    return new Promise((resolve, reject) => {
+    return new Promise(async (resolve, reject) => {
         const start = Date.now();
+        let lastCheckedBlock = null;
 
         const checkForTransaction = async () => {
             try {
@@ -37,16 +38,18 @@ const waitForPayment = async (userAddress, timeout = 33300000) => {
                 }
 
                 const currentBlockNumber = await provider.getBlockNumber();
-                const targetBlockNumber = currentBlockNumber - 2; // Process 2 blocks behind
+                const blockToCheck = lastCheckedBlock ? lastCheckedBlock - 1 : currentBlockNumber;
 
-                console.log(`Checking block ${targetBlockNumber} for transactions...`);
-                const block = await provider.getBlock(targetBlockNumber);
+                console.log(`Checking block ${blockToCheck} for transactions...`);
+                const block = await provider.getBlock(blockToCheck);
 
                 if (!block) {
                     console.log("Block not found. Retrying...");
                     setTimeout(checkForTransaction, 2000);
                     return;
                 }
+
+                lastCheckedBlock = blockToCheck;
 
                 // Fetch all transactions in the block
                 for (const txHash of block.transactions) {
