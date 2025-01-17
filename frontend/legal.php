@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Legal Disclaimer for Cryptonow Token Generator: Our policies on data handling and user obligations for token creation.">
-    <meta name="keywords" content="Cryptonow, legal, disclaimer, token creation, obligations">
+    <meta name="description" content="Understand our policies on data handling and your responsibilities when using Cryptonow.">
+    <meta name="keywords" content="Cryptonow, legal disclaimer, token creation policies, data retention">
     <meta name="author" content="Cryptonow">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://token.cryptonow.cc/legal">
@@ -12,49 +12,36 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <?php include 'google.php'; ?>
     <style>
         body {
-            background: #1a1a1a; /* Dark background */
+            background: #1a1a1a;
             font-family: 'Roboto', sans-serif;
             color: #e0e0e0;
         }
-        .main-header {
-            background: linear-gradient(120deg, #5e35b1, #4527a0); /* Softer purple gradient */
+        header {
+            background: linear-gradient(120deg, #5e35b1, #4527a0);
             color: white;
             padding: 50px 20px;
             text-align: center;
         }
-        .main-header h1 {
+        header h1 {
             font-size: 2.8rem;
             font-weight: bold;
         }
-        .main-header p {
+        header p {
             font-size: 1.4rem;
         }
-        .legal-section {
-            padding: 40px 20px;
-            line-height: 1.6;
+        .container {
+            margin-top: 30px;
         }
-        .legal-section h2 {
-            text-align: center;
-            margin-bottom: 30px;
-            color: #fbc02d;
-        }
-        .legal-section ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        .legal-section ul li {
-            margin-bottom: 20px;
-        }
-        .legal-section ul li::before {
-            content: "\2022"; /* Bullet symbol */
-            color: #fbc02d; /* Gold color */
+        .collapsible-header {
             font-weight: bold;
-            display: inline-block;
-            width: 1em;
-            margin-left: -1em;
+            color: #fbc02d;
+            background: #333;
+        }
+        .collapsible-body {
+            background: #222;
+            color: #e0e0e0;
         }
         footer {
             background: #121212;
@@ -66,27 +53,57 @@
             color: #fbc02d;
             text-decoration: none;
         }
+        footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
-    <header class="main-header">
+    <header>
         <h1>Legal Disclaimer</h1>
         <p>Understand our policies on data handling and your responsibilities when using our platform.</p>
     </header>
 
-    <main>
-        <section class="legal-section">
-            <h2 id="legal-disclaimer" aria-label="Legal Disclaimer">Our Commitment and Your Obligations</h2>
-            <ul>
-                <li><strong>No Data Retention:</strong> We do not store or retain any information provided during the token creation process. All data is discarded once the token is created.</li>
-                <li><strong>Payment Obligations:</strong> Our sole responsibility is to create the token as per the submitted details. After successful creation, we hold no further obligations.</li>
-                <li><strong>Token Responsibility:</strong> You are solely responsible for the management and use of the created token, including compliance with legal requirements.</li>
-                <li><strong>No Support or Maintenance:</strong> After the token is created, we do not offer ongoing support, maintenance, or modifications.</li>
-                <li><strong>Disclaimer of Liability:</strong> We are not liable for any loss, damage, or misuse of the token after creation. Use our platform at your own risk.</li>
-                <li><strong>Acceptance of Terms:</strong> By using our platform, you acknowledge and agree to these terms. If you do not agree, you must not use our services.</li>
-            </ul>
-        </section>
+    <main class="container">
+        <ul class="collapsible">
+            <li>
+                <div class="collapsible-header"><i class="material-icons">info</i>No Data Retention</div>
+                <div class="collapsible-body"><span>We do not store or retain any information provided during the token creation process. All data is discarded once the token is created.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">payment</i>Payment Obligations</div>
+                <div class="collapsible-body"><span>Our sole responsibility is to create the token as per the submitted details. After successful creation, we hold no further obligations.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">security</i>Token Responsibility</div>
+                <div class="collapsible-body"><span>You are solely responsible for the management and use of the created token, including compliance with legal requirements.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">support</i>No Support or Maintenance</div>
+                <div class="collapsible-body"><span>After the token is created, we do not offer ongoing support, maintenance, or modifications.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">warning</i>Disclaimer of Liability</div>
+                <div class="collapsible-body"><span>We are not liable for any loss, damage, or misuse of the token after creation. Use our platform at your own risk.</span></div>
+            </li>
+            <li>
+                <div class="collapsible-header"><i class="material-icons">gavel</i>Acceptance of Terms</div>
+                <div class="collapsible-body"><span>By using our platform, you acknowledge and agree to these terms. If you do not agree, you must not use our services.</span></div>
+            </li>
+        </ul>
     </main>
-    <?php include 'footer.php'; ?>
+
+    <footer>
+        <p>&copy; 2025 Cryptonow. All rights reserved.</p>
+        <a href="/">Home</a> | <a href="/support">Support</a> | <a href="/about">About</a>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const elems = document.querySelectorAll('.collapsible');
+            M.Collapsible.init(elems);
+        });
+    </script>
 </body>
 </html>
