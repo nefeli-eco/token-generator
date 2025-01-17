@@ -29,16 +29,15 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 
-  <!-- Axios (Optional for handling form submission) -->
+  <!-- Axios (For handling form submission) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <?php /* If you have analytics scripts, include them here */ ?>
-  <?php // include 'google.php'; ?>
+  <?php // include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
     body {
-      background-color: #f5f5f5; /* Light gray background */
+      background-color: #f5f5f5; 
       color: #333333;           
       font-family: "Roboto", sans-serif;
       margin: 0;
@@ -178,6 +177,7 @@
       font-weight: 700;
       color: #1565c0;
     }
+    /* We have 3 steps now */
     .form-step {
       display: none; 
     }
@@ -220,7 +220,7 @@
       margin: 10px 0;
     }
 
-    /* ========== STATUS MESSAGE & CUSTOM ERROR STYLE ========== */
+    /* ========== PASTEL ALERTS FOR STATUS MESSAGE ========== */
     #statusMessage {
       margin-top: 20px;
       padding: 16px;
@@ -228,25 +228,48 @@
       font-weight: 600;
       text-align: center;
     }
-    #statusMessage.green {
-      background-color: #e8f5e9;
-      color: #1b5e20;
-      border: 1px solid #1b5e20;
+    /* Error (soft red) */
+    #statusMessage.error {
+      background-color: #fdecec; 
+      border: 1px solid #f5c6c5; 
+      color: #9c2a2a;           
     }
-    #statusMessage.red {
-      background-color: #ffe8d6; /* Light orange background */
-      color: #bf360c;          /* Dark orange text */
-      border: 1px solid #bf360c;
+    /* Success (soft green) */
+    #statusMessage.success {
+      background-color: #edf7ee; 
+      border: 1px solid #c2e4c7; 
+      color: #2d572c;           
     }
-    #statusMessage.yellow {
-      background-color: #fffde7;
-      color: #000000;
-      border: 1px solid #f57f17;
+    /* Warning (soft yellow) */
+    #statusMessage.warning {
+      background-color: #fff9e6; 
+      border: 1px solid #ffe4b5; 
+      color: #8a6d3b;           
     }
-    #statusMessage.green a {
-      color: #1b5e20;
+    /* Links in success messages */
+    #statusMessage.success a {
+      color: #2d572c;
       text-decoration: underline;
       font-weight: 700;
+    }
+
+    /* ========== STEP 3: CREATION STATUS ========== */
+    .creation-status {
+      text-align: center;
+      color: #555;
+    }
+    .creation-spinner {
+      margin: 20px auto;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #1565c0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
     }
 
     /* ========== FOOTER ========== */
@@ -394,13 +417,13 @@
     </div>
   </section>
 
-  <!-- ========== MODAL: 2-STEP COIN CREATION WIZARD ========== -->
+  <!-- ========== MODAL: 3-STEP COIN CREATION WIZARD ========== -->
   <div id="coinModal" class="modal">
     <div class="modal-content">
       <div class="modal-header">
         <h5>Coin Creation Wizard</h5>
       </div>
-      <!-- Step 1: Coin Details -->
+      <!-- STEP 1: Coin Details -->
       <div class="form-step active" id="step1">
         <h6>Step 1: Enter Coin Details</h6>
         <form id="coinForm">
@@ -435,7 +458,7 @@
                 required
               />
             </div>
-            <!-- Wallet Address (Combined field) -->
+            <!-- Wallet Address (single field) -->
             <div class="input-field col s12 m6">
               <label for="walletAddress">Your Ethereum Address</label>
               <input
@@ -449,12 +472,13 @@
         </form>
         <div id="statusMessage" role="status" aria-live="polite"></div>
       </div>
-      <!-- Step 2: Payment Info + Confirm -->
+
+      <!-- STEP 2: Payment Info -->
       <div class="form-step" id="step2">
         <h6>Step 2: Payment Information</h6>
         <div class="payment-info">
           <p>
-            <strong>IMPORTANT:</strong> You must submit this form first. Then, send <strong>0.05 ETH + Network Fees</strong> to the address below <em>after</em> successful submission.
+            <strong>IMPORTANT:</strong> You must submit this form first. Then send <strong>0.05 ETH + Network Fees</strong> to the address below <em>after</em> successful submission.
           </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
           <p>Or scan the QR code:</p>
@@ -470,9 +494,23 @@
           Once payment is detected on-chain, your coin will be deployed automatically.
         </p>
       </div>
+
+      <!-- STEP 3: Creation Status -->
+      <div class="form-step" id="step3">
+        <h6>Step 3: Creation Status</h6>
+        <div class="creation-status">
+          <div id="creationSpinner" class="creation-spinner"></div>
+          <p id="creationStatusText" style="margin-top: 10px;">
+            Deploying your coin...
+          </p>
+        </div>
+        <!-- We'll reuse #statusMessage for final success/error messages if we want -->
+        <div id="finalStatusMessage" role="status" aria-live="polite" style="margin-top: 20px;"></div>
+      </div>
     </div>
+
     <div class="modal-footer" style="margin-bottom: 1rem;">
-      <!-- Step Navigation Buttons with "soft-button" style -->
+      <!-- Wizard Navigation Buttons -->
       <button
         id="btnPrev"
         class="soft-button waves-effect"
@@ -487,11 +525,11 @@
         Show Payment Info
       </button>
       <button
-        id="btnSubmit"
+        id="btnDeploy"
         class="soft-button waves-effect"
         style="display: none; margin-right: 10px;"
       >
-        Create My Coin
+        Deploy My Coin
       </button>
       <a href="#!" class="modal-close btn-flat" style="text-transform: none;">Close</a>
     </div>
@@ -521,120 +559,164 @@
       const collapsibles = document.querySelectorAll(".collapsible");
       M.Collapsible.init(collapsibles);
 
-      // Wizard Navigation
+      // Wizard Steps
       const step1 = document.getElementById("step1");
       const step2 = document.getElementById("step2");
+      const step3 = document.getElementById("step3");
+
+      // Buttons
       const btnPrev = document.getElementById("btnPrev");
       const btnNext = document.getElementById("btnNext");
-      const btnSubmit = document.getElementById("btnSubmit");
+      const btnDeploy = document.getElementById("btnDeploy");
 
-      // Status message
+      // Step 3 elements
+      const creationSpinner = document.getElementById("creationSpinner");
+      const creationStatusText = document.getElementById("creationStatusText");
+      const finalStatusMessage = document.getElementById("finalStatusMessage");
+
+      // Step 1 status message
       const statusMessage = document.getElementById("statusMessage");
+
       let currentStep = 1;
 
       function showStep(step) {
+        // Hide all steps
         step1.classList.remove("active");
         step2.classList.remove("active");
+        step3.classList.remove("active");
+
+        // Reset dynamic content
+        creationSpinner.style.display = "none";
+        creationStatusText.innerText = "";
+        finalStatusMessage.innerHTML = "";
+        finalStatusMessage.className = ""; // remove any pastel alert classes
+
         if (step === 1) {
           step1.classList.add("active");
           btnNext.style.display = "inline-block";
           btnNext.innerText = "Show Payment Info";
           btnPrev.style.display = "none";
-          btnSubmit.style.display = "none";
-        } else {
+          btnDeploy.style.display = "none";
+        } else if (step === 2) {
           step2.classList.add("active");
           btnNext.style.display = "none";
           btnPrev.style.display = "inline-block";
-          btnSubmit.style.display = "inline-block";
+          btnDeploy.style.display = "inline-block";
+        } else {
+          step3.classList.add("active");
+          btnNext.style.display = "none";
+          btnPrev.style.display = "none";
+          btnDeploy.style.display = "none";
         }
       }
       showStep(currentStep);
 
-      // Validate Step 1 fields, then go to Step 2
-      btnNext.addEventListener("click", function () {
-        statusMessage.innerHTML = "";
+      // STEP 1 -> Validate -> Step 2
+      btnNext.addEventListener("click", function() {
+        // Clear old messages
         statusMessage.className = "";
+        statusMessage.innerHTML = "";
 
+        // Collect fields
         const coinName = document.getElementById("coinName").value.trim();
         const coinSymbol = document.getElementById("coinSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
+        // Basic validations
         // 1. Coin Name (3-50 chars)
         if (coinName.length < 3 || coinName.length > 50) {
-          statusMessage.classList.add("red");
-          statusMessage.innerHTML =
-            '<div class="error-message">Coin Name must be between 3 and 50 characters.</div>';
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Coin Name must be between 3 and 50 characters.";
           return;
         }
-        // 2. Coin Symbol (uppercase letters only, 3-5 chars)
+        // 2. Coin Symbol (uppercase, 3-5 chars)
         if (!/^[A-Z]{3,5}$/.test(coinSymbol)) {
-          statusMessage.classList.add("red");
-          statusMessage.innerHTML =
-            '<div class="error-message">Coin Symbol must be 3-5 uppercase letters only.</div>';
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Coin Symbol must be 3-5 uppercase letters only.";
           return;
         }
         // 3. Initial Supply (positive integer)
         if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
-          statusMessage.classList.add("red");
-          statusMessage.innerHTML =
-            '<div class="error-message">Initial Supply must be a positive integer.</div>';
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Initial Supply must be a positive integer.";
           return;
         }
-        // 4. Wallet Address (must be valid Ethereum address)
+        // 4. Wallet Address
         if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
-          statusMessage.classList.add("red");
-          statusMessage.innerHTML =
-            '<div class="error-message">Wallet Address must be a valid Ethereum address.</div>';
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Wallet Address must be a valid Ethereum address.";
           return;
         }
 
+        // If pass all checks -> Step 2
         currentStep = 2;
         showStep(currentStep);
       });
 
-      // "Back" -> Step 1
-      btnPrev.addEventListener("click", function () {
-        statusMessage.innerHTML = "";
+      // STEP 2 -> "Deploy My Coin" -> Step 3
+      btnDeploy.addEventListener("click", function() {
+        currentStep = 3;
+        showStep(currentStep);
+
+        // Indicate creation in progress...
+        creationSpinner.style.display = "inline-block";
+        creationStatusText.innerText = "Deploying your coin...";
+
+        // We'll do the actual creation AJAX call here
+        doCoinCreation();
+      });
+
+      // "Back" from Step 2 to Step 1
+      btnPrev.addEventListener("click", function() {
         statusMessage.className = "";
+        statusMessage.innerHTML = "";
         currentStep = 1;
         showStep(currentStep);
       });
 
-      // Final Submit
-      btnSubmit.addEventListener("click", async function () {
-        statusMessage.innerHTML = "";
-        statusMessage.className = "yellow";
-        statusMessage.innerText = "Submitting form...";
-
+      // Actually create the coin with an AJAX call
+      async function doCoinCreation() {
+        // Grab form fields again (already validated in step 1, but let's be thorough)
         const coinName = document.getElementById("coinName").value.trim();
         const coinSymbol = document.getElementById("coinSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
+        // We can update the creationStatusText or finalStatusMessage as we go
         try {
-          // Example endpoint: Adjust to your real API
+          creationStatusText.innerText = "Contacting server...";
+
+          // Example POST request
           const response = await axios.post("/api/create-coin", {
             coinName,
             coinSymbol,
             initialSupply,
-            walletAddress,
+            walletAddress
           });
 
-          statusMessage.innerText = "Form submitted! Please proceed with payment...";
+          // Simulate short delay
           setTimeout(() => {
-            statusMessage.classList.remove("yellow");
-            statusMessage.classList.add("green");
-            statusMessage.innerHTML =
-              `Coin creation initiated! <a href="https://sepolia.etherscan.io/address/${response.data.transactionHash}" target="_blank">View Transaction</a>`;
-          }, 2000);
+            creationSpinner.style.display = "none";
+            finalStatusMessage.classList.add("success");
+            finalStatusMessage.innerHTML = `
+              <p>Your coin is successfully deployed!</p>
+              <p>
+                <a
+                  href="https://sepolia.etherscan.io/address/${response.data.transactionHash}"
+                  target="_blank"
+                >
+                  View on Etherscan
+                </a>
+              </p>`;
+          }, 1500);
+
         } catch (err) {
-          statusMessage.classList.remove("yellow");
-          statusMessage.classList.add("red");
-          statusMessage.innerHTML =
-            '<div class="error-message">Error: ' + err.message + '</div>';
+          creationSpinner.style.display = "none";
+          finalStatusMessage.classList.add("error");
+          finalStatusMessage.innerText = "Error Deploying Coin: " + err.message;
         }
-      });
+      }
     });
   </script>
 </body>
