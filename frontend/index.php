@@ -212,6 +212,24 @@
     text-decoration: underline; /* Underline for emphasis */
 }
 
+/* Footer Styling */
+footer {
+    background: #121212;
+    color: #bdbdbd;
+    padding: 20px 0;
+    text-align: center;
+    border-top: 1px solid #4527a0; /* Optional: A subtle border */
+}
+
+footer a {
+    color: #fbc02d;
+    text-decoration: none;
+    margin: 0 10px; /* Add some spacing between links */
+}
+
+footer a:hover {
+    text-decoration: underline; /* Add hover effect for links */
+}
     </style>
 </head>
 <body>
@@ -277,7 +295,7 @@
 
         <section class="faq-section" aria-labelledby="faq-section">
     <h5 id="faq-section" class="center-align" style="color: #fbc02d; font-size: 1.8rem; font-weight: bold;">Frequently Asked Questions</h5>
-    <div class="carousel-container" style="position: relative;">
+    <div class="carousel-container">
         <button class="carousel-prev material-icons">chevron_left</button>
         <button class="carousel-next material-icons">chevron_right</button>
         <div class="carousel carousel-slider center">
