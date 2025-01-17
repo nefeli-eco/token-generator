@@ -3,6 +3,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const { ethers } = require("ethers");
 const { exec } = require("child_process");
+const sgMail = require("@sendgrid/mail");
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +16,9 @@ const NETWORK = process.env.DEPLOY_ENV === "production" ? process.env.MAINNET_RP
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const REQUIRED_PAYMENT = ethers.parseEther("0.01");
 const provider = new ethers.JsonRpcProvider(NETWORK);
+
+// Configure SendGrid
+sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Load SendGrid API key from .env
 
 // IP restriction cache
 const submissionCache = new Map();
@@ -124,6 +128,27 @@ app.post("/create-token", async (req, res) => {
         const txHash = await waitForPayment(userAddress, 33300000);
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
+
+        // Compose email
+        const msg = {
+            to: "your-email@yourdomain.com", // Replace with your email
+            from: "no-reply@cryptonow.cc", // Replace with your sender email
+            subject: "New Token Creation Request",
+            text: `A new token creation request was received:\n\nToken Name: ${tokenName}\nToken Symbol: ${tokenSymbol}\nInitial Supply: ${initialSupply}\nReceiver Address: ${receiverAddress}\nUser Address: ${userAddress}\nTransaction Hash: ${txHash}`,
+            html: `
+                <h3>New Token Creation Request</h3>
+                <p><strong>Token Name:</strong> ${tokenName}</p>
+                <p><strong>Token Symbol:</strong> ${tokenSymbol}</p>
+                <p><strong>Initial Supply:</strong> ${initialSupply}</p>
+                <p><strong>Receiver Address:</strong> ${receiverAddress}</p>
+                <p><strong>User Address:</strong> ${userAddress}</p>
+                <p><strong>Transaction Hash:</strong> <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>
+            `,
+        };
+
+        // Send email
+        await sgMail.send(msg);
+        console.log("Email sent successfully!");
 
         // Run deployment script
         exec(
