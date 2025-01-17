@@ -487,28 +487,34 @@ footer a:hover {
 
         // Validate Token Name (min 3 chars, max 50 chars)
         if (tokenName.length < 3 || tokenName.length > 50) {
+            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
+
             statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
             return;
         }
 
         // Validate Token Symbol (uppercase letters only, 3-5 chars)
         if (!/^[A-Z]{3,5}$/.test(tokenSymbol)) {
+            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
             statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
             return;
         }
 
         // Validate Initial Supply (positive integer)
         if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
+            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
             statusMessage.innerHTML = '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
             return;
         }
 
         // Validate Ethereum addresses (starts with "0x" and 42 characters long)
         if (!/^0x[a-fA-F0-9]{40}$/.test(receiverAddress)) {
+            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
             statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
             return;
         }
         if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
+            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
             statusMessage.innerHTML = '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
             return;
         }
