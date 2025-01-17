@@ -180,6 +180,18 @@
     background-color: #fffde7; /* Light yellow background */
     color: #000000 !important; /* Black text for better visibility */
     border: 1px solid #f57f17; /* Border to match the processing theme */
+}/* Success Message Styling */
+#statusMessage.green {
+    background-color: #e8f5e9; /* Light green background */
+    color: #1b5e20 !important; /* Dark green text for default message */
+    border: 1px solid #1b5e20; /* Border to match the text */
+}
+
+/* Adjust link styling inside the success message */
+#statusMessage.green a {
+    color: #ffffff !important; /* White text for better contrast */
+    font-weight: bold; /* Bold text for visibility */
+    text-decoration: underline; /* Underline for emphasis */
 }
 
     </style>
