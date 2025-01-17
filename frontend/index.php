@@ -94,32 +94,46 @@
             align-items: center;
         }
         .carousel .carousel-item .card {
-            width: 100%;
-            max-width: 400px;
-            background: #2e2e2e;
-            color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .carousel-prev,
-        .carousel-next {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: #fff;
-            padding: 10px;
-            cursor: pointer;
-            font-size: 2rem;
-            z-index: 10;
-        }
-        .carousel-prev {
-            left: -20px;
-        }
-        .carousel-next {
-            right: -20px;
-        }
+    width: 100%;
+    max-width: 400px;
+    background: #311b92; /* Matches your site color scheme */
+    color: #ffffff; /* White text for visibility */
+    border-radius: 10px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Slight shadow for depth */
+    text-align: center;
+    padding: 20px; /* Add padding for better readability */
+}
+
+.carousel .carousel-item .card h6 {
+    color: #fbc02d; /* Highlight question headers with the site's yellow color */
+    font-weight: bold;
+}
+
+.carousel .carousel-item .card p {
+    font-size: 1.1rem; /* Slightly larger font for better readability */
+    line-height: 1.6;
+}
+
+/* Navigation button styles */
+.carousel-prev,
+.carousel-next {
+    background: #311b92; /* Matches the FAQ card background */
+    color: #fbc02d; /* Matches the site's yellow color */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+    transition: background 0.3s ease;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+    background: #4527a0; /* Slightly lighter purple on hover */
+}
+
         footer {
             background: #121212;
             color: #bdbdbd;
@@ -257,73 +271,72 @@
         </section>
 
 
-
-    <!-- FAQ Section -->
-    <section class="faq-section" aria-labelledby="faq-section">
-        <h5 id="faq-section" class="center-align">Frequently Asked Questions</h5>
-        <div class="carousel-container">
-            <button class="carousel-prev material-icons">chevron_left</button>
-            <button class="carousel-next material-icons">chevron_right</button>
-            <div class="carousel carousel-slider center">
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
-                            <h6>What is Cryptonow?</h6>
-                            <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
-                        </div>
+        <section class="faq-section" aria-labelledby="faq-section">
+    <h5 id="faq-section" class="center-align" style="color: #fbc02d; font-size: 1.8rem; font-weight: bold;">Frequently Asked Questions</h5>
+    <div class="carousel-container">
+        <button class="carousel-prev material-icons">chevron_left</button>
+        <button class="carousel-next material-icons">chevron_right</button>
+        <div class="carousel carousel-slider center">
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What is Cryptonow?</h6>
+                        <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
-                            <h6>How do I create my token?</h6>
-                            <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-                        </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>How do I create my token?</h6>
+                        <p>Fill out the form, make payment, and let our automated system do the rest.</p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
-                            <h6>What payment methods are accepted?</h6>
-                            <p>We accept Ethereum (ETH) only.</p>
-                        </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>What payment methods are accepted?</h6>
+                        <p>We accept Ethereum (ETH) only.</p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
-                            <h6>How long does it take to create a token?</h6>
-                            <p>Tokens are created within minutes of payment confirmation.</p>
-                        </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>How long does it take to create a token?</h6>
+                        <p>Tokens are created within minutes of payment confirmation.</p>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
                         <h6>What are the costs involved?</h6>
                         <p>The cost to create a token is **0.04 ETH** + network fees, which covers all processing and deployment fees.</p>
-                        </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
                         <h6>Who owns the token after it is created?</h6>
                         <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
-                        </div>
                     </div>
                 </div>
-                <div class="carousel-item">
-                    <div class="card">
-                        <div class="card-content">
-                            <h6>Can I create tokens on other blockchains?</h6>
-                            <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
-                        </div>
+            </div>
+            <div class="carousel-item">
+                <div class="card">
+                    <div class="card-content">
+                        <h6>Can I create tokens on other blockchains?</h6>
+                        <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
+
 
     <!-- Token Creation Form -->
     <section class="form-section" aria-labelledby="form-section">
