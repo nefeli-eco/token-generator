@@ -230,6 +230,32 @@ footer a {
 footer a:hover {
     text-decoration: underline; /* Add hover effect for links */
 }
+.form-section .input-field {
+    margin-bottom: 20px; /* Add space between input fields */
+}
+
+.form-section label {
+    margin-bottom: 8px; /* Add space between the label and input field */
+    display: block; /* Ensure labels are on their own line */
+    color: #bdbdbd; /* Maintain consistent label color */
+}
+
+.form-section button {
+    display: block; /* Ensure the button is centered */
+    margin: 20px auto 0 auto; /* Center the button and add top spacing */
+    padding: 10px 20px; /* Add padding for a larger clickable area */
+    font-size: 1.2rem; /* Increase font size for better visibility */
+    background-color: #4527a0; /* Ensure button color matches the theme */
+    color: white; /* Make text stand out */
+    border: none;
+    border-radius: 8px; /* Rounded corners for the button */
+    transition: background-color 0.3s ease; /* Add hover effect */
+}
+
+.form-section button:hover {
+    background-color: #5e35b1; /* Slightly lighter purple on hover */
+}
+
     </style>
 </head>
 <body>
