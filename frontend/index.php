@@ -356,7 +356,6 @@
             carouselInstance[0].next();
         });
     });
-    <script>
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const statusMessage = document.getElementById('statusMessage');
