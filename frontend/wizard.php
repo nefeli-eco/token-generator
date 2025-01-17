@@ -2,62 +2,22 @@
 /**
  * wizard.php
  *
- * A partial that defines the 3-step "Create Coin" wizard modal,
- * along with all the scripts and CSS needed for the wizard itself.
- *
- * Usage: `<?php include 'wizard.php'; ?>` in your pages
- * that already have Materialize loaded and a button linking to #coinModal.
+ * This file contains the 3-step coin creation wizard modal
+ * with pastel alerts, validated form steps, and an Axios call.
+ * 
+ * Include this in any page (e.g. index.php) with:
+ *   <?php include 'wizard.php'; ?>
  */
 ?>
 
-<style>
-  /* ========== WIZARD SPECIFIC STYLES ========== */
-  /* Pastel alerts for #finalStatusMessage or #statusMessage? */
-  #finalStatusMessage, #statusMessage {
-    margin-top: 20px;
-    padding: 16px;
-    border-radius: 4px;
-    font-weight: 600;
-    text-align: center;
-  }
-  #finalStatusMessage.error, #statusMessage.error {
-    background-color: #fdecec;
-    border: 1px solid #f5c6c5;
-    color: #9c2a2a;
-  }
-  #finalStatusMessage.success, #statusMessage.success {
-    background-color: #edf7ee;
-    border: 1px solid #c2e4c7;
-    color: #2d572c;
-  }
-  #finalStatusMessage.warning, #statusMessage.warning {
-    background-color: #fff9e6;
-    border: 1px solid #ffe4b5;
-    color: #8a6d3b;
-  }
-  /* Spinner for step 3 */
-  .creation-spinner {
-    margin: 20px auto;
-    border: 6px solid #f3f3f3;
-    border-top: 6px solid #1565c0;
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    animation: spin 1s linear infinite;
-  }
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-</style>
-
-<!-- 3-STEP WIZARD MODAL -->
+<!-- 3-STEP COIN CREATION WIZARD MODAL -->
 <div id="coinModal" class="modal">
   <div class="modal-content">
     <div class="modal-header">
       <h5>Coin Creation Wizard</h5>
     </div>
-    <!-- STEP 1 -->
+
+    <!-- STEP 1: Coin Details -->
     <div class="form-step active" id="step1">
       <h6>Step 1: Enter Coin Details</h6>
       <form id="coinForm">
@@ -104,16 +64,17 @@
           </div>
         </div>
       </form>
+      <!-- Status message for Step 1 validation -->
       <div id="statusMessage" role="status" aria-live="polite"></div>
     </div>
 
-    <!-- STEP 2 -->
+    <!-- STEP 2: Payment Info -->
     <div class="form-step" id="step2">
       <h6>Step 2: Payment Information</h6>
       <div class="payment-info">
         <p>
-          <strong>IMPORTANT:</strong> You must submit this form first.
-          Then send <strong>0.05 ETH + Network Fees</strong> to the address below
+          <strong>IMPORTANT:</strong> Submit the form first. Then send
+          <strong>0.05 ETH + Network Fees</strong> to the address below
           <em>after</em> successful submission.
         </p>
         <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
@@ -131,45 +92,63 @@
       </p>
     </div>
 
-    <!-- STEP 3 -->
+    <!-- STEP 3: Creation Status -->
     <div class="form-step" id="step3">
       <h6>Step 3: Creation Status</h6>
-      <div style="text-align:center; color:#555;">
-        <div id="creationSpinner" class="creation-spinner" style="display:none;"></div>
-        <p id="creationStatusText"></p>
+      <div class="creation-status" style="text-align:center; color:#555;">
+        <div
+          id="creationSpinner"
+          class="creation-spinner"
+          style="margin:20px auto;"
+        ></div>
+        <p id="creationStatusText" style="margin-top:10px;">
+          Deploying your coin...
+        </p>
       </div>
-      <div id="finalStatusMessage" role="status" aria-live="polite"></div>
+      <div
+        id="finalStatusMessage"
+        role="status"
+        aria-live="polite"
+        style="margin-top:20px;"
+      ></div>
     </div>
   </div>
 
-  <div class="modal-footer" style="margin-bottom: 1rem;">
+  <!-- WIZARD NAVIGATION BUTTONS -->
+  <div class="modal-footer" style="margin-bottom:1rem;">
     <button
       id="btnPrev"
-      class="btn waves-effect"
-      style="display: none; margin-right:10px;"
+      class="soft-button waves-effect"
+      style="display:none; margin-right:10px;"
     >
       Back
     </button>
     <button
       id="btnNext"
-      class="btn waves-effect"
+      class="soft-button waves-effect"
     >
       Show Payment Info
     </button>
     <button
       id="btnDeploy"
-      class="btn waves-effect"
-      style="display: none; margin-right:10px;"
+      class="soft-button waves-effect"
+      style="display:none; margin-right:10px;"
     >
       Deploy My Coin
     </button>
-    <a href="#!" class="modal-close btn-flat" style="text-transform: none;">Close</a>
+    <a
+      href="#!"
+      class="modal-close btn-flat"
+      style="text-transform:none;"
+    >
+      Close
+    </a>
   </div>
 </div>
 
 <script>
 document.addEventListener("DOMContentLoaded", function() {
-  // The wizard steps
+  // Wizard steps
   const step1 = document.getElementById("step1");
   const step2 = document.getElementById("step2");
   const step3 = document.getElementById("step3");
@@ -179,8 +158,10 @@ document.addEventListener("DOMContentLoaded", function() {
   const btnNext = document.getElementById("btnNext");
   const btnDeploy = document.getElementById("btnDeploy");
 
-  // Status/Feedback elements
+  // Step 1 error/success
   const statusMessage = document.getElementById("statusMessage");
+
+  // Step 3
   const creationSpinner = document.getElementById("creationSpinner");
   const creationStatusText = document.getElementById("creationStatusText");
   const finalStatusMessage = document.getElementById("finalStatusMessage");
@@ -188,12 +169,12 @@ document.addEventListener("DOMContentLoaded", function() {
   let currentStep = 1;
 
   function showStep(step) {
-    // Hide all steps
+    // Hide all
     step1.classList.remove("active");
     step2.classList.remove("active");
     step3.classList.remove("active");
 
-    // Reset dynamic content
+    // Reset step 3 dynamic fields
     creationSpinner.style.display = "none";
     creationStatusText.innerText = "";
     finalStatusMessage.innerHTML = "";
@@ -219,7 +200,7 @@ document.addEventListener("DOMContentLoaded", function() {
   }
   showStep(currentStep);
 
-  // Step 1 -> Validate -> Step 2
+  // STEP 1 -> Validate -> Step 2
   btnNext.addEventListener("click", () => {
     // Clear old status
     statusMessage.className = "";
@@ -230,25 +211,25 @@ document.addEventListener("DOMContentLoaded", function() {
     const initialSupply = document.getElementById("initialSupply").value.trim();
     const walletAddress = document.getElementById("walletAddress").value.trim();
 
-    // 1. Check coinName length
+    // 1. Coin Name (3-50 chars)
     if (coinName.length < 3 || coinName.length > 50) {
       statusMessage.classList.add("error");
       statusMessage.innerText = "Coin Name must be between 3 and 50 characters.";
       return;
     }
-    // 2. coinSymbol
+    // 2. Coin Symbol (3-5 uppercase)
     if (!/^[A-Z]{3,5}$/.test(coinSymbol)) {
       statusMessage.classList.add("error");
       statusMessage.innerText = "Coin Symbol must be 3-5 uppercase letters only.";
       return;
     }
-    // 3. initialSupply
+    // 3. Initial Supply
     if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
       statusMessage.classList.add("error");
       statusMessage.innerText = "Initial Supply must be a positive integer.";
       return;
     }
-    // 4. walletAddress
+    // 4. Wallet Address
     if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
       statusMessage.classList.add("error");
       statusMessage.innerText = "Wallet Address must be a valid Ethereum address.";
@@ -259,20 +240,20 @@ document.addEventListener("DOMContentLoaded", function() {
     showStep(currentStep);
   });
 
-  // Step 2 -> Deploy
+  // STEP 2 -> Deploy -> Step 3
   btnDeploy.addEventListener("click", () => {
     currentStep = 3;
     showStep(currentStep);
 
-    // Show creation spinner
+    // Show spinner & text
     creationSpinner.style.display = "inline-block";
     creationStatusText.innerText = "Deploying your coin...";
 
-    // Actually deploy
+    // Start creation
     doCoinCreation();
   });
 
-  // Step 2 -> Back -> Step 1
+  // BACK -> Step 1
   btnPrev.addEventListener("click", () => {
     statusMessage.className = "";
     statusMessage.innerHTML = "";
@@ -288,7 +269,7 @@ document.addEventListener("DOMContentLoaded", function() {
 
     try {
       creationStatusText.innerText = "Contacting server...";
-      // Example POST request
+      // Example call
       const response = await axios.post("/api/create-coin", {
         coinName,
         coinSymbol,
