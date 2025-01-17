@@ -356,34 +356,40 @@
             carouselInstance[0].next();
         });
     });
+    <script>
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    const statusMessage = document.getElementById('statusMessage');
+        e.preventDefault();
+        const statusMessage = document.getElementById('statusMessage');
 
-    // Reset the status message and apply the "yellow" class for processing
-    statusMessage.className = "yellow";
-    statusMessage.innerText = "Processing...";
+        // Initial message: Waiting for payment
+        statusMessage.className = "yellow";
+        statusMessage.innerText = "Waiting for payment...";
 
-    try {
-        const response = await axios.post('/api/create-token', {
-            tokenName: document.getElementById('tokenName').value,
-            tokenSymbol: document.getElementById('tokenSymbol').value,
-            initialSupply: document.getElementById('initialSupply').value,
-            receiverAddress: document.getElementById('receiverAddress').value,
-            userAddress: document.getElementById('userAddress').value,
-        });
+        try {
+            const response = await axios.post('/api/create-token', {
+                tokenName: document.getElementById('tokenName').value,
+                tokenSymbol: document.getElementById('tokenSymbol').value,
+                initialSupply: document.getElementById('initialSupply').value,
+                receiverAddress: document.getElementById('receiverAddress').value,
+                userAddress: document.getElementById('userAddress').value,
+            });
 
-        const txHash = response.data.transactionHash;
+            // Update message to: Creating your coin
+            statusMessage.innerText = "Payment detected! Creating your coin...";
 
-        // Update the status message on success
-        statusMessage.className = "green";
-        statusMessage.innerHTML = `Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
-    } catch (err) {
-        // Update the status message on error
-        statusMessage.className = "red";
-        statusMessage.innerText = `Error: ${err.message}`;
-    }
-});
+            // Simulate token creation time for user experience
+            setTimeout(() => {
+                const txHash = response.data.transactionHash;
+                statusMessage.className = "green";
+                statusMessage.innerHTML = `Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
+            }, 2000);
+
+        } catch (err) {
+            // Update the message to display an error
+            statusMessage.className = "red";
+            statusMessage.innerText = `Error: ${err.message}`;
+        }
+    });
 
 </script>
 </body>
