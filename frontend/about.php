@@ -7,7 +7,7 @@
     <meta name="keywords" content="Cryptonow, about us, cryptocurrency, token creation, blockchain platform">
     <meta name="author" content="Cryptonow">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cryptonow.cc/about">
+    <link rel="canonical" href="https://token.cryptonow.cc/about">
     <title>About Us - Cryptonow</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

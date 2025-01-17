@@ -7,7 +7,7 @@
     <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token">
     <meta name="author" content="Cryptonow">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cryptonow.cc/">
+    <link rel="canonical" href="https://token.cryptonow.cc/">
     <title>Cryptonow Token Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">

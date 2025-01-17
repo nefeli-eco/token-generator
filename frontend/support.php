@@ -7,7 +7,7 @@
     <meta name="keywords" content="Cryptonow, contact, support, inquiries, token creation, help">
     <meta name="author" content="Cryptonow">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cryptonow.cc/support">
+    <link rel="canonical" href="https://token.cryptonow.cc/support">
     <title>Contact Us - Cryptonow Token Generator</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
