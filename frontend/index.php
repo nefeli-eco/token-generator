@@ -470,21 +470,60 @@ footer a:hover {
             carouselInstance[0].next();
         });
     });
+
     document.getElementById('tokenForm').addEventListener('submit', async function (e) {
         e.preventDefault();
         const statusMessage = document.getElementById('statusMessage');
+        
+        // Clear previous messages
+        statusMessage.innerHTML = '';
 
-        // Initial message: Waiting for payment
+        // Get form values
+        const tokenName = document.getElementById('tokenName').value.trim();
+        const tokenSymbol = document.getElementById('tokenSymbol').value.trim();
+        const initialSupply = document.getElementById('initialSupply').value.trim();
+        const receiverAddress = document.getElementById('receiverAddress').value.trim();
+        const userAddress = document.getElementById('userAddress').value.trim();
+
+        // Validate Token Name (min 3 chars, max 50 chars)
+        if (tokenName.length < 3 || tokenName.length > 50) {
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
+            return;
+        }
+
+        // Validate Token Symbol (uppercase letters only, 3-5 chars)
+        if (!/^[A-Z]{3,5}$/.test(tokenSymbol)) {
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
+            return;
+        }
+
+        // Validate Initial Supply (positive integer)
+        if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
+            return;
+        }
+
+        // Validate Ethereum addresses (starts with "0x" and 42 characters long)
+        if (!/^0x[a-fA-F0-9]{40}$/.test(receiverAddress)) {
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
+            return;
+        }
+        if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
+            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
+            return;
+        }
+
+        // If all validations pass
         statusMessage.className = "yellow";
         statusMessage.innerText = "Waiting for payment...";
 
         try {
             const response = await axios.post('/api/create-token', {
-                tokenName: document.getElementById('tokenName').value,
-                tokenSymbol: document.getElementById('tokenSymbol').value,
-                initialSupply: document.getElementById('initialSupply').value,
-                receiverAddress: document.getElementById('receiverAddress').value,
-                userAddress: document.getElementById('userAddress').value,
+                tokenName,
+                tokenSymbol,
+                initialSupply,
+                receiverAddress,
+                userAddress,
             });
 
             // Update message to: Creating your coin
@@ -503,7 +542,7 @@ footer a:hover {
             statusMessage.innerText = `Error: ${err.message}`;
         }
     });
-
 </script>
+
 </body>
 </html>

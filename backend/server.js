@@ -14,7 +14,7 @@ app.use(bodyParser.json());
 const RECEIVER_ADDRESS = process.env.RECEIVER_ADDRESS || "0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805";
 const NETWORK = process.env.DEPLOY_ENV === "production" ? process.env.MAINNET_RPC_URL : process.env.SEPOLIA_RPC_URL;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
-const REQUIRED_PAYMENT = ethers.parseEther("0.01");
+const REQUIRED_PAYMENT = ethers.parseEther("0.05");
 const provider = new ethers.JsonRpcProvider(NETWORK);
 
 // Configure SendGrid
