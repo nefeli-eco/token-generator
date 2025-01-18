@@ -75,7 +75,7 @@ const waitForPayment = async (walletAddress, timeout = 33300000) => {
                         console.log(`- Expected Payment: ${ethers.formatEther(REQUIRED_PAYMENT)} ETH`);
 
                         if (
-                            tx.from.toLowerCase() === userAddress.toLowerCase() &&
+                            tx.from.toLowerCase() === walletAddress.toLowerCase() &&
                             tx.to.toLowerCase() === RECEIVER_ADDRESS.toLowerCase() &&
                             BigInt(tx.value) === REQUIRED_PAYMENT
                         ) {
