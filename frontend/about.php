@@ -592,9 +592,7 @@
 
   <!-- FOOTER -->
   <?php include 'footer.php'; ?>
-  <!-- If you don't have a separate footer file, replace the above line with
-       <footer>...your footer content...</footer>
-  -->
+
 
   <!-- MATERIALIZE JS -->
   <script
