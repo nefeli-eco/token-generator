@@ -682,7 +682,7 @@
 
         // We can update the creationStatusText or finalStatusMessage as we go
         try {
-          creationStatusText.innerText = "Searching for payment...";
+          creationStatusText.innerText = "Searching blockchain for payment... This can take up to 5 minutes....";
 
           // Example POST request
           const response = await axios.post("/api/create-token", {
@@ -704,7 +704,7 @@
                   target="_blank"
                 >
                   View on Etherscan
-                </a>
+                </a> Please wait 1 minute for the block to be confirmed.
               </p>`;
           }, 1500);
 
