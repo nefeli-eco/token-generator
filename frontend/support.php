@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <meta
     name="description"
     content="Contact Cryptonow Token Generator for any support or inquiries. We are here to assist you."
@@ -29,13 +29,12 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- If you have analytics scripts, include them here -->
-  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
+  <?php include 'google.php'; /* If you have analytics scripts */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
     body {
-      background-color: #f5f5f5; /* Light gray background */
+      background-color: #f5f5f5;
       color: #333333;
       font-family: "Roboto", sans-serif;
       margin: 0;
@@ -89,17 +88,27 @@
       font-weight: 600;
       margin-bottom: 20px;
     }
+
+    .input-field {
+      margin-bottom: 20px; /* Space each field from the next */
+    }
     .input-field label {
       color: #444444;
       font-weight: 500;
+      margin-bottom: 5px;
+      display: block; /* Put label on its own line */
     }
+
+    /* Extra padding inside the inputs/textarea */
     .input-field input[type="text"],
     .input-field input[type="email"],
-    .input-field textarea {
+    .input-field textarea.materialize-textarea {
       border: 1px solid #ccc;
       background-color: #fafafa;
       box-shadow: none;
+      padding: 10px 15px; /* Add horizontal padding so text isn't hugging the left */
     }
+
     /* Submit Button */
     .btn-submit {
       background-color: #1565c0 !important;
@@ -158,14 +167,6 @@
     footer a:hover {
       text-decoration: underline;
     }
-    .input-field input[type="text"],
-.input-field input[type="email"],
-.input-field textarea.materialize-textarea {
-  border: 1px solid #ccc;
-  background-color: #fafafa;
-  box-shadow: none;
-  padding: 10px 15px; /* Increase horizontal padding */
-}
   </style>
 </head>
 <body>
@@ -232,9 +233,6 @@
 
   <!-- FOOTER -->
   <?php include 'footer.php'; ?>
-  <!-- If you don't have a separate footer file, replace the above line with
-       <footer>...your footer content...</footer>
-  -->
 
   <!-- MATERIALIZE JS -->
   <script
@@ -246,7 +244,6 @@
       e.preventDefault();
 
       const statusMessage = document.getElementById("statusMessage");
-      // Show a warning/pending style if you like:
       statusMessage.className = "warning";
       statusMessage.textContent = "Submitting your message...";
 
@@ -268,10 +265,8 @@
           statusMessage.className = "success";
           statusMessage.textContent =
             "Thank you! Your message has been sent successfully.";
-          // Clear the form
           document.getElementById("contactForm").reset();
         } else {
-          // Attempt to parse error message
           const errorData = await response.json().catch(() => ({}));
           statusMessage.className = "error";
           statusMessage.textContent =
