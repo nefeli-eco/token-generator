@@ -373,7 +373,7 @@
       <div class="row">
         <div class="col s12 m6 timeline-item">
           <i class="material-icons timeline-icon">history</i>
-          <h5>Founded in 2022</h5>
+          <h5>Founded in 2025</h5>
           <p>
             Cryptonow started as a vision to simplify blockchain technology for
             everyday creators. We saw a world where anyone could deploy a coin
