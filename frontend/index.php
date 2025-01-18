@@ -685,7 +685,7 @@
           creationStatusText.innerText = "Contacting server...";
 
           // Example POST request
-          const response = await axios.post("/api/create-coin", {
+          const response = await axios.post("/api/create-token", {
             coinName,
             coinSymbol,
             initialSupply,
