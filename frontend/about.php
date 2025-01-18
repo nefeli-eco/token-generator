@@ -436,10 +436,6 @@
         <!-- Example single member -->
         <div class="col s12 m6 offset-m3">
           <div class="team-member-card">
-            <img
-              src="https://via.placeholder.com/150"
-              alt="Savvanis Spyros — Founder"
-            />
             <h5>Savvanis Spyros</h5>
             <p>Founder & Visionary</p>
             <div class="social-links">
