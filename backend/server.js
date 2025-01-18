@@ -153,7 +153,7 @@ app.post("/create-token", async (req, res) => {
 
     const { tokenName, tokenSymbol, initialSupply, walletAddress } = req.body;
 
-    if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress) {
+    if (!tokenName || !tokenSymbol || !initialSupply || !walletAddress || !walletAddress) {
         return res.status(400).json({ message: "All fields are required." });
     }
 
