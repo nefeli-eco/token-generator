@@ -1,554 +1,720 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Create your own ERC-20 cryptocurrency token in just 5 minutes with Cryptonow. No coding skills required.">
-    <meta name="keywords" content="ERC-20, cryptocurrency, token creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token">
-    <meta name="author" content="Cryptonow">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://token.cryptonow.cc/">
-    <title>Cryptonow Token Generator</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script> <!-- Include Axios -->
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta
+    name="description"
+    content="Create your own ERC-20 cryptocurrency coin in just 5 minutes with Cryptonow. No coding skills required."
+  />
+  <meta
+    name="keywords"
+    content="ERC-20, cryptocurrency, coin creation, crypto coin, blockchain, Ethereum, Bitcoin, crypto, token"
+  />
+  <meta name="author" content="Cryptonow"/>
+  <meta name="robots" content="index, follow"/>
+  <link rel="canonical" href="https://token.cryptonow.cc/"/>
+  <title>Cryptonow Coin Generator</title>
 
-    <?php include 'google.php'; ?>
-    <style>
-        body {
-            background: #1a1a1a;
-            font-family: 'Roboto', sans-serif;
-            color: #e0e0e0;
-        }
-        .main-header {
-            background: linear-gradient(120deg, #5e35b1, #4527a0);
-            color: white;
-            padding: 50px 20px;
-            text-align: center;
-        }
-        .main-header h1 {
-            font-size: 2.8rem;
-            font-weight: bold;
-        }
-        .main-header p {
-            font-size: 1.4rem;
-        }
-        .crypto-icons {
-            font-size: 3rem;
-            color: #fbc02d;
-            margin: 20px 0;
-        }
-        .card {
-            background: #212121;
-            color: #ffffff;
-            border-radius: 10px;
-        }
-        .steps-section {
-            margin: 30px 0;
-        }
-        .step-card {
-            background: #212121;
-            color: #ffffff;
-            padding: 20px;
-            border-radius: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 180px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-        }
-        .step-card i {
-            font-size: 3rem;
-            color: #fbc02d;
-            margin-bottom: 10px;
-        }
-        .payment-section {
-            background-color: #212121;
-            padding: 20px;
-            border-radius: 10px;
-            color: #ffffff;
-            margin-bottom: 30px;
-        }
-        .payment-section h5 {
-            color: #fbc02d;
-        }
-        .payment-section .eth-address {
-            font-family: monospace;
-            background: #311b92;
-            padding: 10px;
-            border-radius: 5px;
-            text-align: center;
-            color: #fbc02d;
-        }
-        .carousel-container {
-            position: relative;
-        }
-        .carousel {
-            margin: 30px auto;
-        }
-        .carousel .carousel-item {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .carousel .carousel-item .card {
-    width: 100%;
-    max-width: 400px;
-    background: #311b92; /* Matches your site color scheme */
-    color: #ffffff; /* White text for visibility */
-    border-radius: 10px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4); /* Slight shadow for depth */
-    text-align: center;
-    padding: 20px; /* Add padding for better readability */
-}
+  <!-- Materialize CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+  />
+  <!-- Google Icons -->
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="/favicon.ico"/>
 
-.carousel .carousel-item .card h6 {
-    color: #fbc02d; /* Highlight question headers with the site's yellow color */
-    font-weight: bold;
-}
+  <!-- Axios (For handling form submission) -->
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-.carousel .carousel-item .card p {
-    font-size: 1.1rem; /* Slightly larger font for better readability */
-    line-height: 1.6;
-}
+  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
-/* Navigation button styles */
-/* Center the carousel navigation arrows */
-.carousel-prev,
-.carousel-next {
-    position: absolute;
-    top: 50%; /* Center vertically */
-    transform: translateY(-50%); /* Adjust for proper vertical centering */
-    background: #311b92; /* Matches the FAQ card background */
-    color: #fbc02d; /* Matches the site's yellow color */
-    border-radius: 50%;
-    width: 40px;
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
-    cursor: pointer;
-    z-index: 10;
-    transition: background 0.3s ease;
-}
+  <style>
+    /* ========== BASE STYLES ========== */
+    body {
+      background-color: #f5f5f5; 
+      color: #333333;           
+      font-family: "Roboto", sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      color: #333;
+      margin-top: 0.5rem;
+    }
+    p {
+      margin-bottom: 1rem;
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 15px;
+    }
 
-.carousel-prev {
-    left: -50px; /* Position the left arrow to the left of the carousel */
-}
+    /* ========== HERO / HEADER ========== */
+    .hero {
+      background: #ffffff;
+      text-align: center;
+      padding: 60px 20px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: relative;
+    }
+    .hero h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      font-weight: 700;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #555555;
+    }
+    .crypto-icons i {
+      font-size: 2.5rem;
+      color: #1565c0; 
+      margin: 0 5px;
+    }
 
-.carousel-next {
-    right: -50px; /* Position the right arrow to the right of the carousel */
-}
+    /* ========== NEUMORPHIC / SOFT BUTTONS ========== */
+    .soft-button {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      font-weight: 600;
+      text-transform: none;
+      border-radius: 30px;
+      background-color: #e0e0e0;
+      color: #333 !important;
+      transition: all 0.3s ease;
+      box-shadow:
+        5px 5px 10px rgba(0,0,0,0.2),
+        -5px -5px 10px rgba(255,255,255,0.5);
+    }
+    .soft-button:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-2px);
+      box-shadow:
+        5px 5px 10px rgba(0,0,0,0.25),
+        -5px -5px 10px rgba(255,255,255,0.7);
+    }
+    .soft-button:active {
+      transform: translateY(1px);
+      box-shadow:
+        2px 2px 6px rgba(0,0,0,0.25),
+        -2px -2px 6px rgba(255,255,255,0.5);
+    }
+    .soft-button-large {
+      padding: 1rem 2.5rem;
+      font-size: 1.1rem;
+      border-radius: 40px;
+    }
 
-.carousel-prev:hover,
-.carousel-next:hover {
-    background: #4527a0; /* Slightly lighter purple on hover */
-}
+    /* ========== STEPS SECTION ========== */
+    .steps-section {
+      margin: 40px 0;
+    }
+    .steps-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .step-box {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .step-box i {
+      font-size: 3rem;
+      color: #1565c0;
+      margin-bottom: 10px;
+    }
+    .step-box p {
+      font-size: 1rem;
+      color: #555555;
+    }
 
+    /* ========== FAQ SECTION ========== */
+    .faq-section {
+      margin: 40px 0;
+    }
+    .faq-section h5 {
+      color: #1565c0;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .collapsible-header {
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #333333;
+    }
+    .collapsible-body p {
+      margin: 0.5rem 0;
+      color: #555555;
+    }
 
-/* General Status Message Styling */
-#statusMessage {
-    padding: 16px;
-    margin-top: 10px;
-    border-radius: 5px;
-    font-size: 16px;
-    font-weight: bold;
-    text-align: center;
-}
+    /* ========== MODAL & FORM WIZARD ========== */
+    .modal {
+      max-height: 90%;
+      border-radius: 8px;
+    }
+    .modal-content {
+      padding-bottom: 0; 
+    }
+    .modal-footer {
+      border-top: none;
+      padding-top: 0;
+    }
+    .modal-header {
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .modal-header h5 {
+      margin-bottom: 0.5rem;
+      font-weight: 700;
+      color: #1565c0;
+    }
+    /* We have 3 steps now */
+    .form-step {
+      display: none; 
+    }
+    .form-step.active {
+      display: block;
+    }
 
-/* Success Message Styling */
-#statusMessage.green {
-    background-color: #e8f5e9; /* Light green background */
-    color: #1b5e20 !important; /* Dark green text */
-    border: 1px solid #1b5e20; /* Border to match the text */
-}
+    /* Input fields */
+    .input-field label {
+      color: #444444;
+      font-weight: 500;
+    }
+    .input-field input[type="text"],
+    .input-field input[type="number"] {
+      border: 1px solid #ccc;
+      box-shadow: none;
+    }
 
-/* Error Message Styling */
-#statusMessage.red {
-    background-color: #ffebee; /* Light red background */
-    color: #b71c1c !important; /* Dark red text */
-    border: 1px solid #b71c1c; /* Border to match the text */
-}
+    /* ========== Payment Info (Step 2) ========== */
+    .payment-info {
+      background-color: #ffffff;
+      border-radius: 4px;
+      margin: 20px 0;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+    .payment-info .eth-address {
+      font-family: monospace;
+      display: inline-block;
+      background-color: #fff8e1;
+      color: #ff9800; 
+      padding: 10px;
+      border-radius: 4px;
+      margin: 10px 0;
+      font-size: 1.1rem;
+    }
+    .payment-info img {
+      border-radius: 4px;
+      margin: 10px 0;
+    }
 
-/* Processing Message Styling */
-#statusMessage.yellow {
-    background-color: #fffde7; /* Light yellow background */
-    color: #000000 !important; /* Black text for better visibility */
-    border: 1px solid #f57f17; /* Border to match the processing theme */
-}/* Success Message Styling */
-#statusMessage.green {
-    background-color: #e8f5e9; /* Light green background */
-    color: #1b5e20 !important; /* Dark green text for default message */
-    border: 1px solid #1b5e20; /* Border to match the text */
-}
+    /* ========== PASTEL ALERTS FOR STATUS MESSAGE ========== */
+    #statusMessage {
+      margin-top: 20px;
+      padding: 16px;
+      border-radius: 4px;
+      font-weight: 600;
+      text-align: center;
+    }
+    /* Error (soft red) */
+    #statusMessage.error {
+      background-color: #fdecec; 
+      border: 1px solid #f5c6c5; 
+      color: #9c2a2a;           
+    }
+    /* Success (soft green) */
+    #statusMessage.success {
+      background-color: #edf7ee; 
+      border: 1px solid #c2e4c7; 
+      color: #2d572c;           
+    }
+    /* Warning (soft yellow) */
+    #statusMessage.warning {
+      background-color: #fff9e6; 
+      border: 1px solid #ffe4b5; 
+      color: #8a6d3b;           
+    }
+    /* Links in success messages */
+    #statusMessage.success a {
+      color: #2d572c;
+      text-decoration: underline;
+      font-weight: 700;
+    }
 
-/* Adjust link styling inside the success message */
-#statusMessage.green a {
-    color: #ffffff !important; /* White text for better contrast */
-    font-weight: bold; /* Bold text for visibility */
-    text-decoration: underline; /* Underline for emphasis */
-}
-/* Input field and label spacing */
-.form-section .input-field {
-    margin-bottom: 20px; /* Spacing between fields */
-}
+    /* ========== STEP 3: CREATION STATUS ========== */
+    .creation-status {
+      text-align: center;
+      color: #555;
+    }
+    .creation-spinner {
+      margin: 20px auto;
+      border: 6px solid #f3f3f3;
+      border-top: 6px solid #1565c0;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-.form-section label {
-    margin-bottom: 5px; /* Add space between the label and field */
-    display: block; /* Ensure labels are on their own line */
-    font-size: 1.1rem; /* Slightly larger text for better readability */
-    color: #bdbdbd; /* Maintain consistent label color */
-}
-
-/* Input field styling */
-#tokenForm input[type="text"],
-#tokenForm input[type="number"] {
-    padding: 12px; /* Increase padding for better feel */
-    font-size: 1rem; /* Larger font size for readability */
-    border-radius: 6px; /* Rounded edges */
-    background-color: #1f1f1f; /* Input background matches form style */
-    border: 1px solid #5e35b1; /* Purple border */
-    color: #ffffff; /* White text */
-    margin-top: 5px; /* Spacing between label and field */
-}
-
-#tokenForm input[type="text"]::placeholder,
-#tokenForm input[type="number"]::placeholder {
-    color: #a0a0a0; /* Lighter placeholder text */
-}
-.form-section button {
-    display: block; /* Center-align */
-    margin: 30px auto; /* Add spacing above and below */
-    padding: 10px 40px; /* Balanced padding for better alignment */
-    font-size: 1rem; /* Adjust font size for readability */
-    font-weight: bold; /* Bold text */
-    line-height: 1.5; /* Adjust line height to avoid text clipping */
-    text-align: center; /* Ensure text is centered */
-    background: linear-gradient(120deg, #5e35b1, #4527a0); /* Gradient for polished look */
-    color: #ffffff; /* White text for visibility */
-    border: none; /* Remove border */
-    border-radius: 8px; /* Rounded corners */
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3); /* Shadow for depth */
-    cursor: pointer; /* Pointer cursor */
-    transition: background 0.3s ease, transform 0.2s ease; /* Smooth hover effect */
-}
-
-.form-section button:hover {
-    background: linear-gradient(120deg, #4527a0, #311b92); /* Hover effect */
-    transform: scale(1.05); /* Slight zoom effect */
-}
-
-.form-section button:active {
-    transform: scale(0.95); /* Slight shrink effect */
-}
-
-
-/* Form card adjustments */
-.form-section .card {
-    padding: 30px; /* Increase padding inside the card */
-    margin-bottom: 40px; /* Add space below the form */
-}
-
-/* Footer alignment fix */
-footer {
-    text-align: center; /* Center footer content */
-    padding: 20px 0; /* Add padding for space */
-    background-color: #121212; /* Dark background */
-    color: #bdbdbd; /* Light gray text */
-    font-size: 0.9rem; /* Slightly smaller font size */
-}
-
-footer a {
-    color: #fbc02d; /* Yellow link color */
-    text-decoration: none; /* Remove underline */
-    margin: 0 10px; /* Space between links */
-}
-
-footer a:hover {
-    text-decoration: underline; /* Underline on hover */
-}
-
-    </style>
+    /* ========== FOOTER ========== */
+    footer {
+      background-color: #ffffff;
+      border-top: 1px solid #dddddd;
+      text-align: center;
+      padding: 20px;
+      color: #777777;
+      margin-top: 40px;
+    }
+    footer a {
+      color: #1565c0;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
 </head>
 <body>
 
-<header class="main-header">
+  <!-- ========== HERO SECTION ========== -->
+  <section class="hero">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
-    <p>No coding skills required. Easy and fast process.</p>
+    <p>No coding skills required. Fast and Easy process.</p>
     <div class="crypto-icons" aria-label="Cryptocurrency Icons">
-        <i class="material-icons">currency_bitcoin</i>
-        <i class="material-icons">token</i>
-        <i class="material-icons">account_balance_wallet</i>
+      <i class="material-icons">currency_bitcoin</i>
+      <i class="material-icons">token</i>
+      <i class="material-icons">account_balance_wallet</i>
     </div>
-</header>
+    <!-- "Soft" style large button -->
+    <a
+      href="#coinModal"
+      class="soft-button soft-button-large modal-trigger"
+    >
+      Create Coin
+    </a>
+  </section>
 
-<main class="container">
-    <!-- Steps Section -->
-    <section class="steps-section" aria-labelledby="steps-section">
-        <h2 id="steps-section" class="center-align">Steps to Create Your Token</h2>
-        <div class="row">
-            <div class="col s12 m6 l3">
-                <div class="card step-card center-align">
-                    <i class="material-icons">edit</i>
-                    <p>Fill out the form with your token details.</p>
-                </div>
-            </div>
-            <div class="col s12 m6 l3">
-                <div class="card step-card center-align">
-                    <i class="material-icons">send</i>
-                    <p>Submit the form.</p>
-                </div>
-            </div>
-            <div class="col s12 m6 l3">
-                <div class="card step-card center-align">
-                    <i class="material-icons">account_balance</i>
-                    <p>Make your payment.</p>
-                </div>
-            </div>
-            <div class="col s12 m6 l3">
-                <div class="card step-card center-align">
-                    <i class="material-icons">check_circle</i>
-                    <p>Wait for the magic to happen!</p>
-                </div>
-            </div>
+  <!-- ========== STEPS SECTION ========== -->
+  <section class="steps-section">
+    <div class="container">
+      <h2>Steps to Create Your Coin</h2>
+      <div class="row">
+        <div class="col s12 m3">
+          <div class="step-box">
+            <i class="material-icons">edit</i>
+            <p>Fill out the form with your coin details.</p>
+          </div>
         </div>
-    </section>
-    
-        <!-- Payment Section -->
-        <section class="payment-section center-align" aria-labelledby="payment-section">
-            <h5 id="payment-section" style="font-weight: bold; font-size: 1.8rem; color: #fbc02d;">Payment Information</h5>
-            <div class="card-panel" style="background-color: #4527a0; color: #ffffff; border-radius: 10px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);">
-                <p style="font-size: 1.2rem;">Please send <strong>0.05 ETH + Network Fees</strong> to the following address:</p>
-                <div class="eth-address" style="font-size: 1.5rem; color: #fbc02d; background-color: #311b92; padding: 12px; border-radius: 8px; display: inline-block; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
-                    0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805
-                </div>
-                <p style="margin-top: 15px; font-size: 1rem;">Scan the QR code below or copy the address to make your payment:</p>
-                <div style="margin: 15px;">
-                    <img src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150" alt="Payment QR Code" style="border-radius: 8px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);">
-                </div>
-                <p style="font-size: 1rem; color: #fbc02d;">💡 Ensure the payment amount matches the required amount to avoid errors.</p>
-            </div>
-        </section>
-
-
-        <section class="faq-section" aria-labelledby="faq-section">
-    <h5 id="faq-section" class="center-align" style="color: #fbc02d; font-size: 1.8rem; font-weight: bold;">Frequently Asked Questions</h5>
-    <div class="carousel-container">
-        <button class="carousel-prev material-icons">chevron_left</button>
-        <button class="carousel-next material-icons">chevron_right</button>
-        <div class="carousel carousel-slider center">
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What is Cryptonow?</h6>
-                        <p>Cryptonow is a platform for creating custom ERC-20 tokens easily.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How do I create my token?</h6>
-                        <p>Fill out the form, make payment, and let our automated system do the rest.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What payment methods are accepted?</h6>
-                        <p>We accept Ethereum (ETH) only.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>Can the token be traded on exchanges?</h6>
-                        <p>Yes, the token follows the ERC-20 standard, which makes it compatible with most exchanges and wallets. However, it is up to the token owner to list it on exchanges.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What advance function Token has?</h6>
-                        <p>Burn fucntion to reduce serculation and Mint function to increase. Include by default. no extra cost</p>
-                    </div>
-                </div>
-            </div> -->
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>How long does it take to create a token?</h6>
-                        <p>Tokens are created within minutes after form sumbission and payment confirmation.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>What are the costs involved?</h6>
-                        <p>The cost to create a token is **0.05 ETH** + network fees, which covers all processing and deployment fees.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>Who owns the token after it is created?</h6>
-                        <p>Once the token is created, it belongs to the wallet address you specified as the receiver during the token creation process.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-item">
-                <div class="card">
-                    <div class="card-content">
-                        <h6>Can I create tokens on other blockchains?</h6>
-                        <p>Currently, Cryptonow supports the Ethereum blockchain only. We plan to add support for other blockchains in the future.</p>
-                    </div>
-                </div>
-            </div>
+        <div class="col s12 m3">
+          <div class="step-box">
+            <i class="material-icons">send</i>
+            <p>Submit your details.</p>
+          </div>
         </div>
+        <div class="col s12 m3">
+          <div class="step-box">
+            <i class="material-icons">account_balance</i>
+            <p>Get payment info to send ETH.</p>
+          </div>
+        </div>
+        <div class="col s12 m3">
+          <div class="step-box">
+            <i class="material-icons">check_circle</i>
+            <p>Confirm and watch your coin deploy!</p>
+          </div>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
+  <!-- ========== FAQ SECTION ========== -->
+  <section class="faq-section">
+    <div class="container">
+      <h5>Frequently Asked Questions</h5>
+      <ul class="collapsible popout">
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What is Cryptonow?
+          </div>
+          <div class="collapsible-body">
+            <p>Cryptonow is a platform for creating custom ERC-20 coins easily.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>How do I create my coin?
+          </div>
+          <div class="collapsible-body">
+            <p>Fill out the form, get payment instructions, make payment, and let our system handle the rest.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What payment methods are accepted?
+          </div>
+          <div class="collapsible-body">
+            <p>We accept Ethereum (ETH) only.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can the coin be traded on exchanges?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin follows the ERC-20 standard, compatible with most wallets and exchanges. Listing is up to you.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>How long does it take to create a coin?
+          </div>
+          <div class="collapsible-body">
+            <p>Coins are created within minutes after payment confirmation.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What are the costs involved?
+          </div>
+          <div class="collapsible-body">
+            <p>It costs <strong>0.05 ETH</strong> + network fees to create a coin.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Who owns the coin after it's created?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin belongs to the wallet address you provide in the form.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can I create coins on other blockchains?
+          </div>
+          <div class="collapsible-body">
+            <p>Currently, we only support Ethereum. More blockchains coming soon.</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
 
-    <!-- Token Creation Form -->
-    <section class="form-section" aria-labelledby="form-section">
-        <div class="card">
-            <div class="card-content">
-                <span id="form-section" class="card-title">Token Creation Form</span>
-                <form id="tokenForm">
-                    <div class="input-field">
-                        <input id="tokenName" type="text" placeholder="Ethereum" required>
-                        <label for="tokenName">Token Name</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="tokenSymbol" type="text" placeholder="ETH" required>
-                        <label for="tokenSymbol">Token Symbol (Ticker)</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="initialSupply" type="number" placeholder="10000000" required>
-                        <label for="initialSupply">Initial Supply</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="receiverAddress" type="text" placeholder="0xYourEthereumAddress" required>
-                        <label for="receiverAddress">Token Receiver Address</label>
-                    </div>
-                    <div class="input-field">
-                        <input id="userAddress" type="text" placeholder="0xYourEthereumAddress" required>
-                        <label for="userAddress">Payment Sender's Address (can be the same or different from the Token Receiver Address)</label>
-                    </div>
-                    <button type="submit" class="btn waves-effect waves-light purple darken-1">Create Token</button>
-                </form>
+  <!-- ========== MODAL: 3-STEP COIN CREATION WIZARD ========== -->
+  <div id="coinModal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5>Coin Creation Wizard</h5>
+      </div>
+      <!-- STEP 1: Coin Details -->
+      <div class="form-step active" id="step1">
+        <h6>Step 1: Enter Coin Details</h6>
+        <form id="coinForm">
+          <div class="row">
+            <!-- Coin Name -->
+            <div class="input-field col s12 m6">
+              <label for="coinName">Coin Name</label>
+              <input
+                type="text"
+                id="coinName"
+                placeholder="Ethereum"
+                required
+              />
             </div>
+            <!-- Coin Symbol -->
+            <div class="input-field col s12 m6">
+              <label for="coinSymbol">Coin Symbol (3-5 uppercase)</label>
+              <input
+                type="text"
+                id="coinSymbol"
+                placeholder="ETH"
+                required
+              />
+            </div>
+            <!-- Initial Supply -->
+            <div class="input-field col s12 m6">
+              <label for="initialSupply">Initial Supply</label>
+              <input
+                type="number"
+                id="initialSupply"
+                placeholder="10000000"
+                required
+              />
+            </div>
+            <!-- Wallet Address (single field) -->
+            <div class="input-field col s12 m6">
+              <label for="walletAddress">Your Ethereum Address</label>
+              <input
+                type="text"
+                id="walletAddress"
+                placeholder="0xYourEthereumAddress"
+                required
+              />
+            </div>
+          </div>
+        </form>
+        <div id="statusMessage" role="status" aria-live="polite"></div>
+      </div>
+
+      <!-- STEP 2: Payment Info -->
+      <div class="form-step" id="step2">
+        <h6>Step 2: Payment Information</h6>
+        <div class="payment-info">
+          <p>
+            <strong>IMPORTANT:</strong> You must submit this form first. Then send <strong>0.05 ETH + Network Fees</strong> to the address below <em>after</em> successful submission.
+          </p>
+          <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
+          <p>Or scan the QR code:</p>
+          <img
+            src="https://api.qrserver.com/v1/create-qr-code/?data=ethereum:0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805&size=150x150"
+            alt="Payment QR Code"
+          />
+          <p style="color: #ff9800;">
+            Make sure to match the exact amount to avoid errors.
+          </p>
         </div>
-        <div id="statusMessage" class="mt-4" role="status" aria-live="polite"></div>
-    </section>
-</main>
-<?php include 'footer.php'; ?>
+        <p class="center" style="color: #555;">
+          Once payment is detected on-chain, your coin will be deployed automatically.
+        </p>
+      </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const carouselElems = document.querySelectorAll('.carousel');
-        const carouselInstance = M.Carousel.init(carouselElems, {
-            fullWidth: true,
-            indicators: true,
-            duration: 200
-        });
+      <!-- STEP 3: Creation Status -->
+      <div class="form-step" id="step3">
+        <h6>Step 3: Creation Status</h6>
+        <div class="creation-status">
+          <div id="creationSpinner" class="creation-spinner"></div>
+          <p id="creationStatusText" style="margin-top: 10px;">
+            Deploying your coin...
+          </p>
+        </div>
+        <!-- We'll reuse #statusMessage for final success/error messages if we want -->
+        <div id="finalStatusMessage" role="status" aria-live="polite" style="margin-top: 20px;"></div>
+      </div>
+    </div>
 
-        document.querySelector('.carousel-prev').addEventListener('click', function () {
-            carouselInstance[0].prev();
-        });
+    <div class="modal-footer" style="margin-bottom: 1rem;">
+      <!-- Wizard Navigation Buttons -->
+      <button
+        id="btnPrev"
+        class="soft-button waves-effect"
+        style="display: none; margin-right: 10px;"
+      >
+        Back
+      </button>
+      <button
+        id="btnNext"
+        class="soft-button waves-effect"
+      >
+        Show Payment Info
+      </button>
+      <button
+        id="btnDeploy"
+        class="soft-button waves-effect"
+        style="display: none; margin-right: 10px;"
+      >
+        Deploy My Coin
+      </button>
+      <a href="#!" class="modal-close btn-flat" style="text-transform: none;">Close</a>
+    </div>
+  </div>
 
-        document.querySelector('.carousel-next').addEventListener('click', function () {
-            carouselInstance[0].next();
-        });
-    });
+  <!-- ========== FOOTER ========== -->
+  <?php include 'footer.php'; ?>
+  <!-- If you don't have a separate footer file, replace the above line with
+       <footer>...your footer content...</footer>
+  -->
 
-    document.getElementById('tokenForm').addEventListener('submit', async function (e) {
-        e.preventDefault();
-        const statusMessage = document.getElementById('statusMessage');
-        
-        // Clear previous messages
-        statusMessage.innerHTML = '';
+  <
+  <!-- Materialize JS -->
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"
+  ></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      // Init modal
+      const modalElems = document.querySelectorAll(".modal");
+      M.Modal.init(modalElems);
 
-        // Get form values
-        const tokenName = document.getElementById('tokenName').value.trim();
-        const tokenSymbol = document.getElementById('tokenSymbol').value.trim();
-        const initialSupply = document.getElementById('initialSupply').value.trim();
-        const receiverAddress = document.getElementById('receiverAddress').value.trim();
-        const userAddress = document.getElementById('userAddress').value.trim();
+      // Init collapsible (FAQ)
+      const collapsibles = document.querySelectorAll(".collapsible");
+      M.Collapsible.init(collapsibles);
 
-        // Validate Token Name (min 3 chars, max 50 chars)
-        if (tokenName.length < 3 || tokenName.length > 50) {
-            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
+      // Wizard Steps
+      const step1 = document.getElementById("step1");
+      const step2 = document.getElementById("step2");
+      const step3 = document.getElementById("step3");
 
-            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Name must be between 3 and 50 characters.</div>';
-            return;
+      // Buttons
+      const btnPrev = document.getElementById("btnPrev");
+      const btnNext = document.getElementById("btnNext");
+      const btnDeploy = document.getElementById("btnDeploy");
+
+      // Step 3 elements
+      const creationSpinner = document.getElementById("creationSpinner");
+      const creationStatusText = document.getElementById("creationStatusText");
+      const finalStatusMessage = document.getElementById("finalStatusMessage");
+
+      // Step 1 status message
+      const statusMessage = document.getElementById("statusMessage");
+
+      let currentStep = 1;
+
+      function showStep(step) {
+        // Hide all steps
+        step1.classList.remove("active");
+        step2.classList.remove("active");
+        step3.classList.remove("active");
+
+        // Reset dynamic content
+        creationSpinner.style.display = "none";
+        creationStatusText.innerText = "";
+        finalStatusMessage.innerHTML = "";
+        finalStatusMessage.className = ""; // remove any pastel alert classes
+
+        if (step === 1) {
+          step1.classList.add("active");
+          btnNext.style.display = "inline-block";
+          btnNext.innerText = "Show Payment Info";
+          btnPrev.style.display = "none";
+          btnDeploy.style.display = "none";
+        } else if (step === 2) {
+          step2.classList.add("active");
+          btnNext.style.display = "none";
+          btnPrev.style.display = "inline-block";
+          btnDeploy.style.display = "inline-block";
+        } else {
+          step3.classList.add("active");
+          btnNext.style.display = "none";
+          btnPrev.style.display = "none";
+          btnDeploy.style.display = "none";
         }
+      }
+      showStep(currentStep);
 
-        // Validate Token Symbol (uppercase letters only, 3-5 chars)
-        if (!/^[A-Z]{3,5}$/.test(tokenSymbol)) {
-            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
-            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Symbol must be 3-5 uppercase letters only.</div>';
-            return;
+      // STEP 1 -> Validate -> Step 2
+      btnNext.addEventListener("click", function() {
+        // Clear old messages
+        statusMessage.className = "";
+        statusMessage.innerHTML = "";
+
+        // Collect fields
+        const coinName = document.getElementById("coinName").value.trim();
+        const coinSymbol = document.getElementById("coinSymbol").value.trim();
+        const initialSupply = document.getElementById("initialSupply").value.trim();
+        const walletAddress = document.getElementById("walletAddress").value.trim();
+
+        // Basic validations
+        // 1. Coin Name (3-50 chars)
+        if (coinName.length < 3 || coinName.length > 50) {
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Coin Name must be between 3 and 50 characters.";
+          return;
         }
-
-        // Validate Initial Supply (positive integer)
+        // 2. Coin Symbol (uppercase, 3-5 chars)
+        if (!/^[A-Z]{3,5}$/.test(coinSymbol)) {
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Coin Symbol must be 3-5 uppercase letters only.";
+          return;
+        }
+        // 3. Initial Supply (positive integer)
         if (!/^\d+$/.test(initialSupply) || parseInt(initialSupply) <= 0) {
-            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
-            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Initial Supply must be a positive integer.</div>';
-            return;
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Initial Supply must be a positive integer.";
+          return;
+        }
+        // 4. Wallet Address
+        if (!/^0x[a-fA-F0-9]{40}$/.test(walletAddress)) {
+          statusMessage.classList.add("error");
+          statusMessage.innerText = "Wallet Address must be a valid Ethereum address.";
+          return;
         }
 
-        // Validate Ethereum addresses (starts with "0x" and 42 characters long)
-        if (!/^0x[a-fA-F0-9]{40}$/.test(receiverAddress)) {
-            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
-            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Token Receiver Address must be a valid Ethereum address.</div>';
-            return;
-        }
-        if (!/^0x[a-fA-F0-9]{40}$/.test(userAddress)) {
-            statusMessage.className = "red"; // Or "green", "yellow" based on the situation
-            statusMessage.innerHTML = '<div class="card-panel red lighten-4">Payment Sender Address must be a valid Ethereum address.</div>';
-            return;
-        }
+        // If pass all checks -> Step 2
+        currentStep = 2;
+        showStep(currentStep);
+      });
 
-        // If all validations pass
-        statusMessage.className = "yellow";
-        statusMessage.innerText = "Waiting for payment...";
+      // STEP 2 -> "Deploy My Coin" -> Step 3
+      btnDeploy.addEventListener("click", function() {
+        currentStep = 3;
+        showStep(currentStep);
 
+        // Indicate creation in progress...
+        creationSpinner.style.display = "inline-block";
+        creationStatusText.innerText = "Deploying your coin...";
+
+        // We'll do the actual creation AJAX call here
+        doCoinCreation();
+      });
+
+      // "Back" from Step 2 to Step 1
+      btnPrev.addEventListener("click", function() {
+        statusMessage.className = "";
+        statusMessage.innerHTML = "";
+        currentStep = 1;
+        showStep(currentStep);
+      });
+
+      // Actually create the coin with an AJAX call
+      async function doCoinCreation() {
+        // Grab form fields again (already validated in step 1, but let's be thorough)
+        const tokenName = document.getElementById("coinName").value.trim();
+        const tokenSymbol = document.getElementById("coinSymbol").value.trim();
+        const initialSupply = document.getElementById("initialSupply").value.trim();
+        const walletAddress = document.getElementById("walletAddress").value.trim();
+
+        // We can update the creationStatusText or finalStatusMessage as we go
         try {
-            const response = await axios.post('/api/create-token', {
-                tokenName,
-                tokenSymbol,
-                initialSupply,
-                receiverAddress,
-                userAddress,
-            });
+          creationStatusText.innerText = "Searching blockchain for payment... This can take up to 5 minutes....";
 
-            // Update message to: Creating your coin
-            statusMessage.innerText = "Payment detected! Creating your coin...";
+          // Example POST request
+          const response = await axios.post("/api/create-token", {
+            tokenName,
+            tokenSymbol,
+            initialSupply,
+            walletAddress
+          });
 
-            // Simulate token creation time for user experience
-            setTimeout(() => {
-                const txHash = response.data.transactionHash;
-                statusMessage.className = "green";
-                statusMessage.innerHTML = `Token created! <a href="https://sepolia.etherscan.io/address/${txHash}" target="_blank">View Transaction</a>`;
-            }, 2000);
+          // Simulate short delay
+          setTimeout(() => {
+            creationSpinner.style.display = "none";
+            finalStatusMessage.classList.add("success");
+            finalStatusMessage.innerHTML = `
+              <p>Your coin is successfully deployed!</p>
+              <p>
+                <a
+                  href="https://sepolia.etherscan.io/address/${response.data.transactionHash}"
+                  target="_blank"
+                >
+                  View on Etherscan
+                </a> Please wait 1 minute for the block to be confirmed.
+              </p>`;
+          }, 1500);
 
         } catch (err) {
-            // Update the message to display an error
-            statusMessage.className = "red";
-            statusMessage.innerText = `Error: ${err.message}`;
+          creationSpinner.style.display = "none";
+          finalStatusMessage.classList.add("error");
+          finalStatusMessage.innerText = "Error Deploying Coin: " + err.message;
         }
+      }
     });
-</script>
-
+  </script>
 </body>
 </html>
