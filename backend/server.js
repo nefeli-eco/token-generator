@@ -24,7 +24,7 @@ sgMail.setApiKey(process.env.SENDGRID_API_KEY); // Load SendGrid API key from .e
 const submissionCache = new Map();
 const TIME_LIMIT = 5 * 60 * 1000; // 5 minutes in milliseconds
 
-const waitForPayment = async (userAddress, timeout = 33300000) => {
+const waitForPayment = async (walletAddress, timeout = 33300000) => {
     return new Promise(async (resolve, reject) => {
         const start = Date.now();
         const checkedBlocks = new Set(); // Track checked blocks
@@ -151,15 +151,15 @@ app.post("/create-token", async (req, res) => {
     // Update submission cache for the current IP
     submissionCache.set(clientIp, Date.now());
 
-    const { tokenName, tokenSymbol, initialSupply, receiverAddress, userAddress } = req.body;
+    const { tokenName, tokenSymbol, initialSupply, walletAddress } = req.body;
 
     if (!tokenName || !tokenSymbol || !initialSupply || !receiverAddress || !userAddress) {
         return res.status(400).json({ message: "All fields are required." });
     }
 
     try {
-        console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${userAddress} to ${RECEIVER_ADDRESS}...`);
-        const txHash = await waitForPayment(userAddress, 33300000);
+        console.log(`Waiting for payment of ${ethers.formatEther(REQUIRED_PAYMENT)} ETH from ${walletAddress} to ${RECEIVER_ADDRESS}...`);
+        const txHash = await waitForPayment(walletAddress, 33300000);
 
         console.log(`Payment detected! Transaction Hash: ${txHash}`);
 
@@ -168,14 +168,13 @@ app.post("/create-token", async (req, res) => {
             to: "admin@cryptonow.cc", // Replace with your email
             from: "form@cryptonow.cc", // Replace with your sender email
             subject: "New Token Creation Request",
-            text: `A new token creation request was received:\n\nToken Name: ${tokenName}\nToken Symbol: ${tokenSymbol}\nInitial Supply: ${initialSupply}\nReceiver Address: ${receiverAddress}\nUser Address: ${userAddress}\nTransaction Hash: ${txHash}`,
+            text: `A new token creation request was received:\n\nToken Name: ${tokenName}\nToken Symbol: ${tokenSymbol}\nInitial Supply: ${initialSupply}\nWallet Address: ${walletAddress}\nTransaction Hash: ${txHash}`,
             html: `
                 <h3>New Token Creation Request</h3>
                 <p><strong>Token Name:</strong> ${tokenName}</p>
                 <p><strong>Token Symbol:</strong> ${tokenSymbol}</p>
                 <p><strong>Initial Supply:</strong> ${initialSupply}</p>
-                <p><strong>Receiver Address:</strong> ${receiverAddress}</p>
-                <p><strong>User Address:</strong> ${userAddress}</p>
+                <p><strong>Wallet Address:</strong> ${walletAddress}</p>
                 <p><strong>Transaction Hash:</strong> <a href="https://sepolia.etherscan.io/tx/${txHash}" target="_blank">${txHash}</a></p>
             `,
         };
@@ -186,7 +185,7 @@ app.post("/create-token", async (req, res) => {
 
         // Run deployment script
         exec(
-            `node deploy.js sepolia "${tokenName}" "${tokenSymbol}" ${initialSupply} 18 "${receiverAddress}"`,
+            `node deploy.js sepolia "${tokenName}" "${tokenSymbol}" ${initialSupply} 18 "${walletAddress}"`,
             (error, stdout, stderr) => {
                 if (error) {
                     console.error(`Error: ${error.message}`);
