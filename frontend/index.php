@@ -682,7 +682,7 @@
 
         // We can update the creationStatusText or finalStatusMessage as we go
         try {
-          creationStatusText.innerText = "Contacting server...";
+          creationStatusText.innerText = "Searching for payment...";
 
           // Example POST request
           const response = await axios.post("/api/create-token", {
