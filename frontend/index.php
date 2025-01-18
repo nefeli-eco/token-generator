@@ -32,7 +32,7 @@
   <!-- Axios (For handling form submission) -->
   <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
+  <?php include 'google.php'; /* If you have analytics scripts, include them here */ ?>
 
   <style>
     /* ========== BASE STYLES ========== */
@@ -185,15 +185,43 @@
       display: block;
     }
 
-    /* Input fields */
-    .input-field label {
-      color: #444444;
-      font-weight: 500;
+    /* Step indicator container */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto 20px;
+      max-width: 400px;
+      position: relative;
     }
-    .input-field input[type="text"],
-    .input-field input[type="number"] {
-      border: 1px solid #ccc;
-      box-shadow: none;
+    .progress-steps::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 25px;
+      right: 25px;
+      height: 2px;
+      background-color: #ddd;
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+    .progress-step {
+      position: relative;
+      z-index: 2;
+      background-color: #ddd;
+      color: #333;
+      width: 40px;
+      height: 40px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .progress-step.active {
+      background-color: #1565c0;
+      color: #fff;
     }
 
     /* ========== Payment Info (Step 2) ========== */
@@ -420,9 +448,17 @@
   <!-- ========== MODAL: 3-STEP COIN CREATION WIZARD ========== -->
   <div id="coinModal" class="modal">
     <div class="modal-content">
+      <!-- STEP PROGRESS INDICATOR -->
+      <div class="progress-steps">
+        <div class="progress-step" id="progressStep1">1</div>
+        <div class="progress-step" id="progressStep2">2</div>
+        <div class="progress-step" id="progressStep3">3</div>
+      </div>
+
       <div class="modal-header">
         <h5>Coin Creation Wizard</h5>
       </div>
+
       <!-- STEP 1: Coin Details -->
       <div class="form-step active" id="step1">
         <h6>Step 1: Enter Coin Details</h6>
@@ -477,15 +513,15 @@
       <div class="form-step" id="step2">
         <h6>Step 2: Payment Information</h6>
         <div class="payment-info">
-        <p>
-  <B>IMPORTANT:</B> You must submit this form first. Then send
-  <B>0.05 ETH + gas fees *</B> to the address below <em>after</em>
-  successful submission. 
-  <br>
-  <span>
-    *Gas fees are automatically determined by the Ethereum network at the time of your transaction.
-  </span>
-        </p>
+          <p>
+            <strong>IMPORTANT:</strong> You must submit this form first. Then send
+            <strong>0.05 ETH + gas fees*</strong> to the address below <em>after</em>
+            successful submission.
+            <br/>
+            <span style="color:#444;">
+              *Gas fees are automatically determined by the Ethereum network at transaction time.
+            </span>
+          </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
           <p>Or scan the QR code:</p>
           <img
@@ -510,7 +546,6 @@
             Deploying your coin...
           </p>
         </div>
-        <!-- We'll reuse #statusMessage for final success/error messages if we want -->
         <div id="finalStatusMessage" role="status" aria-live="polite" style="margin-top: 20px;"></div>
       </div>
     </div>
@@ -563,6 +598,11 @@
       const step2 = document.getElementById("step2");
       const step3 = document.getElementById("step3");
 
+      // Step indicators
+      const progressStep1 = document.getElementById("progressStep1");
+      const progressStep2 = document.getElementById("progressStep2");
+      const progressStep3 = document.getElementById("progressStep3");
+
       // Buttons
       const btnPrev = document.getElementById("btnPrev");
       const btnNext = document.getElementById("btnNext");
@@ -578,6 +618,18 @@
 
       let currentStep = 1;
 
+      function updateProgressIndicator(step) {
+        // Reset all step circles
+        progressStep1.classList.remove("active");
+        progressStep2.classList.remove("active");
+        progressStep3.classList.remove("active");
+
+        // Mark them active up to 'step'
+        if (step >= 1) progressStep1.classList.add("active");
+        if (step >= 2) progressStep2.classList.add("active");
+        if (step >= 3) progressStep3.classList.add("active");
+      }
+
       function showStep(step) {
         // Hide all steps
         step1.classList.remove("active");
@@ -588,7 +640,10 @@
         creationSpinner.style.display = "none";
         creationStatusText.innerText = "";
         finalStatusMessage.innerHTML = "";
-        finalStatusMessage.className = ""; // remove any pastel alert classes
+        finalStatusMessage.className = "";
+
+        // Update step indicators
+        updateProgressIndicator(step);
 
         if (step === 1) {
           step1.classList.add("active");
@@ -608,6 +663,7 @@
           btnDeploy.style.display = "none";
         }
       }
+
       showStep(currentStep);
 
       // STEP 1 -> Validate -> Step 2
@@ -648,7 +704,6 @@
           return;
         }
 
-        // If pass all checks -> Step 2
         currentStep = 2;
         showStep(currentStep);
       });
@@ -676,17 +731,16 @@
 
       // Actually create the coin with an AJAX call
       async function doCoinCreation() {
-        // Grab form fields again (already validated in step 1, but let's be thorough)
+        // Grab form fields again (already validated in step 1)
         const tokenName = document.getElementById("coinName").value.trim();
         const tokenSymbol = document.getElementById("coinSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
-        // We can update the creationStatusText or finalStatusMessage as we go
         try {
-          creationStatusText.innerText = "Searching blockchain for payment... This can take up to 5 minutes....";
+          creationStatusText.innerText = "Searching blockchain for payment... Please wait.";
 
-          // Example POST request
+          // Example POST request to your Node backend
           const response = await axios.post("/api/create-token", {
             tokenName,
             tokenSymbol,
@@ -706,7 +760,7 @@
                   target="_blank"
                 >
                   View on Etherscan
-                </a> Please wait 1 minute for the block to be confirmed.
+                </a>
               </p>`;
           }, 1500);
 
