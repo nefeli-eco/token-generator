@@ -478,9 +478,13 @@
         <h6>Step 2: Payment Information</h6>
         <div class="payment-info">
         <p>
-  <strong>IMPORTANT:</strong> You must submit this form first. Then send
-  <strong>0.05 ETH + gas fees</strong> to the address below <em>after</em>
-  successful submission. Gas fees are automatically determined by the Ethereum network at the time of your transaction.
+  <B>IMPORTANT:</B> You must submit this form first. Then send
+  <B>0.05 ETH + gas fees *</B> to the address below <em>after</em>
+  successful submission. 
+  <br>
+  <span>
+    *Gas fees are automatically determined by the Ethereum network at the time of your transaction.
+  </span>
         </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
           <p>Or scan the QR code:</p>
