@@ -675,8 +675,8 @@
       // Actually create the coin with an AJAX call
       async function doCoinCreation() {
         // Grab form fields again (already validated in step 1, but let's be thorough)
-        const coinName = document.getElementById("coinName").value.trim();
-        const coinSymbol = document.getElementById("coinSymbol").value.trim();
+        const tokenName = document.getElementById("coinName").value.trim();
+        const tokenSymbol = document.getElementById("coinSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
@@ -686,8 +686,8 @@
 
           // Example POST request
           const response = await axios.post("/api/create-token", {
-            coinName,
-            coinSymbol,
+            tokenName,
+            tokenSymbol,
             initialSupply,
             walletAddress
           });
