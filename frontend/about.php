@@ -724,8 +724,8 @@
       });
 
       async function doCoinCreation() {
-        const coinName = document.getElementById("coinName").value.trim();
-        const coinSymbol = document.getElementById("coinSymbol").value.trim();
+        const tokenName = document.getElementById("coinName").value.trim();
+        const tokenSymbol = document.getElementById("coinSymbol").value.trim();
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
@@ -733,8 +733,8 @@
           creationStatusText.innerText = "Contacting server...";
           // Example call
           const response = await axios.post("/api/create-coin", {
-            coinName,
-            coinSymbol,
+            tokenName,
+            tokenSymbol,
             initialSupply,
             walletAddress
           });
