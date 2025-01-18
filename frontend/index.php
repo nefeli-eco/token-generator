@@ -385,17 +385,69 @@
     </div>
   </section>
 
-  <!-- FAQ SECTION -->
-  <section class="faq-section">
+ <!-- FAQ SECTION -->
+ <section class="faq-section">
     <div class="container">
       <h5>Frequently Asked Questions</h5>
-      <ul class="collapsible popout">
+
+@@ -357,69 +398,21 @@
+            <p>Cryptonow is a platform for creating custom ERC-20 coins easily.</p>
+          </div>
+        </li>
         <li>
           <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>What is Cryptonow?
+            <i class="material-icons">help_outline</i>How do I create my coin?
           </div>
           <div class="collapsible-body">
-            <p>Cryptonow is a platform for creating custom ERC-20 coins easily.</p>
+            <p>Fill out the form, get payment instructions, make payment, and let our system handle the rest.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What payment methods are accepted?
+          </div>
+          <div class="collapsible-body">
+            <p>We accept Ethereum (ETH) only.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can the coin be traded on exchanges?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin follows the ERC-20 standard, compatible with most wallets and exchanges. Listing is up to you.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>How long does it take to create a coin?
+          </div>
+          <div class="collapsible-body">
+            <p>Coins are created within minutes after payment confirmation.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>What are the costs involved?
+          </div>
+          <div class="collapsible-body">
+            <p>It costs <strong>0.05 ETH</strong> + network fees to create a coin.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Who owns the coin after it's created?
+          </div>
+          <div class="collapsible-body">
+            <p>The coin belongs to the wallet address you provide in the form.</p>
+          </div>
+        </li>
+        <li>
+          <div class="collapsible-header">
+            <i class="material-icons">help_outline</i>Can I create coins on other blockchains?
+          </div>
+          <div class="collapsible-body">
+            <p>Currently, we only support Ethereum. More blockchains coming soon.</p>
           </div>
         </li>
         <!-- more FAQ items... -->
