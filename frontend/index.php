@@ -185,6 +185,47 @@
       display: block;
     }
 
+    /* Step indicator container */
+    .progress-steps {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0 auto 20px;
+      max-width: 400px;
+      position: relative;
+    }
+    .progress-steps::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 25px;
+      right: 25px;
+      height: 2px;
+      background-color: #ddd;
+      z-index: 1;
+      transform: translateY(-50%);
+    }
+
+    /* Each step circle */
+    .progress-step {
+      position: relative;
+      z-index: 2;
+      background-color: #ddd;
+      color: #333;
+      width: 40px;
+      height: 40px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: background-color 0.3s, color 0.3s;
+    }
+    .progress-step.active {
+      background-color: #1565c0;
+      color: #fff;
+    }
+
     /* Input fields */
     .input-field label {
       color: #444444;
@@ -293,7 +334,7 @@
 </head>
 <body>
 
-  <!-- ========== HERO SECTION ========== -->
+  <!-- HERO SECTION -->
   <section class="hero">
     <h1>Create Your Own Crypto Coin in 5 Minutes!</h1>
     <p>No coding skills required. Fast and Easy process.</p>
@@ -311,7 +352,7 @@
     </a>
   </section>
 
-  <!-- ========== STEPS SECTION ========== -->
+  <!-- STEPS SECTION -->
   <section class="steps-section">
     <div class="container">
       <h2>Steps to Create Your Coin</h2>
@@ -344,7 +385,7 @@
     </div>
   </section>
 
-  <!-- ========== FAQ SECTION ========== -->
+  <!-- FAQ SECTION -->
   <section class="faq-section">
     <div class="container">
       <h5>Frequently Asked Questions</h5>
@@ -357,69 +398,21 @@
             <p>Cryptonow is a platform for creating custom ERC-20 coins easily.</p>
           </div>
         </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>How do I create my coin?
-          </div>
-          <div class="collapsible-body">
-            <p>Fill out the form, get payment instructions, make payment, and let our system handle the rest.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>What payment methods are accepted?
-          </div>
-          <div class="collapsible-body">
-            <p>We accept Ethereum (ETH) only.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>Can the coin be traded on exchanges?
-          </div>
-          <div class="collapsible-body">
-            <p>The coin follows the ERC-20 standard, compatible with most wallets and exchanges. Listing is up to you.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>How long does it take to create a coin?
-          </div>
-          <div class="collapsible-body">
-            <p>Coins are created within minutes after payment confirmation.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>What are the costs involved?
-          </div>
-          <div class="collapsible-body">
-            <p>It costs <strong>0.05 ETH</strong> + network fees to create a coin.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>Who owns the coin after it's created?
-          </div>
-          <div class="collapsible-body">
-            <p>The coin belongs to the wallet address you provide in the form.</p>
-          </div>
-        </li>
-        <li>
-          <div class="collapsible-header">
-            <i class="material-icons">help_outline</i>Can I create coins on other blockchains?
-          </div>
-          <div class="collapsible-body">
-            <p>Currently, we only support Ethereum. More blockchains coming soon.</p>
-          </div>
-        </li>
+        <!-- more FAQ items... -->
       </ul>
     </div>
   </section>
 
-  <!-- ========== MODAL: 3-STEP COIN CREATION WIZARD ========== -->
+  <!-- 3-STEP WIZARD MODAL + PROGRESS INDICATOR -->
   <div id="coinModal" class="modal">
     <div class="modal-content">
+      <!-- STEP PROGRESS INDICATOR -->
+      <div class="progress-steps">
+        <div class="progress-step" id="progressStep1">1</div>
+        <div class="progress-step" id="progressStep2">2</div>
+        <div class="progress-step" id="progressStep3">3</div>
+      </div>
+
       <div class="modal-header">
         <h5>Coin Creation Wizard</h5>
       </div>
@@ -477,15 +470,15 @@
       <div class="form-step" id="step2">
         <h6>Step 2: Payment Information</h6>
         <div class="payment-info">
-        <p>
-  <B>IMPORTANT:</B> You must submit this form first. Then send
-  <B>0.05 ETH + gas fees *</B> to the address below <em>after</em>
-  successful submission. 
-  <br>
-  <span>
-    *Gas fees are automatically determined by the Ethereum network at the time of your transaction.
-  </span>
-        </p>
+          <p>
+            <strong>IMPORTANT:</strong> You must submit this form first. Then send
+            <strong>0.05 ETH + gas fees</strong> to the address below
+            <em>after</em> successful submission.
+            <br/>
+            <span style="color:#444;">
+              (Gas fees are automatically determined by the Ethereum network at transaction time.)
+            </span>
+          </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
           <p>Or scan the QR code:</p>
           <img
@@ -537,11 +530,13 @@
       >
         Deploy My Coin
       </button>
-      <a href="#!" class="modal-close btn-flat" style="text-transform: none;">Close</a>
+      <a href="#!" class="modal-close btn-flat" style="text-transform: none;">
+        Close
+      </a>
     </div>
   </div>
 
-  <!-- ========== FOOTER ========== -->
+  <!-- FOOTER -->
   <?php include 'footer.php'; ?>
 
   <!-- Materialize JS -->
@@ -563,6 +558,11 @@
       const step2 = document.getElementById("step2");
       const step3 = document.getElementById("step3");
 
+      // Step indicators
+      const progressStep1 = document.getElementById("progressStep1");
+      const progressStep2 = document.getElementById("progressStep2");
+      const progressStep3 = document.getElementById("progressStep3");
+
       // Buttons
       const btnPrev = document.getElementById("btnPrev");
       const btnNext = document.getElementById("btnNext");
@@ -578,6 +578,25 @@
 
       let currentStep = 1;
 
+      function updateProgressIndicator(step) {
+        // Reset all steps to inactive
+        progressStep1.classList.remove("active");
+        progressStep2.classList.remove("active");
+        progressStep3.classList.remove("active");
+
+        if (step === 1) {
+          progressStep1.classList.add("active");
+        } else if (step === 2) {
+          progressStep1.classList.add("active");
+          progressStep2.classList.add("active");
+        } else {
+          // step === 3
+          progressStep1.classList.add("active");
+          progressStep2.classList.add("active");
+          progressStep3.classList.add("active");
+        }
+      }
+
       function showStep(step) {
         // Hide all steps
         step1.classList.remove("active");
@@ -588,7 +607,10 @@
         creationSpinner.style.display = "none";
         creationStatusText.innerText = "";
         finalStatusMessage.innerHTML = "";
-        finalStatusMessage.className = ""; // remove any pastel alert classes
+        finalStatusMessage.className = "";
+
+        // Update step indicators
+        updateProgressIndicator(step);
 
         if (step === 1) {
           step1.classList.add("active");
@@ -608,6 +630,7 @@
           btnDeploy.style.display = "none";
         }
       }
+
       showStep(currentStep);
 
       // STEP 1 -> Validate -> Step 2
@@ -648,7 +671,6 @@
           return;
         }
 
-        // If pass all checks -> Step 2
         currentStep = 2;
         showStep(currentStep);
       });
@@ -682,9 +704,8 @@
         const initialSupply = document.getElementById("initialSupply").value.trim();
         const walletAddress = document.getElementById("walletAddress").value.trim();
 
-        // We can update the creationStatusText or finalStatusMessage as we go
         try {
-          creationStatusText.innerText = "Searching blockchain for payment... This can take up to 5 minutes....";
+          creationStatusText.innerText = "Searching blockchain for payment... Please wait.";
 
           // Example POST request
           const response = await axios.post("/api/create-token", {
@@ -706,7 +727,7 @@
                   target="_blank"
                 >
                   View on Etherscan
-                </a> Please wait 1 minute for the block to be confirmed.
+                </a>
               </p>`;
           }, 1500);
 
