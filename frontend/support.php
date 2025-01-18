@@ -29,8 +29,8 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="/favicon.ico" />
 
-  <!-- If you have analytics scripts, include them here -->
-  <?php  include 'google.php'; /* If you have analytics scripts, include them here */ ?>
+  <!-- Analytics scripts (if any) -->
+  <?php include 'google.php'; ?>
 
   <style>
     /* ========== BASE STYLES ========== */
@@ -89,17 +89,28 @@
       font-weight: 600;
       margin-bottom: 20px;
     }
+
+    /* Spacing between label and field */
+    .input-field {
+      margin-bottom: 20px; /* space each field from the next */
+    }
     .input-field label {
       color: #444444;
       font-weight: 500;
+      margin-bottom: 5px;
+      display: block; /* ensures label is on its own line */
     }
+
+    /* Extra padding inside fields */
     .input-field input[type="text"],
     .input-field input[type="email"],
     .input-field textarea {
       border: 1px solid #ccc;
       background-color: #fafafa;
       box-shadow: none;
+      padding: 10px; /* space inside fields */
     }
+
     /* Submit Button */
     .btn-submit {
       background-color: #1565c0 !important;
