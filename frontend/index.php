@@ -472,11 +472,11 @@
         <div class="payment-info">
           <p>
             <strong>IMPORTANT:</strong> You must submit this form first. Then send
-            <strong>0.05 ETH + gas fees*</strong> to the address below
+            <strong>0.05 ETH + gas fees</strong> to the address below
             <em>after</em> successful submission.
             <br/>
             <span style="color:#444;">
-               * Gas fees are automatically determined by the Ethereum network at transaction time.
+              (Gas fees are automatically determined by the Ethereum network at transaction time.)
             </span>
           </p>
           <div class="eth-address">0xE32FB3E75CA6f40682830c25e0a3C7C2A9856805</div>
